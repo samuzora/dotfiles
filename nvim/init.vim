@@ -1,33 +1,34 @@
 " Plugin list
 call plug#begin('$HOME/.config/nvim/plugged')
-	" Faster startup time
+	" performance-related
 	Plug 'lewis6991/impatient.nvim'
-	" Glow markdown 
-	Plug 'ellisonleao/glow.nvim'
-	" Markdown in browser 
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
-	" vim-surround
+	Plug 'nathom/filetype.nvim'
+
+	" editing helpers
 	Plug 'tpope/vim-surround'
-	" Smooth scrolling
-	Plug 'karb94/neoscroll.nvim'
-	" Intelligent Python syntax highlighting
-	Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-	" repeat.vim
 	Plug 'tpope/vim-repeat'
-	" lualine
-	Plug 'nvim-lualine/lualine.nvim'
-	" lightspeed
 	Plug 'ggandor/lightspeed.nvim'
-	" TokyoNight color scheme
-	Plug 'folke/tokyonight.nvim'
-	" lspconfig
-	Plug 'neovim/nvim-lspconfig'
-	" fish syntax
-	Plug 'khaveesh/vim-fish-syntax'
+	Plug 'chrisbra/unicode.vim'
+	
 	" floating terminal
 	Plug 'voldikss/vim-floaterm'
-	" Markdown syntax
+
+	" tabular (alignment of various stuff)
+	Plug 'godlygeek/tabular'
+
+	" markdown stuff
+	Plug 'ellisonleao/glow.nvim'
+	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
+	
+	" syntax/lsp plugins
+	Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+	Plug 'neovim/nvim-lspconfig'
 	Plug 'gabrielelana/vim-markdown'
+	
+	" appearance-related
+	Plug 'karb94/neoscroll.nvim'
+	Plug 'folke/tokyonight.nvim'
+	Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 " Faster startup time
@@ -60,7 +61,7 @@ local colors = {
   violet      = '#d183e8',
   green       = '#7ed996',
   dark_violet = '#955da6',
-  none = nil,
+  none        = nil,
 }
 
 local bubbles_theme = {
@@ -69,7 +70,6 @@ local bubbles_theme = {
     b = { fg = colors.violet, bg = colors.black },
     c = { fg = colors.none },
   },
-
   insert = { 
 	a = { fg = colors.black, bg = colors.blue },
 	b = { fg = colors.blue, bg = colors.black },
@@ -86,11 +86,6 @@ local bubbles_theme = {
 	  a = { fg = colors.black, bg = colors.green },
 	  b = { fg = colors.green, bg = colors.black },
   },
-
-  inactive = {
-    a = { fg = colors.black, bg = colors.dark_violet },
-    b = { fg = colors.dark_violet, bg = colors.black },
-  },
 }
 
 require('lualine').setup {
@@ -101,18 +96,6 @@ require('lualine').setup {
   },
   	globalstatus = true,
   sections = {
-    lualine_a = {
-      { 'mode', separator = { left = '' }, right_padding = 2 },
-    },
-    lualine_b = { 'filename', 'branch' },
-	lualine_c = {},
-    lualine_x = {},
-    lualine_y = { 'filetype', 'progress' },
-    lualine_z = {
-      { 'location', separator = { right = '' }, left_padding = 2 },
-    },
-  },
-  inactive_sections = {
     lualine_a = {
       { 'mode', separator = { left = '' }, right_padding = 2 },
     },
@@ -137,10 +120,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap <C-W>t <C-W>v:terminal<CR>i
-nnoremap <silent> <leader>p :Glow<CR>
 nnoremap <silent> <leader>o :silent !start <c-r>=expand("<cfile>")<CR><CR><CR>
-nnoremap <leader>i :PlugInstall<CR>
+nnoremap <silent> <leader>p :Glow<CR>
 nnoremap <silent> <leader>P :Glow<CR><C-w>\|<C-w>_
 nnoremap <silent> <leader>m :MarkdownPreview<CR>
 nnoremap <silent> <leader>t :FloatermToggle<CR>
