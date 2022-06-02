@@ -9,6 +9,9 @@ call plug#begin('$HOME/.config/nvim/plugged')
 	Plug 'tpope/vim-repeat'
 	Plug 'ggandor/lightspeed.nvim'
 	Plug 'chrisbra/unicode.vim'
+	Plug 'kshenoy/vim-signature'
+	Plug 'tmhedberg/SimpylFold'
+	Plug 'tversteeg/registers.nvim'
 	
 	" floating terminal
 	Plug 'voldikss/vim-floaterm'
@@ -21,9 +24,9 @@ call plug#begin('$HOME/.config/nvim/plugged')
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
 	
 	" syntax/lsp plugins
-	Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 	Plug 'neovim/nvim-lspconfig'
-	Plug 'gabrielelana/vim-markdown'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'neoclide/vim-jsx-improve'
 	
 	" appearance-related
 	Plug 'karb94/neoscroll.nvim'
@@ -46,9 +49,8 @@ let g:mkdp_open_to_the_world = 1
 lua require('neoscroll').setup()
 let g:neoscroll_easing_function = "quintic"
 
-" Semshi config
-let g:semshi#error_sign_delay = 2.5
-let g:semshi#excluded_hl_groups = []
+" registers.nvim cofnig
+let g:registers_window_border = "rounded"
 
 " lualine setup
 lua << END
@@ -125,13 +127,19 @@ nnoremap <silent> <leader>p :Glow<CR>
 nnoremap <silent> <leader>P :Glow<CR><C-w>\|<C-w>_
 nnoremap <silent> <leader>m :MarkdownPreview<CR>
 nnoremap <silent> <leader>t :FloatermToggle<CR>
+nnoremap <silent> <leader>f :TableFormat<CR>
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>
 tnoremap <M-[> <Esc>
 
+" Floaterm
+let g:floaterm_position = "topright"
+
 " TokyoNight color scheme
 let g:tokyonight_style = 'storm'
 let g:tokyonight_transparent = 1
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_italic_variables = 1
 colorscheme tokyonight
 
 " Highlights
@@ -150,6 +158,8 @@ hi clear SignColumn
 hi clear NormalFloat
 hi NormalFloat ctermbg=none 
 hi FloatBorder guibg=none
+hi clear CursorLineNr
+hi CursorLineNr guifg=#d183e8
 
 " More natural split opening
 set splitbelow
@@ -179,10 +189,9 @@ set relativenumber
 " Break on blank characters
 set linebreak
 
-" Fold based on indents
-set foldmethod=indent
+" Fold based on syntax
+set foldmethod=syntax
 set nofoldenable
-set foldlevel=99
 
 " Turn on sign column always, on the same column as line numbers
 set signcolumn=number
@@ -192,4 +201,24 @@ set cursorline
 set cursorlineopt=number
 
 " LSPs
-lua require('lspconfig').pyright.setup{}
+lua << END
+require('lspconfig').pyright.setup{
+    handlers = {
+        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			signs = false,
+            underline = false,
+        })
+    },
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "off",
+				diagnosticSeverityOverrides = {
+					reportWildcardImportFromLibrary = "none",
+				},
+			},
+		},
+	},
+}
+END
+lua require('lspconfig').tsserver.setup{}
