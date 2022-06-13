@@ -11,7 +11,7 @@ call plug#begin('$HOME/.config/nvim/plugged')
 	Plug 'chrisbra/unicode.vim'
 	Plug 'kshenoy/vim-signature'
 	Plug 'tmhedberg/SimpylFold'
-	Plug 'tversteeg/registers.nvim'
+	Plug 'echasnovski/mini.nvim', { 'branch' : 'stable' }
 	
 	" floating terminal
 	Plug 'voldikss/vim-floaterm'
@@ -27,11 +27,22 @@ call plug#begin('$HOME/.config/nvim/plugged')
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'neoclide/vim-jsx-improve'
+
+	" pytest plugins
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-treesitter/nvim-treesitter'
+	Plug 'antoinemadec/FixCursorHold.nvim'
+	Plug 'rcarriga/nvim-dap-ui'
+	Plug 'rcarriga/neotest'
+	Plug 'rcarriga/neotest-python'
 	
 	" appearance-related
 	Plug 'karb94/neoscroll.nvim'
 	Plug 'folke/tokyonight.nvim'
 	Plug 'nvim-lualine/lualine.nvim'
+
+	" system-related
+	Plug 'lambdalisue/suda.vim'
 call plug#end()
 
 " Faster startup time
@@ -48,9 +59,6 @@ let g:mkdp_open_to_the_world = 1
 " Neoscroll config
 lua require('neoscroll').setup()
 let g:neoscroll_easing_function = "quintic"
-
-" registers.nvim cofnig
-let g:registers_window_border = "rounded"
 
 " lualine setup
 lua << END
@@ -113,6 +121,58 @@ require('lualine').setup {
   extensions = {},
 }
 END
+
+" neotest
+lua << END
+require("neotest").setup({
+  adapters = {
+	  require("neotest-python")({
+		  dap = { justMyCode = false },
+		}),
+  },
+})
+END
+
+" mini.nvim setup (collection of useful plugins)
+lua << END
+require('mini.indentscope').setup {
+  draw = {
+    delay = 200,
+  },
+
+  -- Module mappings. Use `''` (empty string) to disable one.
+  mappings = {
+    -- Textobjects
+    object_scope = 'ii',
+    object_scope_with_border = 'ai',
+
+    -- Motions (jump to respective border line; if not present - body line)
+    goto_top = '[i',
+    goto_bottom = ']i',
+  },
+
+  -- Options which control computation of scope. Buffer local values can be
+  -- supplied in buffer variable `vim.b.miniindentscope_options`.
+  options = {
+    -- Type of scope's border: which line(s) with smaller indent to
+    -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
+    border = 'both',
+
+    -- Whether to use cursor column when computing reference indent. Useful to
+    -- see incremental scopes with horizontal cursor movements.
+    indent_at_cursor = true,
+
+    -- Whether to first check input line to be a border of adjacent scope.
+    -- Use it if you want to place cursor on function header to get scope of
+    -- its body.
+    try_as_border = false,
+  },
+
+  -- Which character to use for drawing scope indicator
+  symbol = '╎',
+}
+END
+
 set laststatus=3
 
 " Remaps
@@ -134,6 +194,9 @@ tnoremap <M-[> <Esc>
 
 " Floaterm
 let g:floaterm_position = "topright"
+
+" Suda
+let g:suda_smart_edit = 1
 
 " TokyoNight color scheme
 let g:tokyonight_style = 'storm'
