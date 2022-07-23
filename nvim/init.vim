@@ -5,13 +5,14 @@ call plug#begin('$HOME/.config/nvim/plugged')
 	Plug 'nathom/filetype.nvim'
 
 	" editing helpers
-	Plug 'tpope/vim-surround'
+	Plug 'kylechui/nvim-surround'
 	Plug 'tpope/vim-repeat'
 	Plug 'ggandor/lightspeed.nvim'
 	Plug 'chrisbra/unicode.vim'
 	Plug 'kshenoy/vim-signature'
 	Plug 'tmhedberg/SimpylFold'
 	Plug 'echasnovski/mini.nvim', { 'branch' : 'stable' }
+	Plug 'ziontee113/color-picker.nvim'
 	
 	" floating terminal
 	Plug 'voldikss/vim-floaterm'
@@ -19,9 +20,10 @@ call plug#begin('$HOME/.config/nvim/plugged')
 	" tabular (alignment of various stuff)
 	Plug 'godlygeek/tabular'
 
-	" markdown stuff
+	" markdown/latex stuff
 	Plug 'ellisonleao/glow.nvim'
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
+	Plug 'lervag/vimtex'
 	
 	" syntax/lsp plugins
 	Plug 'neovim/nvim-lspconfig'
@@ -55,6 +57,7 @@ let g:glow_border = "rounded"
 " Markdown preview config
 let g:mkdp_port = '1337'
 let g:mkdp_open_to_the_world = 1
+" let g:mkdp_markdown_css = '/home/samuzora/.config/nvim/markdown.css'
 
 " Neoscroll config
 lua require('neoscroll').setup()
@@ -122,6 +125,12 @@ require('lualine').setup {
 }
 END
 
+" nvim-surround setup
+lua << END
+require("nvim-surround").setup({
+})
+END
+
 " neotest
 lua << END
 require("neotest").setup({
@@ -173,6 +182,14 @@ require('mini.indentscope').setup {
 }
 END
 
+" color-picker setup
+lua << END
+require("color-picker").setup {
+	["border"] = "rounded",
+}
+END
+
+
 set laststatus=3
 
 " Remaps
@@ -188,6 +205,9 @@ nnoremap <silent> <leader>P :Glow<CR><C-w>\|<C-w>_
 nnoremap <silent> <leader>m :MarkdownPreview<CR>
 nnoremap <silent> <leader>t :FloatermToggle<CR>
 nnoremap <silent> <leader>f :TableFormat<CR>
+nnoremap <silent> <leader>c :PickColor<CR>
+nnoremap <leader>b :ls<CR>:b
+
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>
 tnoremap <M-[> <Esc>
