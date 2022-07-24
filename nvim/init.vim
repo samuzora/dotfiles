@@ -1,51 +1,55 @@
 " Plugin list
-call plug#begin('$HOME/.config/nvim/plugged')
+packadd vim-jetpack
+call jetpack#begin()
+	" bootstrap
+	Jetpack 'tani/vim-jetpack', {'opt': 1} 
 	" performance-related
-	Plug 'lewis6991/impatient.nvim'
-	Plug 'nathom/filetype.nvim'
+	Jetpack 'lewis6991/impatient.nvim'
+	Jetpack 'nathom/filetype.nvim'
 
 	" editing helpers
-	Plug 'kylechui/nvim-surround'
-	Plug 'tpope/vim-repeat'
-	Plug 'ggandor/lightspeed.nvim'
-	Plug 'chrisbra/unicode.vim'
-	Plug 'kshenoy/vim-signature'
-	Plug 'tmhedberg/SimpylFold'
-	Plug 'echasnovski/mini.nvim', { 'branch' : 'stable' }
-	Plug 'ziontee113/color-picker.nvim'
+	Jetpack 'kylechui/nvim-surround'
+	Jetpack 'tpope/vim-repeat'
+	" Jetpack 'ggandor/lightspeed.nvim'
+	Jetpack 'ggandor/leap.nvim'
+	Jetpack 'chrisbra/unicode.vim'
+	Jetpack 'kshenoy/vim-signature'
+	Jetpack 'tmhedberg/SimpylFold'
+	Jetpack 'echasnovski/mini.nvim', { 'branch' : 'stable' }
+	Jetpack 'ziontee113/color-picker.nvim'
 	
 	" floating terminal
-	Plug 'voldikss/vim-floaterm'
+	Jetpack 'voldikss/vim-floaterm'
 
 	" tabular (alignment of various stuff)
-	Plug 'godlygeek/tabular'
+	Jetpack 'godlygeek/tabular'
 
 	" markdown/latex stuff
-	Plug 'ellisonleao/glow.nvim'
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
-	Plug 'lervag/vimtex'
+	Jetpack 'ellisonleao/glow.nvim'
+	Jetpack 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
+	Jetpack 'lervag/vimtex'
 	
 	" syntax/lsp plugins
-	Plug 'neovim/nvim-lspconfig'
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-	Plug 'neoclide/vim-jsx-improve'
+	Jetpack 'neovim/nvim-lspconfig'
+	Jetpack 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Jetpack 'neoclide/vim-jsx-improve'
 
 	" pytest plugins
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-treesitter/nvim-treesitter'
-	Plug 'antoinemadec/FixCursorHold.nvim'
-	Plug 'rcarriga/nvim-dap-ui'
-	Plug 'rcarriga/neotest'
-	Plug 'rcarriga/neotest-python'
+	Jetpack 'nvim-lua/plenary.nvim'
+	Jetpack 'nvim-treesitter/nvim-treesitter'
+	Jetpack 'antoinemadec/FixCursorHold.nvim'
+	Jetpack 'rcarriga/nvim-dap-ui'
+	Jetpack 'rcarriga/neotest'
+	Jetpack 'rcarriga/neotest-python'
 	
 	" appearance-related
-	Plug 'karb94/neoscroll.nvim'
-	Plug 'folke/tokyonight.nvim'
-	Plug 'nvim-lualine/lualine.nvim'
+	Jetpack 'karb94/neoscroll.nvim'
+	Jetpack 'folke/tokyonight.nvim'
+	Jetpack 'nvim-lualine/lualine.nvim'
 
 	" system-related
-	Plug 'lambdalisue/suda.vim'
-call plug#end()
+	Jetpack 'lambdalisue/suda.vim'
+call jetpack#end()
 
 " Faster startup time
 lua require('impatient')
@@ -61,7 +65,7 @@ let g:mkdp_open_to_the_world = 1
 
 " Neoscroll config
 lua require('neoscroll').setup()
-let g:neoscroll_easing_function = "quintic"
+let g:neoscroll_easing_function = "linear"
 
 " lualine setup
 lua << END
