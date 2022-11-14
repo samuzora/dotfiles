@@ -1,0 +1,102 @@
+
+* {
+    background:  #1e1e2e;
+    background-light: #1e1e2e;
+    border-col: #1e1e2e;
+    selected: #1e1e2e;
+    blue: #89b4fa;
+    foreground: #cdd6f4;
+    selected: #89b4fa;
+    highlight: #f38ba8;
+    grey: #6c7086;
+    on: #89b4fa;
+    off: #6c7086;
+
+    width: 600;
+    font: "Delugia 14";
+}
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+window {
+    height: 360px;
+    border: 3px;
+    border-color: @border-col;
+    background-color: @background;
+}
+
+mainbox {
+    background-color: @background;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @background;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @blue;
+    padding: 6px;
+    text-color: @background;
+    border-radius: 3px;
+    margin: 20px 0px 0px 20px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 6px;
+    margin: 20px 0px 0px 10px;
+    text-color: @foreground;
+    background-color: @background;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 6px 0px 0px;
+    margin: 10px 0px 0px 20px;
+    columns: 2;
+    lines: 5;
+    background-color: @background;
+}
+
+element {
+    padding: 5px;
+    background-color: @background;
+    text-color: @foreground  ;
+}
+
+element-icon {
+    size: 25px;
+}
+
+element selected {
+    background-color:  @selected ;
+    text-color: @highlight  ;
+}
+
+mode-switcher {
+    spacing: 0;
+  }
+
+button {
+    padding: 10px;
+    background-color: @highlight;
+    text-color: @grey;
+    vertical-align: 0.5; 
+    horizontal-align: 0.5;
+}
+
+button selected {
+  background-color: @background;
+  text-color: @blue;
+}
+

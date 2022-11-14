@@ -1,0 +1,35 @@
+add_newline = false
+format = '''[●](bold red) $directory $character
+[\$](bold blue) '''
+command_timeout = 5000
+
+[character]
+format = '$symbol'
+success_symbol = '[\(^._.^\)](bold white)'
+error_symbol = '[\(^x.x^\)](bold red)' 
+vicmd_symbol = '[\(^v.v^\)](bold green)'
+
+[directory]
+format = '[$read_only]($read_only_style)[$path]($style)'
+style = 'cyan'
+read_only = 'ro!! '
+truncation_length = 3
+
+[git_branch]
+disabled = true
+format = '[git:](cyan)[$branch(:$remote_branch)]($style) '
+style = 'bold fg:230'
+
+[git_status]
+disabled = true
+format = '$all_status$ahead_behind'
+conflicted = '!'
+ahead = 'a'
+behind = 'b'
+deleted = 'd'
+modified = 'm'
+staged = 's'
+stashed = '$'
+renamed = 'r'
+up_to_date = 'u'
+windows_starship = '/mnt/c/ProgramData/chocolatey/bin/starship.exe'
