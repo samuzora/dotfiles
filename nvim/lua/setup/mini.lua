@@ -1,5 +1,5 @@
 -- mini.nvim
-require('mini.indentscope').setup ({
+require('mini.indentscope').setup({
   draw = {
     delay = 500,
     animation = require('mini.indentscope').gen_animation('quadraticOut', { duration = 40, unit = "step" }),
@@ -22,20 +22,20 @@ require('mini.indentscope').setup ({
 
 require("mini.comment").setup()
 
-require("mini.surround").setup({
-  highlight_duration = 500,
-  mappings = {
-    add = "ys",
-    delete = "ds",
-    find = "<leader>fs",
-    find_left = "<leader>Fs",
-    highlight = "<leader>hs",
-    replace = "cs",
-    update_n_lines = "",
-  },
-  n_lines = 50,
-  search_method = "cover"
-})
+-- require("mini.surround").setup({
+--   highlight_duration = 500,
+--   mappings = {
+--     add = "ys",
+--     delete = "ds",
+--     find = "<leader>fs",
+--     find_left = "<leader>Fs",
+--     highlight = "<leader>hs",
+--     replace = "cs",
+--     update_n_lines = "",
+--   },
+--   n_lines = 50,
+--   search_method = "cover"
+-- })
 
 require("mini.pairs").setup({
   modes = {

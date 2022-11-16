@@ -58,6 +58,7 @@ require('packer').startup({
     use { 'chentoast/marks.nvim', config = [[setup("marks")]] }
     use 'tpope/vim-repeat'
     use 'superhawk610/ascii-blocks.nvim'
+    use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
 
     -- undo
     use 'mbbill/undotree'
@@ -82,7 +83,6 @@ require('packer').startup({
     -- formatting
     use { 'sbdchd/neoformat' }
     use { 'AckslD/nvim-trevJ.lua', config = [[setup("nvim-trevJ")]] }
-    -- use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
 
     -- git
     use { 'f-person/git-blame.nvim', config = [[setup("git-blame")]] }
@@ -125,7 +125,7 @@ require('packer').startup({
     -- use { '~/pet.nvim', config = [[setup("pet-nvim")]] }
     --
     -- keybinds
-    use { 'mrjones2014/legendary.nvim', config = [[setup("legendary")]] }
+    -- use { 'mrjones2014/legendary.nvim', config = [[setup("legendary")]] }
 
     -- more bootstrap
     if packer_bootstrap then

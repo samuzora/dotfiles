@@ -137,12 +137,6 @@ _G.packer_plugins = {
     path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/leap.nvim",
     url = "https://github.com/ggandor/leap.nvim"
   },
-  ["legendary.nvim"] = {
-    config = { 'setup("legendary")' },
-    loaded = true,
-    path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/legendary.nvim",
-    url = "https://github.com/mrjones2014/legendary.nvim"
-  },
   ["lsp-format.nvim"] = {
     loaded = true,
     path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/lsp-format.nvim",
@@ -248,6 +242,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
+  },
+  ["nvim-surround"] = {
+    config = { 'setup("nvim-surround")' },
+    loaded = true,
+    path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     config = { 'setup("nvim-tree")' },
@@ -376,70 +376,26 @@ time([[Defining packer_plugins]], false)
 time([[Setup for markdown-preview.nvim]], true)
 try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rmarkdown\19mkdp_filetypes\6g\bvim\0", "setup", "markdown-preview.nvim")
 time([[Setup for markdown-preview.nvim]], false)
--- Config for: git-blame.nvim
-time([[Config for git-blame.nvim]], true)
-setup("git-blame")
-time([[Config for git-blame.nvim]], false)
--- Config for: mini.nvim
-time([[Config for mini.nvim]], true)
-setup("mini")
-time([[Config for mini.nvim]], false)
--- Config for: vim-doge
-time([[Config for vim-doge]], true)
-setup("vim-doge")
-time([[Config for vim-doge]], false)
--- Config for: impatient.nvim
-time([[Config for impatient.nvim]], true)
-setup("impatient")
-time([[Config for impatient.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-setup("treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: FixCursorHold.nvim
-time([[Config for FixCursorHold.nvim]], true)
-setup("cursorhold")
-time([[Config for FixCursorHold.nvim]], false)
--- Config for: pretty-fold.nvim
-time([[Config for pretty-fold.nvim]], true)
-setup("pretty-fold")
-time([[Config for pretty-fold.nvim]], false)
--- Config for: legendary.nvim
-time([[Config for legendary.nvim]], true)
-setup("legendary")
-time([[Config for legendary.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-setup("lspconfig")
-time([[Config for nvim-lspconfig]], false)
--- Config for: suda.vim
-time([[Config for suda.vim]], true)
-setup("suda")
-time([[Config for suda.vim]], false)
--- Config for: true-zen.nvim
-time([[Config for true-zen.nvim]], true)
-setup("true-zen")
-time([[Config for true-zen.nvim]], false)
--- Config for: neovim
-time([[Config for neovim]], true)
-setup("rose-pine")
-time([[Config for neovim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-setup("nvim-tree")
-time([[Config for nvim-tree.lua]], false)
+-- Config for: nvim-surround
+time([[Config for nvim-surround]], true)
+setup("nvim-surround")
+time([[Config for nvim-surround]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 setup("gitsigns")
 time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+setup("nvim-tree")
+time([[Config for nvim-tree.lua]], false)
+-- Config for: impatient.nvim
+time([[Config for impatient.nvim]], true)
+setup("impatient")
+time([[Config for impatient.nvim]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 setup("telescope")
 time([[Config for telescope.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-setup("nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
 -- Config for: leap.nvim
 time([[Config for leap.nvim]], true)
 setup('leap')
@@ -448,14 +404,6 @@ time([[Config for leap.nvim]], false)
 time([[Config for toggleterm.nvim]], true)
 setup("toggleterm")
 time([[Config for toggleterm.nvim]], false)
--- Config for: marks.nvim
-time([[Config for marks.nvim]], true)
-setup("marks")
-time([[Config for marks.nvim]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-setup("mason")
-time([[Config for mason.nvim]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
 setup("trouble")
@@ -468,14 +416,66 @@ time([[Config for nvim-trevJ.lua]], false)
 time([[Config for lualine.nvim]], true)
 setup("lualine")
 time([[Config for lualine.nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-setup('nvim-cmp')
-time([[Config for nvim-cmp]], false)
+-- Config for: true-zen.nvim
+time([[Config for true-zen.nvim]], true)
+setup("true-zen")
+time([[Config for true-zen.nvim]], false)
 -- Config for: nvim-ts-autotag
 time([[Config for nvim-ts-autotag]], true)
 setup("nvim-ts-autotag")
 time([[Config for nvim-ts-autotag]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+setup("treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: marks.nvim
+time([[Config for marks.nvim]], true)
+setup("marks")
+time([[Config for marks.nvim]], false)
+-- Config for: vim-doge
+time([[Config for vim-doge]], true)
+setup("vim-doge")
+time([[Config for vim-doge]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+setup("nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: mini.nvim
+time([[Config for mini.nvim]], true)
+setup("mini")
+time([[Config for mini.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+setup('nvim-cmp')
+time([[Config for nvim-cmp]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+setup("mason")
+time([[Config for mason.nvim]], false)
+-- Config for: FixCursorHold.nvim
+time([[Config for FixCursorHold.nvim]], true)
+setup("cursorhold")
+time([[Config for FixCursorHold.nvim]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+setup("lspconfig")
+time([[Config for nvim-lspconfig]], false)
+-- Config for: pretty-fold.nvim
+time([[Config for pretty-fold.nvim]], true)
+setup("pretty-fold")
+time([[Config for pretty-fold.nvim]], false)
+-- Config for: neovim
+time([[Config for neovim]], true)
+setup("rose-pine")
+time([[Config for neovim]], false)
+-- Config for: git-blame.nvim
+time([[Config for git-blame.nvim]], true)
+setup("git-blame")
+time([[Config for git-blame.nvim]], false)
+-- Config for: suda.vim
+time([[Config for suda.vim]], true)
+setup("suda")
+time([[Config for suda.vim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd neorg ]]
@@ -488,14 +488,14 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType css ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "css" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType scss ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "scss" }, _G.packer_plugins)]]
 vim.cmd [[au FileType sass ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "sass" }, _G.packer_plugins)]]
 vim.cmd [[au FileType conf ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "conf" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
