@@ -47,7 +47,7 @@ require('lualine').setup {
     lualine_a = {
       {
         'mode',
-	icons_enabled = true,
+        icons_enabled = true,
         padding = 2,
       },
     },
@@ -79,31 +79,17 @@ require('lualine').setup {
     }
   },
   tabline = {
-    lualine_a = {
+    lualine_z = {
       {
-        'tabs',
+        'buffers',
+        show_filename_only = false,
         padding = 2,
-        mode = 2,
+        mode = 4,
+        max_length = vim.o.columns,
       },
     },
   },
-  winbar = {
-    lualine_b = {
-      {
-        'buffers',
-        padding = 2,
-        mode = 4,
-      },
-    }
-  },
-  inactive_winbar = {
-    lualine_b = {
-      {
-        'buffers',
-        padding = 2,
-        mode = 4,
-      },
-    },
-  },
-  extensions = { 'quickfix' },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = { 'quickfix', },
 }

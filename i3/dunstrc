@@ -7,7 +7,7 @@ origin = top-right
 offset = 14x52
 scale = 0
 
-corner_radius = 10
+corner_radius = 15
 indicate_hidden = yes
 shrink = no
 separator_color = auto

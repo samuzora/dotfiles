@@ -26,6 +26,7 @@ gaps inner 15
 gaps outer 0
 gaps top 40
 
+
 # Only enable gaps on a workspace when there is at least one container
 #smart_gaps on
 

@@ -499,7 +499,7 @@ def combine_actions(eths, aps, vpns, wgs, gsms, blues, wwan, others, saved):
                  others: list of Actions
     """
     compact = CONF.getboolean("dmenu", "compact", fallback=False)
-    empty_action = [Action('', None)] if not compact else []
+    empty_action = [Action('---', None)] if not compact else []
     all_actions = []
     all_actions += eths + empty_action if eths else []
     all_actions += aps + empty_action if aps else []
@@ -521,7 +521,7 @@ def get_selection(all_actions):
     if rofi_highlight is True:
         inp = [str(action) for action in all_actions]
     else:
-        inp = [('== ' if action.is_active else '   ') + str(action)
+        inp = [('-> ' if action.is_active else '   ') + str(action)
                for action in all_actions]
     active_lines = [index for index, action in enumerate(all_actions)
                     if action.is_active]

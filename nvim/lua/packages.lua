@@ -22,6 +22,8 @@ require('packer').startup({
     use { 'neovim/nvim-lspconfig', config = [[setup("lspconfig")]] }
     use { 'nvim-treesitter/nvim-treesitter', config = [[setup("treesitter")]], run = ":TSUpdate", commit = '4cccb6' }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use { 'nvim-treesitter/nvim-treesitter-context', config = [[setup("treesitter-context")]] }
+    use { 'SmiteshP/nvim-navic', requires = 'neovim/nvim-lspconfig' }
 
     -- appearance
     use { 'nvim-lualine/lualine.nvim', config = [[setup("lualine")]] }
@@ -47,8 +49,11 @@ require('packer').startup({
     use { 'antoinemadec/FixCursorHold.nvim', config = [[setup("cursorhold")]] }
     use { 'Pocco81/true-zen.nvim', config = [[setup("true-zen")]] }
 
-    -- editing
+    -- navigation
     use { 'ggandor/leap.nvim', config = [[setup('leap')]] }
+    use { 'stevearc/aerial.nvim', config = [[setup('aerial')]] }
+
+    -- editing
     use {
       'ziontee113/color-picker.nvim',
       ft = { 'html', 'css', 'javascriptreact', 'scss', 'sass', 'conf' },
@@ -59,6 +64,8 @@ require('packer').startup({
     use 'tpope/vim-repeat'
     use 'superhawk610/ascii-blocks.nvim'
     use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
+    use { "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }
+    use { 'ggandor/leap-spooky.nvim', config = [[setup('leap-spooky')]] }
 
     -- undo
     use 'mbbill/undotree'
@@ -87,6 +94,7 @@ require('packer').startup({
     -- git
     use { 'f-person/git-blame.nvim', config = [[setup("git-blame")]] }
     use { 'lewis6991/gitsigns.nvim', config = [[setup("gitsigns")]] }
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- terminal
     use { 'akinsho/toggleterm.nvim', config = [[setup("toggleterm")]] }

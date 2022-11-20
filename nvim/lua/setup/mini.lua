@@ -49,11 +49,11 @@ require('mini.ai').setup({
   search_method = "cover_or_nearest",
 })
 
-require('mini.align').setup({
-  mappings = {
-    start_with_preview = "<leader>a"
-  }
-})
+-- require('mini.align').setup({
+--   mappings = {
+--     start_with_preview = "<leader>a"
+--   }
+-- })
 
 local map = require('mini.map')
 map.setup({
@@ -63,13 +63,13 @@ map.setup({
     map.gen_integration.diagnostic(),
   },
   symbols = {
-    encode = map.gen_encode_symbols.dot('4x2'),
+    -- encode = map.gen_encode_symbols.dot('4x2'),
   },
   window = {
+    side = "right",
     show_integration_count = false,
     winblend = 0,
   }
 })
-map.open()
 
 require('mini.bufremove').setup()

@@ -1,6 +1,7 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require("lsp-format").setup({})
+require("nvim-navic").setup()
 
 local lspconfig = require('lspconfig')
 
@@ -37,7 +38,10 @@ end
 lspconfig.tsserver.setup({
   single_file_support = true,
   capabilities = capabilities,
-  on_attach = require("lsp-format").on_attach,
+  on_attach = function(client, bufnr)
+    require("lsp-format").on_attach(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
+  end,
   commands = {
     OrganizeImports = {
       organize_imports,
