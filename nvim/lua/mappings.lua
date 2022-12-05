@@ -30,8 +30,9 @@ vim.keymap.set('n', '<leader>lf', function() vim.cmd(":Trouble") end)
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.code_action)
 
 vim.keymap.set('', '<leader>s', require('trevj').format_at_cursor)
-local nt = require("nvim-tree.api")
-vim.keymap.set('n', '<leader>d', function() nt.tree.toggle(true) end)
+-- local nt = require("nvim-tree.api")
+-- vim.keymap.set('n', '<leader>d', function() nt.tree.toggle(true) end)
+nnoremap('<leader>fd', ':Neotree toggle<CR>')
 local terminal = require("toggleterm.terminal").Terminal
 local lazygit = terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
 vim.keymap.set('', '<leader>gl', function() lazygit:toggle() end)

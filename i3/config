@@ -8,7 +8,7 @@ set $mod Mod4
 set $alt Mod1
 
 ##-- Fonts (Global) ----------------------
-font Delugia 10
+font Delugia 12
 
 ##-- Gaps --------------------------------
 
@@ -22,9 +22,9 @@ title_align center
 for_window [class=".*"] border pixel 2
 
 # Gaps (Outer gaps are added to the inner gaps)
-gaps inner 15
+gaps inner 10
 gaps outer 0
-gaps top 40
+gaps top 45
 
 
 # Only enable gaps on a workspace when there is at least one container
@@ -59,11 +59,10 @@ bindsym $mod+t 					exec --no-startup-id ~/.config/i3/bin/i3term.sh --full
 bindsym $mod+Shift+f 			exec --no-startup-id ranger
 bindsym $mod+Shift+e 			exec --no-startup-id nvim
 bindsym $mod+Shift+w 			exec --no-startup-id firefox
-bindsym $alt+Control+v 			exec --no-startup-id "alacritty --config-file ~/.config/i3/alacritty/alacritty.yml -e vim"
-bindsym $alt+Control+n 			exec --no-startup-id "alacritty --config-file ~/.config/i3/alacritty/alacritty.yml -e nvim"
-bindsym $alt+Control+r 			exec --no-startup-id "alacritty --config-file ~/.config/i3/alacritty/alacritty.yml -e ranger"
-bindsym $alt+Control+h 			exec --no-startup-id "alacritty --config-file ~/.config/i3/alacritty/alacritty.yml -e htop"
-bindsym $alt+Control+b 			exec --no-startup-id "alacritty --config-file ~/.config/i3/alacritty/alacritty.yml -e bashtop"
+bindsym $alt+Control+n 			exec --no-startup-id "kitty nvim"
+bindsym $alt+Control+r 			exec --no-startup-id "kitty ranger"
+bindsym $alt+Control+h 			exec --no-startup-id "kitty htop"
+bindsym $alt+Control+b 			exec --no-startup-id "kitty bashtop"
 
 # -- Rofi --
 bindsym $alt+F1 				exec --no-startup-id ~/.config/i3/rofi/bin/launcher
@@ -189,10 +188,10 @@ bindsym Control+Shift+q exit
 mode "Resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -204,10 +203,10 @@ bindsym $mod+Shift+r mode "Resize"
 mode "Move" {
         # These bindings trigger as soon as you enter the Move mode
 
-        bindsym Left move left 20px
-        bindsym Down move down  20px
-        bindsym Up move up 20px
-        bindsym Right move right 20px
+        bindsym h move left 20px
+        bindsym j move down  20px
+        bindsym k move up 20px
+        bindsym l move right 20px
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"

@@ -36,6 +36,8 @@ browser = x-www-browser -new-tab
 always_run_script = true
 title = Dunst
 class = Dunst
+mouse_left_click = do_action
+mouse_right_click = close_current
 
 [urgency_low]
 timeout = 2

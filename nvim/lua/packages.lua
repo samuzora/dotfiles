@@ -20,12 +20,12 @@ require('packer').startup({
     use { 'williamboman/mason.nvim', config = [[setup("mason")]], requires = { "williamboman/mason-lspconfig.nvim" } }
     use 'lukas-reineke/lsp-format.nvim'
     use { 'neovim/nvim-lspconfig', config = [[setup("lspconfig")]] }
-    use { 'nvim-treesitter/nvim-treesitter', config = [[setup("treesitter")]], run = ":TSUpdate", commit = '4cccb6' }
+    use { 'nvim-treesitter/nvim-treesitter', config = [[setup("treesitter")]], run = ":TSUpdate" } -- commit = '4cccb6' }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use { 'nvim-treesitter/nvim-treesitter-context', config = [[setup("treesitter-context")]] }
-    use { 'SmiteshP/nvim-navic', requires = 'neovim/nvim-lspconfig' }
 
     -- appearance
+    use 'kyazdani42/nvim-web-devicons'
     use { 'nvim-lualine/lualine.nvim', config = [[setup("lualine")]] }
     use { 'rose-pine/neovim', config = [[setup("rose-pine")]] }
     use { 'folke/noice.nvim',
@@ -37,23 +37,21 @@ require('packer').startup({
       },
     }
     use { 'folke/trouble.nvim', config = [[setup("trouble")]] }
-    use 'kyazdani42/nvim-web-devicons'
     use { 'anuvyklack/pretty-fold.nvim', config = [[setup("pretty-fold")]] }
     use { 'p00f/nvim-ts-rainbow' }
 
     -- documentation
     use { 'kkoomen/vim-doge', config = [[setup("vim-doge")]], run = ":call doge#install()" }
 
-    -- system
-    use { 'lambdalisue/suda.vim', config = [[setup("suda")]] }
-    use { 'antoinemadec/FixCursorHold.nvim', config = [[setup("cursorhold")]] }
-    use { 'Pocco81/true-zen.nvim', config = [[setup("true-zen")]] }
-
     -- navigation
     use { 'ggandor/leap.nvim', config = [[setup('leap')]] }
+    use { 'ggandor/leap-spooky.nvim', config = [[setup('leap-spooky')]] }
     use { 'stevearc/aerial.nvim', config = [[setup('aerial')]] }
 
     -- editing
+    use { 'lambdalisue/suda.vim', config = [[setup("suda")]] }
+    use { 'Pocco81/true-zen.nvim', config = [[setup("true-zen")]] }
+
     use {
       'ziontee113/color-picker.nvim',
       ft = { 'html', 'css', 'javascriptreact', 'scss', 'sass', 'conf' },
@@ -65,13 +63,19 @@ require('packer').startup({
     use 'superhawk610/ascii-blocks.nvim'
     use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
     use { "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }
-    use { 'ggandor/leap-spooky.nvim', config = [[setup('leap-spooky')]] }
 
     -- undo
     use 'mbbill/undotree'
 
     -- file browser
-    use { 'nvim-tree/nvim-tree.lua', config = [[setup("nvim-tree")]] }
+    use { 'nvim-neo-tree/neo-tree.nvim', config = [[setup("neo-tree")]],
+      branch = "v2.x",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      }
+    }
 
     -- autocomplete
     use {
@@ -131,11 +135,12 @@ require('packer').startup({
     -- random
     -- use { 'samuzora/pet.nvim', config = [[setup("pet-nvim")]] }
     -- use { '~/pet.nvim', config = [[setup("pet-nvim")]] }
+    use { 'Eandrju/cellular-automaton.nvim' }
     --
     -- keybinds
     -- use { 'mrjones2014/legendary.nvim', config = [[setup("legendary")]] }
 
-    -- more bootstrap
+    -- bootstrap
     if packer_bootstrap then
       require('packer').sync()
     end

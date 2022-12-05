@@ -40,3 +40,4 @@ nitrogen --restore
 
 # Start mpd
 #exec mpd &
+exec greenclip daemon & 

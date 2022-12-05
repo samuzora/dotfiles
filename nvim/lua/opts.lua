@@ -9,7 +9,7 @@ opt.smartindent = true
 opt.autoindent  = true
 opt.smarttab    = true
 
-opt.textwidth = 120
+opt.textwidth = 80
 
 opt.splitbelow = true
 opt.splitright = true
