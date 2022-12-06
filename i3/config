@@ -47,8 +47,13 @@ client.background       #1E222A
 ##-- Autostart ---------------------------
 
 exec_always --no-startup-id 	~/.config/i3/bin/autostart.sh
+exec_always --no-startup-id     greenclip daemon
 
 ##-- Key Bindings ------------------------
+
+# -- clipboard --
+
+bindsym $mod+v                  exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme "~/.config/rofi/greenclip.rasi"
 
 # -- Terminal --
 bindsym $mod+Return 			exec --no-startup-id ~/.config/i3/bin/i3term.sh

@@ -26,6 +26,11 @@ local rose_pine = {
     b = { bg = p.overlay, fg = p.love },
     c = { fg = p.none, bg = p.none },
   },
+  terminal = {
+    a = { bg = p.text, fg = p.base, gui = 'bold' },
+    b = { bg = p.overlay, fg = p.text },
+    c = { fg = p.none, bg = p.none },
+  },
   inactive = {
     a = { bg = p.base, fg = p.muted, gui = 'bold' },
     b = { bg = p.base, fg = p.muted },
@@ -56,7 +61,7 @@ require('lualine').setup {
         'filename',
         separator = '|',
       },
-      'branch',
+      'diagnostics',
     },
     lualine_c = {},
     lualine_x = {},
@@ -78,17 +83,7 @@ require('lualine').setup {
       },
     }
   },
-  tabline = {
-    lualine_z = {
-      {
-        'buffers',
-        show_filename_only = false,
-        padding = 2,
-        mode = 4,
-        max_length = vim.o.columns,
-      },
-    },
-  },
+  tabline = {},
   winbar = {},
   inactive_winbar = {},
   extensions = { 'quickfix', },

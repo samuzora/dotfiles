@@ -63,6 +63,7 @@ require('packer').startup({
     use 'superhawk610/ascii-blocks.nvim'
     use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
     use { "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }
+    use { 'smjonas/inc-rename.nvim', config = [[setup("inc-rename")]] }
 
     -- undo
     use 'mbbill/undotree'
