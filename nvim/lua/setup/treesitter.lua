@@ -21,7 +21,9 @@ require('nvim-treesitter.configs').setup({
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner"
+        ["ic"] = "@class.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
       },
       selection_modes = {
         ["@parameter.outer"] = "v",

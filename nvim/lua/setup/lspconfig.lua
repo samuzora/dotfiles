@@ -48,6 +48,8 @@ lspconfig.tsserver.setup({
   }
 })
 
+lspconfig.prismals.setup({})
+
 lspconfig.texlab.setup({
   single_file_support = true,
   capabilities = capabilities,
