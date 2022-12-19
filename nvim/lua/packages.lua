@@ -39,7 +39,8 @@ require('packer').startup({
     use { 'folke/trouble.nvim', config = [[setup("trouble")]] }
 
     -- ui
-    use { 'rose-pine/neovim', config = [[setup("rose-pine")]] }
+    -- use { 'rose-pine/neovim', config = [[setup("rose-pine")]] }
+    use { 'nyoom-engineering/oxocarbon.nvim', config = [[setup("oxocarbon")]] }
     use { 'nvim-lualine/lualine.nvim', config = [[setup("lualine")]] }
     use { 'folke/noice.nvim',
       event = 'VimEnter',
@@ -62,16 +63,17 @@ require('packer').startup({
     -- documentation
     use { 'kkoomen/vim-doge', config = [[setup("vim-doge")]], run = ":call doge#install()" }
 
-    -- editing
-    use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
-    use { 'lambdalisue/suda.vim', config = [[setup("suda")]] }
-    use { 'Pocco81/true-zen.nvim', config = [[setup("true-zen")]] }
-
+    -- colors
     use {
       'ziontee113/color-picker.nvim',
       ft = { 'html', 'css', 'javascriptreact', 'scss', 'sass', 'conf' },
       config = [[setup("color-picker")]],
     }
+
+    -- editing
+    use { 'kylechui/nvim-surround', config = [[setup("nvim-surround")]] }
+    use { 'lambdalisue/suda.vim', config = [[setup("suda")]] }
+    use { 'Pocco81/true-zen.nvim', config = [[setup("true-zen")]] }
     use { 'chentoast/marks.nvim', config = [[setup("marks")]] }
     use 'tpope/vim-repeat'
     use { 'smjonas/inc-rename.nvim', config = [[setup("inc-rename")]] }
@@ -87,7 +89,6 @@ require('packer').startup({
       }
     }
 
-    -- autocomplete
     -- formatting
     use { 'sbdchd/neoformat' }
     use { 'AckslD/nvim-trevJ.lua', config = [[setup("nvim-trevJ")]] }

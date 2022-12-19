@@ -18,7 +18,6 @@ opt.undofile  = true
 opt.backupdir = '/home/samuzora/.local/share/nvim/backup'
 
 opt.mouse = 'nv'
--- vim.g.clipboard = 'unnamedplus'
 
 opt.number         = true
 opt.relativenumber = true

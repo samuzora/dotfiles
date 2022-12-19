@@ -2,7 +2,13 @@
 require('mini.indentscope').setup({
   draw = {
     delay = 500,
-    animation = require('mini.indentscope').gen_animation('quadraticOut', { duration = 40, unit = "step" }),
+    gen_animation = {
+      'quadraticOut',
+      {
+        duration = 40,
+        unit = "step"
+      }
+    }
   },
 
   mappings = {
