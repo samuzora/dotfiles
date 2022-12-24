@@ -16,7 +16,7 @@ font Delugia 12
 title_align center
 
 # Uncomment this to enable title bars
-#for_window [class=".*"] border normal 4
+# for_window [class=".*"] border normal 4
 
 # Uncomment this to disable title bars
 for_window [class=".*"] border pixel 2
@@ -24,11 +24,12 @@ for_window [class=".*"] border pixel 2
 # Gaps (Outer gaps are added to the inner gaps)
 gaps inner 10
 gaps outer 0
-gaps top 45
+gaps top 50
 
 
 # Only enable gaps on a workspace when there is at least one container
 #smart_gaps on
+for_window [class="^.*"] border pixel 0
 
 # Activate smart borders (always)
 smart_borders on
@@ -100,7 +101,7 @@ bindsym $mod+Control+Print 		exec --no-startup-id "takeshot --area"
 # -- i3wm --
 
 # Lockscreen
-bindsym $alt+Control+l 			exec --no-startup-id "betterlockscreen --lock"
+bindsym $alt+Control+l 			exec --no-startup-id "i3lock-fancy"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

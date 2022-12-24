@@ -40,3 +40,5 @@ cmp.setup.cmdline(':', {
       { name = 'cmdline' }
     })
 })
+
+require("nvim-autopairs").setup()

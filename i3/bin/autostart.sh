@@ -39,4 +39,4 @@ nitrogen --restore
 ~/.config/i3/bin/i3comp.sh
 
 # Start mpd
-#exec mpd &
+exec mpd &

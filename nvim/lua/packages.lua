@@ -14,14 +14,30 @@ require('packer').startup({
     use 'wbthomason/packer.nvim' -- auto update packer.nvim
     use { 'lewis6991/impatient.nvim', config = [[setup("impatient")]] }
 
-    -- treesitter
-    use { 'nvim-treesitter/nvim-treesitter', config = [[setup("treesitter")]], run = ":TSUpdate" } -- commit = '4cccb6' }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use { 'nvim-treesitter/nvim-treesitter-context', config = [[setup("treesitter-context")]] }
+    -- debugging
+    use { 'mfussenegger/nvim-dap', config = [[setup("dap")]] }
 
-    -- lsp, completion and linting
-    use { 'neovim/nvim-lspconfig', config = [[setup("lspconfig")]] }
-    use 'lukas-reineke/lsp-format.nvim'
+    -- parsers
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      config = [[setup("treesitter")]],
+      run = ":TSUpdate",
+      requires = {
+        "nvim-treesitter/nvim-treesitter-context",
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "windwp/nvim-ts-autotag"
+      }
+    }
+
+    -- lsp and nvim-cmp
+    use {
+      'neovim/nvim-lspconfig',
+      config = [[setup("lspconfig")]],
+      requires = {
+        "lukas-reineke/lsp-format.nvim",
+        "folke/trouble.nvim"
+      },
+    }
     use { 'williamboman/mason.nvim', config = [[setup("mason")]], requires = { "williamboman/mason-lspconfig.nvim" } }
     use {
       'hrsh7th/nvim-cmp',
@@ -30,17 +46,15 @@ require('packer').startup({
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline'
+        'hrsh7th/cmp-cmdline',
+        "windwp/nvim-autopairs"
       }
     }
-    use { 'windwp/nvim-autopairs', config = [[setup("nvim-autopairs")]] }
-    use { 'windwp/nvim-ts-autotag', config = [[setup("nvim-ts-autotag")]] }
-
-    use { 'folke/trouble.nvim', config = [[setup("trouble")]] }
 
     -- ui
-    -- use { 'rose-pine/neovim', config = [[setup("rose-pine")]] }
-    use { 'nyoom-engineering/oxocarbon.nvim', config = [[setup("oxocarbon")]] }
+    use { 'catppuccin/nvim', as = "catppuccin", config = [[setup("catppuccin")]] }
+    -- use { 'sam4llis/nvim-tundra', config = [[setup("tundra")]] }
+    -- use { 'nyoom-engineering/oxocarbon.nvim', config = [[setup("oxocarbon")]] }
     use { 'nvim-lualine/lualine.nvim', config = [[setup("lualine")]] }
     use { 'folke/noice.nvim',
       event = 'VimEnter',
@@ -92,6 +106,7 @@ require('packer').startup({
     -- formatting
     use { 'sbdchd/neoformat' }
     use { 'AckslD/nvim-trevJ.lua', config = [[setup("nvim-trevJ")]] }
+    use { 'findango/vim-mdx' }
 
     -- git
     use { 'f-person/git-blame.nvim', config = [[setup("git-blame")]] }
@@ -105,7 +120,6 @@ require('packer').startup({
     use { 'echasnovski/mini.nvim', config = [[setup("mini")]] }
 
     -- notes
-    -- use { 'ellisonleao/glow.nvim', ft = { 'markdown' }, config = [[setup("glow")]] }
     use { 'jbyuki/nabla.nvim' }
     use {
       'iamcco/markdown-preview.nvim',
@@ -131,12 +145,7 @@ require('packer').startup({
     }
 
     -- random
-    -- use { 'samuzora/pet.nvim', config = [[setup("pet-nvim")]] }
-    -- use { '~/pet.nvim', config = [[setup("pet-nvim")]] }
     use { 'Eandrju/cellular-automaton.nvim' }
-    --
-    -- keybinds
-    -- use { 'mrjones2014/legendary.nvim', config = [[setup("legendary")]] }
 
     -- bootstrap
     if packer_bootstrap then

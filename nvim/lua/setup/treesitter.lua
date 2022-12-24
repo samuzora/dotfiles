@@ -72,3 +72,22 @@ require('nvim-treesitter.configs').setup({
 })
 
 require('nvim-treesitter.install').update()
+
+require("treesitter-context").setup({
+  enable = true,
+  packages = {
+    default = {
+      'class',
+      'function',
+      'method',
+      'for',
+      'while',
+      'if',
+      'switch',
+      'case',
+    },
+  },
+  separator = '-'
+})
+
+require('nvim-ts-autotag').setup()

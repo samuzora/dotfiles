@@ -53,14 +53,14 @@ case $chosen in
         fi
         ;;
     $lock)
-        betterlockscreen --lock
+        i3lock-fancy
         ;;
     $suspend)
 		ans=$(get_confirmation &)
 		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
 			mpc -q pause
 			amixer set Master mute
-			betterlockscreen --suspend
+            i3lock-fancy
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
 			exit
         else

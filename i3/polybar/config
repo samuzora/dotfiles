@@ -19,11 +19,11 @@ margin-top = 0
 ;; File Inclusion
 ; include an external file, like module file, etc.
 
-include-file = ~/.config/polybar/system
+include-file = ~/.config/i3/polybar/system
 
-include-file = ~/.config/polybar/colors
-include-file = ~/.config/polybar/modules
-include-file = ~/.config/polybar/decor
+include-file = ~/.config/i3/polybar/colors
+include-file = ~/.config/i3/polybar/modules
+include-file = ~/.config/i3/polybar/decor
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
@@ -45,7 +45,7 @@ monitor-strict = false
 
 ; Tell the Window Manager not to configure the window.
 ; Use this to detach the bar if your WM is locking its size/position.
-override-redirect = true
+override-redirect = false
 
 ; Put the bar at the bottom of the screen
 bottom = false
@@ -57,15 +57,15 @@ fixed-center = true
 ; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in a width or height of 50% minus 10 pixels
-width = 95%
-height = 60
+width = 100%
+height = 26
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in an offset in the x or y direction 
 ; of 50% minus 10 pixels
-offset-x = 2.5%
-offset-y = 1%
+offset-x = 0%
+offset-y = 0%
 
 ; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
 background = ${color.BG}
@@ -82,8 +82,8 @@ foreground = ${color.FG}
 ; doesn't get rounded
 ; Individual top/bottom values can be defined using:
 ;   radius-{top,bottom}
-radius-top = 15.0
-radius-bottom = 15.0
+radius-top = 0.0
+radius-bottom = 0.0
 
 ; Under-/overline pixel size and argb color
 ; Individual values can be defined using:
@@ -103,13 +103,13 @@ line-color = ${color.BLUE}
 ; the border is placed withing this area. So you effectively only have the
 ; following horizontal space on the bar:
 ;   width - border-right-size - border-left-size
-; border-size = 6
-; border-color = ${color.BG}
+border-size = 6
+border-color = ${color.BG}
 
 ; Number of spaces to add at the beginning/end of the bar
 ; Individual side values can be defined using:
 ;   padding-{left,right}
-padding = 2
+padding = 0
 
 ; Number of spaces to add before/after each module
 ; Individual side values can be defined using:
@@ -125,11 +125,11 @@ module-margin-right = 0
 ;   font-3 = FontAwesome:size=10
 ; See the Fonts wiki page for more details
 
-font-0 = "Delugia Book:size=10;5"
-font-1 = "Delugia Mono:size=10;5"
-font-2 = "Delugia Mono:size=10;5"
-font-3 = "Delugia Mono:size=10;5"
-font-4 = "Delugia Code:size=10;5"
+font-0 = "JetBrains Mono:bold:size=10;3"
+font-1 = "Iosevka Nerd Font:size=12;3"
+font-2 = "Iosevka Nerd Font:size=15;4"
+font-3 = "Iosevka Nerd Font:bold:size=12;4"
+font-4 = "archcraft:size=14;4"
 
 ; Modules are added to one of the available blocks
 ;   modules-left = cpu ram
@@ -137,17 +137,17 @@ font-4 = "Delugia Code:size=10;5"
 ;   modules-right = ipc clock
 
 # Default
-modules-left = i3
-modules-center = date
-modules-right = volume dot backlight dot network dot battery
+modules-left = menu dot LD i3 RD dot LD mpd RD sep song
+modules-center = 
+modules-right = volume dot backlight dot battery dot network dot LD date RD dot sysmenu
 
 # Alternate
 ;modules-left = openbox 2LD cpu 3LD memory 4LD filesystem 5LD
 ;modules-center = mpd
-;modules-right = 2RD volume 3RD backlight 4RD battery 5RD network 6RD date sep
+;modules-right = 2RD volume 3RD brightness 4RD battery 5RD network 6RD date sep
 
 ; The separator will be inserted between the output of each module
-separator = 
+separator =
 
 ; This value is used to add extra spacing between elements
 ; @deprecated: This parameter will be removed in an upcoming version
@@ -175,14 +175,14 @@ locale =
 ;   center
 ;   right
 ;   none
-tray-position = none
+tray-position = right
 
 ; If true, the bar will not shift its
 ; contents when the tray changes
 tray-detached = false
 
 ; Tray icon max size
-tray-maxsize = 32
+tray-maxsize = 16
 
 ; DEPRECATED! Since 3.3.0 the tray always uses pseudo-transparency
 ; Enable pseudo transparency
@@ -201,7 +201,7 @@ tray-offset-x = 0
 tray-offset-y = 0
 
 ; Pad the sides of each tray icon
-tray-padding = 2
+tray-padding = 0
 
 ; Scale factor for tray clients
 tray-scale = 1.0
@@ -215,11 +215,11 @@ tray-scale = 1.0
 ; Currently supported WM's:
 ;   bspwm
 ;   i3 (requires: `override-redirect = true`)
-wm-restack = i3
+; wm-restack =
 
 ; Set a DPI values used when rendering text
 ; This only affects scalable fonts
-dpi = 196
+; dpi = 
 
 ; Enable support for inter-process messaging
 ; See the Messaging wiki page for more details.

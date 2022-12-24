@@ -68,3 +68,5 @@ lspconfig.sumneko_lua.setup({
 })
 
 lspconfig.ccls.setup({})
+
+require("trouble").setup()
