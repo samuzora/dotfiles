@@ -79,3 +79,5 @@ map.setup({
 })
 
 require('mini.bufremove').setup()
+
+require('mini.animate').setup()

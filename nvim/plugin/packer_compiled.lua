@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -234,6 +239,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/neorg-contexts",
     url = "https://github.com/max397574/neorg-contexts"
+  },
+  neotest = {
+    config = { 'setup("neotest")' },
+    loaded = true,
+    path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
+  },
+  ["neotest-python"] = {
+    loaded = true,
+    path = "/home/samuzora/.local/share/nvim/site/pack/packer/start/neotest-python",
+    url = "https://github.com/nvim-neotest/neotest-python"
   },
   ["noice.nvim"] = {
     config = { 'setup("noice")' },
@@ -406,22 +422,34 @@ time([[Defining packer_plugins]], false)
 time([[Setup for markdown-preview.nvim]], true)
 try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rmarkdown\19mkdp_filetypes\6g\bvim\0", "setup", "markdown-preview.nvim")
 time([[Setup for markdown-preview.nvim]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-setup("nvim-surround")
-time([[Config for nvim-surround]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-setup("telescope")
-time([[Config for telescope.nvim]], false)
+-- Config for: true-zen.nvim
+time([[Config for true-zen.nvim]], true)
+setup("true-zen")
+time([[Config for true-zen.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 setup("treesitter")
 time([[Config for nvim-treesitter]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-setup("toggleterm")
-time([[Config for toggleterm.nvim]], false)
+-- Config for: vim-doge
+time([[Config for vim-doge]], true)
+setup("vim-doge")
+time([[Config for vim-doge]], false)
+-- Config for: nvim-dap
+time([[Config for nvim-dap]], true)
+setup("dap")
+time([[Config for nvim-dap]], false)
+-- Config for: git-blame.nvim
+time([[Config for git-blame.nvim]], true)
+setup("git-blame")
+time([[Config for git-blame.nvim]], false)
+-- Config for: neotest
+time([[Config for neotest]], true)
+setup("neotest")
+time([[Config for neotest]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+setup("lspconfig")
+time([[Config for nvim-lspconfig]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 setup("gitsigns")
@@ -430,82 +458,74 @@ time([[Config for gitsigns.nvim]], false)
 time([[Config for aerial.nvim]], true)
 setup('aerial')
 time([[Config for aerial.nvim]], false)
--- Config for: nvim-trevJ.lua
-time([[Config for nvim-trevJ.lua]], true)
-setup("nvim-trevJ")
-time([[Config for nvim-trevJ.lua]], false)
--- Config for: impatient.nvim
-time([[Config for impatient.nvim]], true)
-setup("impatient")
-time([[Config for impatient.nvim]], false)
--- Config for: marks.nvim
-time([[Config for marks.nvim]], true)
-setup("marks")
-time([[Config for marks.nvim]], false)
--- Config for: inc-rename.nvim
-time([[Config for inc-rename.nvim]], true)
-setup("inc-rename")
-time([[Config for inc-rename.nvim]], false)
--- Config for: git-blame.nvim
-time([[Config for git-blame.nvim]], true)
-setup("git-blame")
-time([[Config for git-blame.nvim]], false)
--- Config for: vim-doge
-time([[Config for vim-doge]], true)
-setup("vim-doge")
-time([[Config for vim-doge]], false)
--- Config for: leap-spooky.nvim
-time([[Config for leap-spooky.nvim]], true)
-setup('leap-spooky')
-time([[Config for leap-spooky.nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-setup('nvim-cmp')
-time([[Config for nvim-cmp]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-setup("mason")
-time([[Config for mason.nvim]], false)
--- Config for: leap.nvim
-time([[Config for leap.nvim]], true)
-setup('leap')
-time([[Config for leap.nvim]], false)
--- Config for: catppuccin
-time([[Config for catppuccin]], true)
-setup("catppuccin")
-time([[Config for catppuccin]], false)
--- Config for: mini.nvim
-time([[Config for mini.nvim]], true)
-setup("mini")
-time([[Config for mini.nvim]], false)
--- Config for: nvim-dap
-time([[Config for nvim-dap]], true)
-setup("dap")
-time([[Config for nvim-dap]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-setup("lspconfig")
-time([[Config for nvim-lspconfig]], false)
--- Config for: true-zen.nvim
-time([[Config for true-zen.nvim]], true)
-setup("true-zen")
-time([[Config for true-zen.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-setup("lualine")
-time([[Config for lualine.nvim]], false)
 -- Config for: pretty-fold.nvim
 time([[Config for pretty-fold.nvim]], true)
 setup("pretty-fold")
 time([[Config for pretty-fold.nvim]], false)
--- Config for: neo-tree.nvim
-time([[Config for neo-tree.nvim]], true)
-setup("neo-tree")
-time([[Config for neo-tree.nvim]], false)
+-- Config for: impatient.nvim
+time([[Config for impatient.nvim]], true)
+setup("impatient")
+time([[Config for impatient.nvim]], false)
+-- Config for: nvim-trevJ.lua
+time([[Config for nvim-trevJ.lua]], true)
+setup("nvim-trevJ")
+time([[Config for nvim-trevJ.lua]], false)
 -- Config for: suda.vim
 time([[Config for suda.vim]], true)
 setup("suda")
 time([[Config for suda.vim]], false)
+-- Config for: inc-rename.nvim
+time([[Config for inc-rename.nvim]], true)
+setup("inc-rename")
+time([[Config for inc-rename.nvim]], false)
+-- Config for: catppuccin
+time([[Config for catppuccin]], true)
+setup("catppuccin")
+time([[Config for catppuccin]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+setup("mason")
+time([[Config for mason.nvim]], false)
+-- Config for: leap-spooky.nvim
+time([[Config for leap-spooky.nvim]], true)
+setup('leap-spooky')
+time([[Config for leap-spooky.nvim]], false)
+-- Config for: nvim-surround
+time([[Config for nvim-surround]], true)
+setup("nvim-surround")
+time([[Config for nvim-surround]], false)
+-- Config for: mini.nvim
+time([[Config for mini.nvim]], true)
+setup("mini")
+time([[Config for mini.nvim]], false)
+-- Config for: leap.nvim
+time([[Config for leap.nvim]], true)
+setup('leap')
+time([[Config for leap.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+setup('nvim-cmp')
+time([[Config for nvim-cmp]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+setup("toggleterm")
+time([[Config for toggleterm.nvim]], false)
+-- Config for: marks.nvim
+time([[Config for marks.nvim]], true)
+setup("marks")
+time([[Config for marks.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+setup("telescope")
+time([[Config for telescope.nvim]], false)
+-- Config for: neo-tree.nvim
+time([[Config for neo-tree.nvim]], true)
+setup("neo-tree")
+time([[Config for neo-tree.nvim]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+setup("lualine")
+time([[Config for lualine.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd neorg ]]
@@ -518,14 +538,14 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType html ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "html" }, _G.packer_plugins)]]
-vim.cmd [[au FileType css ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "css" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType scss ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "scss" }, _G.packer_plugins)]]
 vim.cmd [[au FileType sass ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "sass" }, _G.packer_plugins)]]
 vim.cmd [[au FileType conf ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "conf" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType css ++once lua require("packer.load")({'color-picker.nvim'}, { ft = "css" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)

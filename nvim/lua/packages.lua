@@ -16,6 +16,14 @@ require('packer').startup({
 
     -- debugging
     use { 'mfussenegger/nvim-dap', config = [[setup("dap")]] }
+    use { 'nvim-neotest/neotest', config = [[setup("neotest")]], requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+
+      -- adapters
+      "nvim-neotest/neotest-python"
+    } }
 
     -- parsers
     use {
@@ -52,7 +60,7 @@ require('packer').startup({
     }
 
     -- ui
-    use { 'catppuccin/nvim', as = "catppuccin", config = [[setup("catppuccin")]] }
+    -- use { 'catppuccin/nvim', as = "catppuccin", config = [[setup("catppuccin")]] }
     -- use { 'sam4llis/nvim-tundra', config = [[setup("tundra")]] }
     -- use { 'nyoom-engineering/oxocarbon.nvim', config = [[setup("oxocarbon")]] }
     use { 'nvim-lualine/lualine.nvim', config = [[setup("lualine")]] }
