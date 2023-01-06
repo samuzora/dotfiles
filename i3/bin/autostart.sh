@@ -33,7 +33,10 @@ nitrogen --restore
 ~/.config/i3/bin/i3dunst.sh
 
 # Lauch polybar
-~/.config/i3/bin/i3bar.sh
+# ~/.config/i3/bin/i3bar.sh
+
+# Launch eww bar
+eww daemon && eww open bar &
 
 # Lauch compositor
 ~/.config/i3/bin/i3comp.sh

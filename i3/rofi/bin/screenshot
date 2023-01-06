@@ -8,7 +8,7 @@ DIR="$HOME/.config/rofi"
 time=`date +%Y-%m-%d-%H-%M-%S`
 geometry=`xrandr | grep 'current' | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
 # dir="`xdg-user-dir PICTURES`/Screenshots"
-dir="/home/samuzora/external/ctf/comp/stf/writeups"
+dir="/home/samuzora/Pictures/Screenshots"
 file="Screenshot_${time}_${geometry}.png"
 
 # Commands

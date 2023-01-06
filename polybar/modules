@@ -45,7 +45,7 @@ ramp-7 = 
 ramp-8 = 
 ramp-9 = 
 ramp-font = 2
-ramp-foreground = ${color.PINK}
+ramp-foreground = ${color.BLUE}
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
@@ -120,7 +120,7 @@ time-format = %H:%M
 format-charging = <animation-charging> <label-charging>
 # format-charging-prefix = " "
 format-charging-prefix-font = 1
-format-charging-prefix-foreground = ${color.PINK}
+format-charging-prefix-foreground = ${color.BLUE}
 
 ; Available tags:
 ;   <label-discharging> (default)
@@ -153,7 +153,7 @@ label-discharging = %percentage%%
 format-full = <label-full>
 format-full-prefix = " "
 format-full-prefix-font = 2
-format-full-prefix-foreground = ${color.PINK}
+format-full-prefix-foreground = ${color.BLUE}
 label-full = %percentage%%
 
 ; Only applies if <ramp-capacity> is used
@@ -162,7 +162,7 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${color.PINK}
+ramp-capacity-foreground = ${color.BLUE}
 ramp-capacity-font = 2
 
 ; Only applies if <animation-charging> is used
@@ -171,7 +171,7 @@ animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${color.PINK}
+animation-charging-foreground = ${color.BLUE}
 animation-charging-font = 2
 animation-charging-framerate = 500
 
@@ -684,7 +684,8 @@ unknown-as-up = true
 ; Available tags:
 ;   <label-connected> (default)
 ;   <ramp-signal>
-format-connected = <ramp-signal> <label-connected>
+# format-connected = <ramp-signal>; <label-connected>
+format-connected = <ramp-signal>
 
 ; Available tags:
 ;   <label-disconnected> (default)
@@ -737,7 +738,7 @@ ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = ${color.PINK}
+ramp-signal-foreground = ${color.BLUE}
 ramp-signal-font = 2
 
 ; Only applies if <animation-packetloss> is used
@@ -786,7 +787,7 @@ format-muted-prefix-font = 2
 ; Available tokens:
 ;   %percentage% (default)
 label-muted = " Mute"
-label-muted-foreground = ${color.PINK}
+label-muted-foreground = ${color.BLUE}
 
 ; Only applies if <bar-volume> is used
 bar-volume-width = 10
@@ -794,15 +795,15 @@ bar-volume-gradient = false
 
 bar-volume-indicator = 雷
 bar-volume-indicator-font = 2
-bar-volume-indicator-foreground = ${color.PINK}
+bar-volume-indicator-foreground = ${color.BLUE}
 
 bar-volume-fill = 絛
 bar-volume-fill-font = 3
-bar-volume-foreground-0 = ${color.PINK}
-bar-volume-foreground-1 = ${color.PINK}
-bar-volume-foreground-2 = ${color.PINK}
-bar-volume-foreground-3 = ${color.PINK}
-bar-volume-foreground-4 = ${color.PINK}
+bar-volume-foreground-0 = ${color.BLUE}
+bar-volume-foreground-1 = ${color.BLUE}
+bar-volume-foreground-2 = ${color.BLUE}
+bar-volume-foreground-3 = ${color.BLUE}
+bar-volume-foreground-4 = ${color.BLUE}
 
 bar-volume-empty = 絛
 bar-volume-empty-font = 3
@@ -820,7 +821,7 @@ ramp-volume-7 = 
 ramp-volume-8 = 
 ramp-volume-9 = 
 ramp-volume-font = 2
-ramp-volume-foreground = ${color.PINK}
+ramp-volume-foreground = ${color.BLUE}
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 

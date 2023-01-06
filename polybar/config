@@ -126,7 +126,7 @@ module-margin-right = 0
 ; See the Fonts wiki page for more details
 
 font-0 = "Delugia Book:size=10;5"
-font-1 = "Delugia Mono:size=10;5"
+font-1 = "Delugia Mono:size=16;5"
 font-2 = "Delugia Mono:size=10;5"
 font-3 = "Delugia Mono:size=10;5"
 font-4 = "Delugia Code:size=10;5"
