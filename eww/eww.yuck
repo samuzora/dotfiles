@@ -90,9 +90,9 @@
 	(box :orientation "v" 
 		 :space-evenly false  
 		 :class "control"
+(bright)
 (bat)
 (wifi)
-(bright)
 (volume)))
 
 ;; Clock Widgets ;;
@@ -155,7 +155,7 @@
 	(box	:orientation "v" 
 			:space-evenly "false" 
 			:valign "start" 
-; (launcher)
+;; (launcher)
 (workspaces)))
 
 ;; Bottom Widgets ;;
@@ -188,10 +188,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bar Windows ;;
 (defwindow bar
-	:geometry (geometry :x "10px" 
+	:geometry (geometry :x "30px" 
 						:y "2%" 
 						:height "96%" 
-						:width "47px")
+						:width "50px")
 	:monitor 0
 	:reserve (struts :distance "35px" 
 					 :side "left")

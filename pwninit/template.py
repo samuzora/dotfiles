@@ -6,7 +6,6 @@ from pwn import *
 
 context.binary = {bin_name}
 
-
 def conn():
     if args.LOCAL:
         p = process({proc_args})

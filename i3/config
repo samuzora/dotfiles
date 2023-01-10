@@ -24,12 +24,12 @@ for_window [class=".*"] border pixel 2
 # Gaps (Outer gaps are added to the inner gaps)
 gaps inner 5
 gaps outer 15
-gaps left 50
+gaps left 70
 
 
 # Only enable gaps on a workspace when there is at least one container
 #smart_gaps on
-# for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 0
 
 # Activate smart borders (always)
 smart_borders on

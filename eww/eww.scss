@@ -25,7 +25,8 @@ $white: $foreground;
 // EWW BAR
 .eww_bar{
   background-color: $background;
-  padding: .3rem;
+  padding: 0.5rem;
+    border-radius: 10px;
 }
 
 // Launcher

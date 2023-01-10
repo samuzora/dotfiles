@@ -32,20 +32,20 @@ function M.config()
 
   require("mini.comment").setup()
 
-  require("mini.surround").setup({
-    highlight_duration = 500,
-    mappings = {
-      add = "<C-s>i",
-      delete = "<C-s>d",
-      find = "<C-s>f",
-      find_left = "<C-s>F",
-      highlight = "<C-s>h",
-      replace = "<C-s>r",
-      update_n_lines = "<C-s>n",
-    },
-    n_lines = 20,
-    search_method = "cover"
-  })
+  -- require("mini.surround").setup({
+  --   highlight_duration = 500,
+  --   mappings = {
+  --     add = "<C-s>i",
+  --     delete = "<C-s>d",
+  --     find = "<C-s>f",
+  --     find_left = "<C-s>F",
+  --     highlight = "<C-s>h",
+  --     replace = "<C-s>r",
+  --     update_n_lines = "<C-s>n",
+  --   },
+  --   n_lines = 20,
+  --   search_method = "cover"
+  -- })
 
   -- require("mini.pairs").setup({
   --   modes = {
@@ -72,8 +72,11 @@ function M.config()
       winblend = 0,
     }
   })
-  vim.keymap.set('n', '<Leader>mf', map.toggle_focus)
-  vim.keymap.set('n', '<Leader>mt', map.toggle)
+  map.toggle()
+  vim.keymap.set('n', '<leader>mf', map.toggle_focus)
+  vim.keymap.set('n', '<leader>mt', map.toggle)
+  vim.keymap.set('n', '<leader>mo', map.open)
+  vim.keymap.set('n', '<leader>mc', map.close)
 
 end
 

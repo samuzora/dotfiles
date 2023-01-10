@@ -3,12 +3,10 @@ return {
   "hrsh7th/cmp-nvim-lsp",
 
   "tpope/vim-repeat",
-  "mbbill/undotree",
   {
-    "AckslD/nvim-trevJ.lua",
-    config = true,
+    "mbbill/undotree",
     keys = {
-      { "<leader>s", function() require("trevj").format_at_cursor() end }
+      { "<leader>u", ":UndotreeToggle" }
     }
   },
   {
@@ -26,7 +24,7 @@ return {
   {
     "Eandrju/cellular-automaton.nvim",
     keys = {
-      { "<leader>fml", ":CellularAutomaton make_it_rain<CR>" }
+      { "<leader>fun", ":CellularAutomaton make_it_rain<CR>" }
     },
   },
   {
@@ -39,6 +37,10 @@ return {
     keys = {
       { "<leader>gb", ":GitBlameToggle<CR>" }
     }
+  },
+  {
+    "stevearc/oil.nvim",
+    config = true,
   },
   {
     "lewis6991/gitsigns.nvim",

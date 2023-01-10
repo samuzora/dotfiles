@@ -37,12 +37,13 @@ opt.spell = true
 
 opt.lazyredraw = false
 
-opt.cmdheight     = 1
+opt.cmdheight     = 0
+opt.showmode      = false
 opt.termguicolors = true
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
-  group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
-  callback = function()
-    opt.foldenable = false
-  end
+    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+    callback = function()
+        opt.foldenable = false
+    end
 })
