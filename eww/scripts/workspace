@@ -7,46 +7,53 @@ workspaces() {
 # visible: the current window
 display_string=$(cat <<EOF
 (box
-    :class "works"
-    :orientation "v"
-    :halign "center"
-    :valign "start"
-    :space-evenly "false"
-    :spacing "-5" 
+:class "workspaces"
+:spacing 30
 EOF
 )
 
 src=$(i3-msg -t get_workspaces)
+
 # get active windows
-active_workspaces=$(echo $src | jq -c '.[] | .name')
+active_workspaces=$(sort<<<$(echo $src | jq '.[] | .name'))
 
+# TODO: handle multi-monitor setup
 # should have only 1 element in array
-focused_workspaces=$(echo $src | jq -c '.[] | select(.focused == true) | .name')
+focused_workspaces=$(echo $src | jq '.[] | select(.focused == true) | .name')
 
-for workspace in $active_workspaces
+
+for i in {1..9}
 do
-
-    if [ $focused_workspaces == $workspace ]
-    then
+    if [[ $focused_workspaces =~ $i ]]; then
         display_string+=$(cat <<EOF
-            (button 
-                :class "011"
-                :onclick 'i3-msg workspace $workspace'
-                $workspace
-            ) 
+        (button 
+        :class "workspace focused"
+        :onclick 'i3-msg workspace $i'
+        ""
+        ) 
 EOF
-    )
-    else
+        )
+    elif [[ $active_workspaces[*] =~ $i ]]; then
         display_string+=$(cat <<EOF
-            (button 
-                :class "01"
-                :onclick 'i3-msg workspace $workspace'
-                $workspace
-            ) 
+        (button 
+        :class "workspace active"
+        :onclick 'i3-msg workspace $i'
+        ""
+        ) 
 EOF
-    )
+        )
+    else 
+        display_string+=$(cat <<EOF
+        (button
+        :class "workspace"
+        :onclick 'i3-msg workspace $i'
+        ""
+        )
+EOF
+        )
     fi
 done
+
 
 display_string+=")"
 echo $display_string
@@ -54,27 +61,3 @@ echo $display_string
 
 workspaces 
 i3-msg -t subscribe -m '[ "window", "workspace" ]' | while read line ; do workspaces; done
-
-# bspc subscribe desktop node_transfer | while read -r _ ; do
-# workspaces
-# done
-#
-#
-# (box 
-#     :class "works" 
-#     :orientation "v" 
-#     :halign "center" 
-#     :valign "start" 
-#     :space-evenly "false" 
-#     :spacing "-5" 
-#     (button 
-#         :class "011" 
-#         :onclick "i3-msg workspace 1"
-#         "1" 
-#     )
-#     (button 
-#         :class "01" 
-#         :onclick 'i3-msg workspace "2"'
-#         "2" 
-#     )
-# ))

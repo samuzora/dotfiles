@@ -24,6 +24,10 @@ function M.config()
   require("mason")
 
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lienFoldingOnly = true
+  }
 
   local lspconfig = require("lspconfig")
 
@@ -77,9 +81,17 @@ function M.config()
     }
   })
 
-  lspconfig.intelephense.setup({})
+  lspconfig.clangd.setup({
+    capabilities = capabilities,
+  })
 
-  lspconfig.prismals.setup({})
+  lspconfig.intelephense.setup({
+    capabilities = capabilities,
+  })
+
+  lspconfig.prismals.setup({
+    capabilities = capabilities,
+  })
 
   lspconfig.texlab.setup({
     single_file_support = true,
@@ -88,6 +100,7 @@ function M.config()
 
   lspconfig.sumneko_lua.setup({
     single_file_support = true,
+    capabilities = capabilities,
     on_attach = require("lsp-format").on_attach,
     settings = {
       Lua = {
@@ -98,7 +111,13 @@ function M.config()
     },
   })
 
-  lspconfig.ccls.setup({})
+  lspconfig.ccls.setup({
+    capabilities = capabilities,
+  })
+
+  lspconfig.gopls.setup({
+    capabilities = capabilities,
+  })
 end
 
 return M

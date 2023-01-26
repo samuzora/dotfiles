@@ -2,6 +2,55 @@ return {
   "williamboman/mason-lspconfig.nvim",
   "hrsh7th/cmp-nvim-lsp",
 
+  {
+    "toppair/peek.nvim",
+    config = true,
+    run = "deno task --quiet build:fast",
+    keys = {
+      { "<leader>mdo", function() require('peek').open() end },
+      { "<leader>mdc", function() require('peek').close() end }
+    }
+  },
+
+  {
+    "folke/which-key.nvim",
+    config = {
+      plugins = {
+        spelling = {
+          enabled = true,
+        }
+      }
+    }
+  },
+
+  {
+    "elkowar/yuck.vim"
+  },
+
+  {
+    "chomosuke/term-edit.nvim",
+    ft = "toggleterm",
+    version = "1.*",
+    config = {
+      prompt_end = "%$ "
+    }
+  },
+
+  {
+    "stevearc/overseer.nvim",
+    config = {
+      templates = { "builtin", "cpp_build" }
+    },
+    keys = {
+      { "<leader>g++", ":OverseerRun<CR>1<CR>" }
+    }
+  },
+
+  {
+    "windwp/nvim-autopairs",
+    config = true
+  },
+
   "tpope/vim-repeat",
   {
     "mbbill/undotree",
@@ -9,13 +58,13 @@ return {
       { "<leader>u", ":UndotreeToggle" }
     }
   },
+
   {
-    "anuvyklack/pretty-fold.nvim",
+    "s1n7ax/nvim-window-picker",
     config = true,
   },
   {
     "lambdalisue/suda.vim",
-    config = function() vim.g['suda_smart_edit'] = 1 end,
   },
   {
     "chentoast/marks.nvim",
@@ -37,10 +86,6 @@ return {
     keys = {
       { "<leader>gb", ":GitBlameToggle<CR>" }
     }
-  },
-  {
-    "stevearc/oil.nvim",
-    config = true,
   },
   {
     "lewis6991/gitsigns.nvim",

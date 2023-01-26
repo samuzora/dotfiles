@@ -1,5 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "Isrothy/lualine-diagnostic-message"
+  },
   config = {
     options = {
       -- theme = rose_pine,
@@ -25,7 +28,9 @@ return {
         },
         'diagnostics',
       },
-      lualine_c = {},
+      lualine_c = {
+        "diagnostic-message"
+      },
       lualine_x = {},
       lualine_y = {
         {

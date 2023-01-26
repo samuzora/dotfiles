@@ -23,8 +23,7 @@ for_window [class=".*"] border pixel 2
 
 # Gaps (Outer gaps are added to the inner gaps)
 gaps inner 5
-gaps outer 15
-gaps left 70
+gaps outer 5
 
 
 # Only enable gaps on a workspace when there is at least one container
@@ -60,15 +59,10 @@ bindsym $mod+v                  exec rofi -modi "clipboard:greenclip print" -sho
 bindsym $mod+Return 			exec --no-startup-id ~/.config/i3/bin/i3term.sh
 bindsym $mod+Shift+Return 		exec --no-startup-id ~/.config/i3/bin/i3term.sh --float
 bindsym $mod+t 					exec --no-startup-id ~/.config/i3/bin/i3term.sh --full
+bindsym $mod+b                  exec --no-startup-id "eww open bar"
+bindsym $mod+c                  exec --no-startup-id "eww close bar"
 
 # -- Apps --
-bindsym $mod+Shift+f 			exec --no-startup-id ranger
-bindsym $mod+Shift+e 			exec --no-startup-id nvim
-bindsym $mod+Shift+w 			exec --no-startup-id firefox
-bindsym $alt+Control+n 			exec --no-startup-id "kitty nvim"
-bindsym $alt+Control+r 			exec --no-startup-id "kitty ranger"
-bindsym $alt+Control+h 			exec --no-startup-id "kitty htop"
-bindsym $alt+Control+b 			exec --no-startup-id "kitty bashtop"
 
 # -- Rofi --
 bindsym $alt+F1 				exec --no-startup-id ~/.config/i3/rofi/bin/launcher
@@ -108,13 +102,16 @@ floating_modifier $mod
 
 # kill focused window
 bindsym $mod+q kill
-bindsym $mod+c kill
 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -155,7 +152,6 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -167,7 +163,6 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -179,7 +174,6 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym Control+$alt+c reload
@@ -263,6 +257,19 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 ##-- Workspace Rules ------------------------
 assign [class="Lxappearance|Nitrogen"] 6
 assign [class="Pavucontrol|Xfce4-power-manager-settings"] 6
+
+##-- multi-monitor setup --------------------
+
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+workspace 5 output eDP-1
+workspace 6 output eDP-1
+
+workspace 7 output HDMI-1
+workspace 8 output HDMI-1
+workspace 9 output HDMI-1
 
 ##-- Window Rules ------------------------
 for_window [window_role="pop-up"] floating enable

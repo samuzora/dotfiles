@@ -1,11 +1,6 @@
-/* Created   by https://github.com/rxyhn 
-   Designed  by https://github.com/rxyhn
-   Maintaned by https://github.com/rxyhn
-*/
-
 // Global
-*{
-  all: unset;
+* {
+    all: unset;
 }
 
 // Variable Color's
@@ -23,208 +18,177 @@ $cyan: #7DCFFF;
 $white: $foreground;
 
 // EWW BAR
-.eww_bar{
-  background-color: $background;
-  padding: 0.5rem;
-    border-radius: 10px;
+.eww_bar {
+    background-color: $background;
+    padding: 0.5rem;
 }
 
-// Launcher
-.launcher_icon{
-    color: $cyan;
-    font-family: "Font Awesome 6 Pro";
-    font-size: 1.7em;
-    padding: 1rem 0 1rem 0;
+// power menu
+.powermenu {
+    font-family: Delugia Book;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.lock {
+    color: $green;
+}
+
+.reboot {
+    color: $yellow;
+}
+
+.poweroff {
+    color: $red;
 }
 
 // Workspaces
-.works {
-font-family: "Font Awesome 6 Pro";
-padding: .2rem .7rem .2rem .7rem;
-background-color: $black;
-border-radius: 5px;
+.workspaces {
+    min-height: 1.8rem;
+    font-family: Delugia Book;
+    font-size: 1rem;
+    background-color: $black;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    padding: .3rem 1rem;
 }
 
-.0 , .01, .02, .03, .04, .05, .06,
-.011, .022, .033, .044, .055, .066{
-  margin: .55rem 0 .55rem 0;
-}
-
-/* Unoccupied */
-.0 {
-color: $gray;
-}
-
-/* Occupied */
-.01, .02, .03, .04, .05, .06 {
-  color: $gray;
+.workspace {
+    color: $gray;
 }
 
 /* Focused */
-.011,
-.022,
-.033,
-.044,
-.055,
-.066 {
-  color: $foreground;
+.focused {
+    color: $blue;
 }
 
-.0:nth-child(1),
-.0:nth-child(3){
-  font-size: 1.5em;
+.active {
+    color: $foreground;
 }
-.0:nth-child(2){
-  font-size: 1.4em;
+
+// stats display
+progressbar trough {
+    all: unset;
+    background-color: $gray;
+    border-radius: 5px;
+    min-height: 10px;
+    min-width: 100px;
 }
-.0:nth-child(4),
-.0:nth-child(5){
-  font-size: 1.6em;
+
+trough progress {
+    border-radius: 5px;
+    min-height: 10px;
 }
-.0:nth-child(6){
-  font-size: 1.7em;
+
+.Discharging trough progress {
+    background-color: $white;
 }
-.01,
-.011,
-.03,
-.033{
-  font-size: 1.5em;
+
+.Charging trough progress {
+    background-color: $cyan;
 }
-.02,
-.022{
-  font-size: 1.4em;
-}
-.04,
-.05,
-.044,
-.055{
-  font-size: 1.6em;
-}
-.06,
-.066{
-  font-size: 1.7em;
+
+.ram > trough progress {
+    background-color: $red;
 }
 
 // Control Panel
 .control {
-padding: .5rem;
-font-family: Material Icons;
-font-size: 1.6em;
-background-color: $black;
-border-radius: 5px;
+    min-height: 1.8rem;
+    font-family: Delugia Book;
+    font-size: 1rem;
+    color: $white;
+    background-color: $black;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+    padding: .3rem 1rem;
 }
-.bat{
-  font-size: 1.2em;
-  margin: .5rem 0 .0rem 0;
-  color: $blue;
+
+.wifi-connected {
+    color: $magenta
 }
-.wifi-icon{
-  margin: .5rem 0 .0rem 0;
-  color: $magenta;
+
+.wifi-disconnected {
+    color: $gray;
 }
-.brightness-icon{
-  margin: .5rem 0 .0rem 0;
-  color: $yellow;
+
+.wifi-name {
+    margin-left: 0.5rem;
 }
-.volume-icon{
-  margin: .5rem 0 .3rem 0;
-  color: $green;
-}
+
 scale trough {
-  all: unset;
-  background-color: $background;
-  border-radius: 5px;
-  min-height: 80px;
-  min-width: 10px;
-  margin: .3rem 0 .3rem 0;
+    all: unset;
+    background-color: $background;
+    border-radius: 5px;
+    min-height: 10px;
+    min-width: 80px;
+    margin-left: 0.5rem;
 }
-.bribar trough highlight {
-  background-color: $yellow;
-  border-radius: 5px;
+
+.brightness-icon{
+    color: $yellow;
 }
-.volbar trough highlight {
-  background-color: $green;
-  border-radius: 5px;
+
+.brightness-bar trough highlight {
+    background-color: $yellow;
+    border-radius: 5px;
+}
+
+.volume-bar trough highlight {
+    background-color: $green;
+    border-radius: 5px;
+}
+
+.volume-icon{
+    color: $green;
 }
 
 // Clock
 .time {
-  font-family: Comic Mono;
-  font-weight: bold;
-  font-size: 1.2em;
-  background-color: $black;
-  color: $white;
-  border-radius: 5px;
-  padding: .7rem 0 .5rem 0;
-  margin: .5rem 0 .5rem 0;
+    font-family: Delugia Book;
+    font-size: 1.3rem;
+    color: $white;
 }
 
 // Calendar
 .cal-box {
-  background-color: $black;
-  font-family: Comic Mono;
-  font-size: 1em;
-  font-weight: bold;
+    background-color: $background;
+    font-family: Comic Mono;
+    font-size: 1em;
+    font-weight: bold;
 
-  .cal-inner-box {
-      padding: 1rem 1rem .2rem;
+    .cal-inner-box {
+        padding: 1rem 1rem .2rem;
 
-      .cal {
-          &.highlight {
-              padding: 10rem;
-          }
+        .cal {
+            &.highlight {
+                padding: 10rem;
+            }
 
-          padding: .8rem .25rem 0rem;
-          margin-left: 10px;
-      }
-  }
+            padding: .8rem .25rem 0rem;
+            margin-left: 20px;
+        }
+    }
 }
 
 calendar:selected {
-  color: $blue;
+    color: $blue;
 }
 
 calendar.header {
-color: $blue;
-font-weight: bold;
+    color: $blue;
+    font-weight: bold;
 }
 
 calendar.button {
-color: $magenta;
+    color: $magenta;
 }
 
 calendar.highlight {
-color: $magenta;
-font-weight: bold;
+    color: $magenta;
+    font-weight: bold;
 }
 
 calendar:indeterminate {
-color: $background;
-}
-
-// Powermenu
-.powermenu {
-  font-family: feather;
-  font-size: 1.4em;
-  font-weight: bold;
-}
-.button-bspres, .button-reb, .button-lock,
-.button-quit, .button-off{
-  padding: .5rem .2rem .3rem .2rem;
-}
-.button-off{
-  margin-bottom: .5rem;
-  color: $red;
-}
-.button-bspres{
-  color: $green;
-}
-.button-reb{
-  color: $yellow
-}
-.button-quit{
-  color: $magenta;
-}
-.button-lock{
-  color: $blue;
+    color: $background;
 }

@@ -1,1 +1,2 @@
-vim.opt.textwidth = 0
+-- vim.opt.foldmethod = "indent"
+-- vim.opt.textwidth = 0

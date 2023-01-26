@@ -1,2 +1,2 @@
-require('packages')
-require('opts')
+require("lazy-manager")
+require("opts")

@@ -1,12 +1,12 @@
 #!/bin/sh
 
 symbol() {
-[ $(cat /sys/class/net/w*/operstate) = down ] && echo  && exit
-echo 
+    [ $(cat /sys/class/net/w*/operstate) = down ] && echo "wifi-disconnected" && exit
+    echo "wifi-connected"
 }
 
 name() {
-nmcli | grep "^wlp" | sed 's/\ connected\ to\ /Connected to /g' | cut -d ':' -f2
+    nmcli | grep "^wlan0" | sed 's/wlan0:\ \(unavailable\|disconnected\)//' | sed 's/\ connected\ to\ //' | cut -d ':' -f2
 }
 
 [ "$1" = "icon" ] && symbol && exit
