@@ -19,7 +19,7 @@ xsetroot -cursor_name left_ptr
 /usr/lib/xfce-polkit/xfce-polkit &
 
 # Enable power management
-xfce4-power-manager &
+# xfce4-power-manager &
 
 # Enable Super Keys For Menu
 ksuperkey -e 'Super_L=Alt_L|F1' &
@@ -36,10 +36,7 @@ nitrogen --restore
 # ~/.config/i3/bin/i3bar.sh
 
 # Launch eww bar
-eww daemon && eww open bar &
+eww --config $HOME/.config/eww/bar daemon && eww --config $HOME/.config/eww/bar open bar &
 
 # Lauch compositor
 ~/.config/i3/bin/i3comp.sh
-
-# Start mpd
-exec mpd &

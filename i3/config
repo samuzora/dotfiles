@@ -22,8 +22,8 @@ title_align center
 for_window [class=".*"] border pixel 2
 
 # Gaps (Outer gaps are added to the inner gaps)
-gaps inner 5
-gaps outer 5
+gaps inner 10
+gaps outer 10
 
 
 # Only enable gaps on a workspace when there is at least one container
@@ -56,19 +56,15 @@ exec_always --no-startup-id     greenclip daemon
 bindsym $mod+v                  exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme "~/.config/rofi/greenclip.rasi"
 
 # -- Terminal --
-bindsym $mod+Return 			exec --no-startup-id ~/.config/i3/bin/i3term.sh
-bindsym $mod+Shift+Return 		exec --no-startup-id ~/.config/i3/bin/i3term.sh --float
-bindsym $mod+t 					exec --no-startup-id ~/.config/i3/bin/i3term.sh --full
-bindsym $mod+b                  exec --no-startup-id "eww open bar"
-bindsym $mod+c                  exec --no-startup-id "eww close bar"
 
 # -- Apps --
+bindsym $alt+F1                 exec --no-startup-id "$HOME/.config/eww/dashboard/scripts/open"
+bindsym $mod+t                  exec --no-startup-id kitty
 
 # -- Rofi --
-bindsym $alt+F1 				exec --no-startup-id ~/.config/i3/rofi/bin/launcher
+bindsym $mod+m 				    exec --no-startup-id ~/.config/i3/rofi/bin/launcher
 bindsym $mod+n 					exec --no-startup-id ~/.config/i3/rofi/bin/network_menu
 bindsym $mod+x 					exec --no-startup-id ~/.config/i3/rofi/bin/powermenu
-bindsym $mod+m 					exec --no-startup-id ~/.config/i3/rofi/bin/mpd
 bindsym $mod+s 					exec --no-startup-id ~/.config/i3/rofi/bin/screenshot
 bindsym $mod+r 					exec --no-startup-id ~/.config/i3/rofi/bin/asroot
 bindsym $mod+w 					exec --no-startup-id ~/.config/i3/rofi/bin/windows
@@ -255,8 +251,8 @@ mode "$mode_gaps" {
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 ##-- Workspace Rules ------------------------
-assign [class="Lxappearance|Nitrogen"] 6
-assign [class="Pavucontrol|Xfce4-power-manager-settings"] 6
+# assign [class="Lxappearance|Nitrogen"] 6
+# assign [class="Pavucontrol|Xfce4-power-manager-settings"] 6
 
 ##-- multi-monitor setup --------------------
 
@@ -272,12 +268,11 @@ workspace 8 output HDMI-1
 workspace 9 output HDMI-1
 
 ##-- Window Rules ------------------------
+for_window [class="bomi"] fullscreen enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [class="alacritty-float"] floating enable
 for_window [class="Pcmanfm|Onboard|Yad"] floating enable
 for_window [class="Lxappearance|Nitrogen"] floating enable
 for_window [class="Pavucontrol|Xfce4-power-manager-settings|Nm-connection-editor"] floating enable
 for_window [class="feh|Viewnior|Gpicview|Gimp|MPlayer"] floating enable
 for_window [class="Kvantum Manager|qt5ct"] floating enable
-for_window [class="VirtualBox Manager|qemu|Qemu-system-x86_64"] floating enable

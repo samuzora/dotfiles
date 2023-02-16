@@ -6,8 +6,8 @@ symbol() {
 }
 
 name() {
-    nmcli | grep "^wlan0" | sed 's/wlan0:\ \(unavailable\|disconnected\)//' | sed 's/\ connected\ to\ //' | cut -d ':' -f2
+    nmcli device show wlan0 | sed -n "s/GENERAL.CONNECTION:\s*\(.*\)/\1/p"
 }
 
-[ "$1" = "icon" ] && symbol && exit
+[ "$1" = "class" ] && symbol && exit
 [ "$1" = "name" ] && name && exit

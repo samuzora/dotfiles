@@ -98,7 +98,7 @@ function M.config()
     capabilities = capabilities,
   })
 
-  lspconfig.sumneko_lua.setup({
+  lspconfig.lua_ls.setup({
     single_file_support = true,
     capabilities = capabilities,
     on_attach = require("lsp-format").on_attach,

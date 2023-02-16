@@ -10,7 +10,7 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun";
-    show-icons:                 false;
+    show-icons:                 true;
     display-drun:               "";
 	drun-display-format:        "{name}";
 }
@@ -25,9 +25,10 @@ window {
     location:                    North East;
     anchor:                      North East;
     fullscreen:                  false;
-    width:                       1000px;
-    x-offset:                    -100px;
-    y-offset:                    100px;
+    width:                       30%;
+    height:                      50%;
+    x-offset:                    -5%;
+    y-offset:                    5%;
 
     enabled:                     true;
     margin:                      0px;
@@ -136,7 +137,7 @@ element normal.normal, element alternate.normal {
     text-color:                  @foreground;
 }
 element selected.normal {
-    background-color:            @cya;
+    background-color:            @magenta;
     text-color:                  @background;
 }
 element-icon {

@@ -1,6 +1,5 @@
 local M = {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "sam4llis/nvim-tundra",
   dependencies = {
     "kyazdani42/nvim-web-devicons"
   }
@@ -8,10 +7,10 @@ local M = {
 
 function M.config()
   -- catppuccin
-  require("catppuccin").setup({
-    transparent_background = true,
-  })
-  vim.cmd.colorscheme "catppuccin"
+  -- require("catppuccin").setup({
+  --   transparent_background = true,
+  -- })
+  -- vim.cmd.colorscheme "catppuccin"
   ---
 
   -- rose-pine
@@ -40,26 +39,35 @@ function M.config()
   ---
 
   -- tundra
-  -- require('nvim-tundra').setup({
-  --   transparent_background = true,
-  --   syntax = {
-  --     booleans = { bold = true, italic = true },
-  --     comments = { bold = true, italic = true },
-  --     conditionals = {},
-  --     constants = { bold = true },
-  --     fields = {},
-  --     functions = {},
-  --     keywords = {},
-  --     loops = {},
-  --     numbers = { bold = true },
-  --     operators = { bold = true },
-  --     punctuation = {},
-  --     strings = {},
-  --     types = { italic = true },
-  --   },
-  -- })
-  -- vim.opt.background = 'dark'
-  -- vim.cmd('colorscheme tundra')
+  require('nvim-tundra').setup({
+    transparent_background = true,
+    syntax = {
+      booleans = { bold = true, italic = true },
+      comments = { bold = true, italic = true },
+      conditionals = {},
+      constants = { bold = true },
+      fields = {},
+      functions = {},
+      keywords = {},
+      loops = {},
+      numbers = { bold = true },
+      operators = { bold = true },
+      punctuation = {},
+      strings = {},
+      types = { italic = true },
+    },
+    overwrite = {
+      highlights = {
+        ["NonText"] = { fg = "" },
+        ["@text.strong"] = { bold = true },
+        ["@text.emphasis"] = { italic = true },
+        ["LeapBackdrop"] = { fg = "#F9FAFB" },
+        SpellBad = { fg = "", bg = "", bold = false }
+      }
+    }
+  })
+  vim.opt.background = 'dark'
+  vim.cmd('colorscheme tundra')
   ---
 end
 

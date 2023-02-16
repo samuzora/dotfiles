@@ -7,7 +7,7 @@ opt.softtabstop          = 4
 opt.smartindent          = true
 opt.autoindent           = true
 opt.smarttab             = true
-opt.textwidth            = 80
+opt.textwidth            = 0
 opt.splitbelow           = true
 opt.splitright           = true
 opt.undofile             = true
@@ -29,14 +29,12 @@ opt.cmdheight            = 0
 opt.showmode             = false
 opt.termguicolors        = true
 vim.g['suda_smart_edit'] = 1
-
-opt.shell = "fish"
-
-vim.o.foldcolumn = '1'
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-
+opt.conceallevel         = 2
+opt.shell                = "fish"
+vim.o.foldcolumn         = '1'
+vim.o.foldlevel          = 99
+vim.o.foldlevelstart     = 99
+vim.o.foldenable         = true
 
 -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
 --   group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),

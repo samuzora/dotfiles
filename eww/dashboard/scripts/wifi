@@ -1,0 +1,22 @@
+#!/bin/sh
+
+wifi_name=$(nmcli device show wlan0 | sed -n "s/GENERAL.CONNECTION:\s*\(.*\)/\1/p")
+wifi_signal_strength="$(nmcli device wifi | sed -n "s/\*.*Infra\s*[0-9]*\s*[0-9]* .*\s*\([0-9]\{2\}\).*/\1/p")%"
+
+local_ip=$(nmcli device show wlan0 | sed -n "s/IP4.ADDRESS\[1\]:\s*\([0-9.]*\).*/\1/p")
+# external_ip=$(curl -fs ifconfig.co)
+
+if [ -z "${local_ip}" ]
+then
+    local_ip="Unavailable"
+fi
+
+if [ -z "${external_ip}" ]
+then
+    external_ip="Unavailable"
+fi
+
+array=("$wifi_name ($wifi_signal_strength)" $local_ip)
+jq -cn '$ARGS.positional' --args -- "${array[@]}"
+
+# vim:set ft=bash

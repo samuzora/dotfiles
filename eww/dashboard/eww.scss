@@ -1,0 +1,108 @@
+$foreground: #c4bfe1;
+$background: #12101e;
+
+$black: #1B152C;
+$gray: #2D284A;
+$red: #E68C9C;
+$green: #A3DE95;
+$yellow: #F5D084;
+$blue: #82A5D0;
+$magenta: #D39FDB;
+$cyan: #7AC9C1;
+$white: #dbe6d9;
+
+* {
+    all: unset;
+}
+
+.background {
+    opacity: 0.1;
+    background: $background;
+}
+
+.details {
+    opacity: 1.0;
+    color: $foreground;
+    background: $background;
+    font-family: TypoPRO Lato;
+}
+
+.details-header {
+    padding: 2rem;
+    margin: 1.3rem;
+    font-size: 3rem;
+}
+
+.wifi-header {
+    min-height: 4rem;
+
+    margin: 1rem;
+    padding: 1.5rem;
+
+    color: $magenta;
+
+    font-family: Material Icons;
+    border-bottom: 5px solid $gray;
+    border-right: 5px solid $gray;
+    border-bottom-right-radius: 10px;
+    font-size: 5rem;
+}
+
+.wifi-details {
+    color: $foreground;
+    font-family: TypoPRO Lato;
+    font-size: 1.3rem;
+}
+
+.bluetooth-header {
+    min-height: 4rem;
+    margin: 1rem;
+    padding: 1.5rem;
+    padding-left: 2.3rem;
+
+    color: $blue;
+
+    font-family: Material Icons;
+    border-bottom: 5px solid $gray;
+    border-right: 5px solid $gray;
+    border-bottom-right-radius: 10px;
+    font-size: 5rem;
+}
+
+.bluetooth-details {
+    color: $foreground;
+
+    font-family: TypoPRO Lato;
+    font-size: 1.3rem;
+}
+
+.launcher {
+    opacity: 1.0;
+    color: $foreground;
+    background: $background;
+    padding: 48px;
+    font-family: TypoPRO Lato;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.launcher-icon {
+    font-family: TypoPRO Lato;
+    font-weight: 900;
+    margin-left: 1rem;
+}
+
+.launcher entry {
+    background: $background;
+    text-decoration: none;
+
+    margin-left: 1rem;
+}
+
+.notifications {
+    opacity: 1.0;
+    font-family: TypoPRO Lato;
+    font-size: 1.5rem;
+    color: $foreground;
+    background: $background;
+}

@@ -1,16 +1,16 @@
 * {
-    bg: argb:99191724;
-    cur: #26233a;
-    fgd: #e0def4;
-    cmt: #6e6a86;
-    cya: #9ccfd8;
-    grn: #31748f;
-    ora: #ebbcba;
-    pur: #c4a7e7;
-    red: #eb6f92;
-    yel: #f6c177;
+    fgd: #c4bfe1;
+    bg: #12101e;
 
-    font: "Delugia Book 12";
+    black: #1B152C;
+    gray: #2D284A;
+    red: #E68C9C;
+    grn: #A3DE95;
+    yel: #F5D084;
+    blue: #82A5D0;
+    magenta: #D39FDB;
+    cya: #7AC9C1;
+    white: #dbe6d9;
 
     foreground: @fgd;
     background: @bg;

@@ -1,0 +1,37 @@
+(defwindow notifications
+  :geometry
+  (geometry
+    :x -20
+    :y 80
+    :width "12%"
+    :anchor "top right"
+    )
+  (notification 
+    :title "asdf" 
+    :content "asdf"
+    )
+  )
+
+(defwidget notification [title content]
+  (box
+    :space-evenly false
+    :spacing 5
+    :orientation "v"
+    (box
+      :class "title-box"
+      (label
+        :class "title"
+        :halign "start"
+        :text title
+        )
+      )
+    (box
+      :class "content-box"
+      (label
+        :class "content"
+        :halign "start"
+        :text content
+        )
+      )
+    )
+  )

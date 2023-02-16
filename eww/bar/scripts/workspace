@@ -7,6 +7,7 @@ workspaces() {
 # visible: the current window
 display_string=$(cat <<EOF
 (box
+:valign "center"
 :class "workspaces"
 :spacing 30
 EOF
@@ -60,4 +61,4 @@ echo $display_string
 }
 
 workspaces 
-i3-msg -t subscribe -m '[ "window", "workspace" ]' | while read line ; do workspaces; done
+i3-msg -t subscribe -m '[ "workspace" ]' | while read line ; do workspaces; done

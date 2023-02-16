@@ -24,6 +24,11 @@ return {
   },
 
   {
+    "stevearc/oil.nvim",
+    config = true
+  },
+
+  {
     "elkowar/yuck.vim"
   },
 

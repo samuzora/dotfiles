@@ -4,29 +4,27 @@
 }
 
 // Variable Color's
-$background: #1A1B26;
-$foreground: #A9B1D6;
+$foreground: #c4bfe1;
+$background: #12101e;
 
-$black: #24283B;
-$gray: #565F89;
-$red: #F7768E;
-$green: #73DACA;
-$yellow: #E0AF68;
-$blue: #7AA2F7;
-$magenta: #BB9AF7;
-$cyan: #7DCFFF;
-$white: $foreground;
+$black: #1B152C;
+$gray: #2D284A;
+$red: #E68C9C;
+$green: #A3DE95;
+$yellow: #F5D084;
+$blue: #82A5D0;
+$magenta: #D39FDB;
+$cyan: #7AC9C1;
+$white: #dbe6d9;
 
-// EWW BAR
-.eww_bar {
+.eww-bar {
     background-color: $background;
     padding: 0.5rem;
 }
 
-// power menu
 .powermenu {
     font-family: Delugia Book;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-left: 0.5rem;
 }
 
@@ -40,16 +38,15 @@ $white: $foreground;
 
 .poweroff {
     color: $red;
+    margin-right: 0.5rem;
 }
 
-// Workspaces
 .workspaces {
-    min-height: 1.8rem;
+    min-height: 1.9rem;
     font-family: Delugia Book;
-    font-size: 1rem;
+    font-size: 1.1rem;
     background-color: $black;
     border-radius: 10px;
-    margin-left: 0.5rem;
     padding: .3rem 1rem;
 }
 
@@ -57,16 +54,14 @@ $white: $foreground;
     color: $gray;
 }
 
-/* Focused */
-.focused {
-    color: $blue;
-}
-
 .active {
     color: $foreground;
 }
 
-// stats display
+.focused {
+    color: $blue;
+}
+
 progressbar trough {
     all: unset;
     background-color: $gray;
@@ -80,24 +75,28 @@ trough progress {
     min-height: 10px;
 }
 
+// battery
 .Discharging trough progress {
-    background-color: $white;
+    background-color: $yellow;
 }
 
 .Charging trough progress {
-    background-color: $cyan;
+    background-color: $magenta;
+}
+
+.Full trough progress {
+    background-color: $green;
 }
 
 .ram > trough progress {
-    background-color: $red;
+    background-color: $cyan;
 }
 
-// Control Panel
 .control {
-    min-height: 1.8rem;
+    min-height: 1.9rem;
     font-family: Delugia Book;
-    font-size: 1rem;
-    color: $white;
+    font-size: 1.1rem;
+    color: $foreground;
     background-color: $black;
     border-radius: 10px;
     margin-right: 0.5rem;
@@ -105,7 +104,7 @@ trough progress {
 }
 
 .wifi-connected {
-    color: $magenta
+    color: $magenta;
 }
 
 .wifi-disconnected {
@@ -143,52 +142,11 @@ scale trough {
     color: $green;
 }
 
-// Clock
 .time {
-    font-family: Delugia Book;
-    font-size: 1.3rem;
-    color: $white;
-}
-
-// Calendar
-.cal-box {
-    background-color: $background;
-    font-family: Comic Mono;
-    font-size: 1em;
+    font-family: TypoPRO Lato;
     font-weight: bold;
-
-    .cal-inner-box {
-        padding: 1rem 1rem .2rem;
-
-        .cal {
-            &.highlight {
-                padding: 10rem;
-            }
-
-            padding: .8rem .25rem 0rem;
-            margin-left: 20px;
-        }
-    }
-}
-
-calendar:selected {
-    color: $blue;
-}
-
-calendar.header {
-    color: $blue;
-    font-weight: bold;
-}
-
-calendar.button {
-    color: $magenta;
-}
-
-calendar.highlight {
-    color: $magenta;
-    font-weight: bold;
-}
-
-calendar:indeterminate {
-    color: $background;
+    font-size: 1.5rem;
+    color: $foreground;
+    animation-timing-function: linear;
+    animation-timing-function: linear;
 }

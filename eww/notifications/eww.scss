@@ -1,0 +1,33 @@
+$foreground: #c4bfe1;
+$background: #12101e;
+
+$black: #1B152C;
+$gray: #2D284A;
+$red: #E68C9C;
+$green: #A3DE95;
+$yellow: #F5D084;
+$blue: #82A5D0;
+$magenta: #D39FDB;
+$cyan: #7AC9C1;
+$white: #dbe6d9;
+
+.notifications {
+    font-family: TypoPRO Lato;
+    font-size: 1.3rem;
+    background-color: $black;
+}
+
+.title-box {
+    padding: 0.8rem;
+
+    font-size: 2rem;
+    font-weight: bold;
+    border-bottom: 1px $white solid;
+}
+
+.title {
+}
+
+.content {
+    padding: 0.8rem;
+}

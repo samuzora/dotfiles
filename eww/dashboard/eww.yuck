@@ -1,0 +1,187 @@
+(defvar EWW_CMD "eww --config $HOME/.config/eww/dashboard")
+
+; --- background ---
+(defwindow background
+  :windowtype "desktop"
+  :geometry 
+  (geometry 
+    ; this is offset to fit my top bar - change as necessary
+    :x "0%"
+    :y "80px"
+    :width "100%"
+    :height "100%"
+    :anchor "top center"
+    )
+  :monitor "eDP-1"
+  ""
+  )
+
+; --- details window --- 
+(defwindow details
+  :windowtype "desktop"
+  :geometry 
+  (geometry
+    :x "-18%"
+    :y "-3%"
+    :width "30%"
+    :height "64%"
+    :anchor "center"
+    )
+  :monitor "eDP-1"
+  (details)
+  )
+
+(defwidget details []
+  (box
+    :class "details-header"
+    :orientation "v"
+    :space-evenly false
+    (label
+      :hexpand true
+      :vexpand true
+      :text "(^._.^) konnichiwatsup!"
+      )
+    (wifi-details)
+    (bluetooth-details)
+    )
+  )
+
+(defwidget wifi-details []
+  (box
+    :class "wifi-header"
+    :hexpand true
+    (button
+      :halign "start"
+      :onclick "$HOME/.config/i3/rofi/bin/network_menu & ./scripts/open"
+      (label 
+        :halign "center"
+        :text ""
+        )
+      )
+    (box
+      :orientation "v"
+      (for item in wifi-poller
+        (label
+          :class "wifi-details"
+          :halign "end"
+          :text item
+          )
+        )
+      )
+    )
+  )
+
+(defpoll wifi-poller 
+  :interval "10s"
+  :initial "[\"Polling...\"]"
+  "./scripts/wifi"
+  )
+
+(defwidget bluetooth-details []
+  (box
+    :class "bluetooth-header"
+    :hexpand true
+    (button 
+      :halign "start"
+      :onclick "kitty bluetuith & ./scripts/open"
+      ""
+      )
+    (box
+      :orientation "v"
+      (for item in bluetooth-poller
+        (label
+          :class "bluetooth-details"
+          :halign "end"
+          :text item
+          )
+        )
+      )
+    )
+  )
+
+(defpoll bluetooth-poller
+  :interval "10s"
+  :initial "[\"Polling...\"]"
+  "./scripts/bluetooth"
+  )
+
+; --- launcher window ---
+(defwindow launcher
+  :windowtype "desktop"
+  :geometry 
+  (geometry 
+    :x "-18%"
+    :y "33%"
+    :width "30%"
+    :height "4%"
+    :anchor "center"
+    )
+  :stacking "fg"
+  :monitor 0
+  (launcher)
+  )
+
+(defwidget launcher []
+  (box
+    (box
+      :valign "center"
+      :space-evenly false
+      :spacing 5
+      (label
+        :class "launcher-icon"
+        :text ""
+        )
+      (input
+        :valign "center"
+        :hexpand true
+        :onchange "${EWW_CMD} update app-match=\"$(./scripts/parse-desktop search \"{}\")\""
+        :onaccept "(cd $HOME && $($HOME/.config/eww/dashboard/scripts/parse-desktop run \"{}\")) & ${EWW_CMD} update app-match=\"\" & ./scripts/open"
+        )
+      (label
+        :class "launcher-icon"
+        :text "|"
+        )
+      )
+    (label
+      :halign "center"
+      :text app-match
+      )
+    )
+  )
+
+(defvar app-match "")
+
+; --- notifications window ---
+
+(defwindow notifications
+  :windowtype "desktop"
+  :geometry
+  (geometry
+    :x "18%"
+    :y 0
+    :width "30%"
+    :height "70%"
+    :anchor "center"
+    )
+  :stacking "fg"
+  :monitor 0
+  "to be implemented"
+  ; (for item in notification-listener
+  ;   (notification
+  ;     :summary item.summary
+  ;     :body item.body
+  ;     )
+  ;   )
+  )
+
+; note: summary == title of notification
+; (defwidget notification [summary body]
+;   (box
+;     summary
+;     body
+;     )
+;   )
+;
+; (deflisten notification-listener
+;   "tiramisu -js"
+;   )

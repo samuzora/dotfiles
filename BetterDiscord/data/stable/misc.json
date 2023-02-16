@@ -2,7 +2,8 @@
     "version": "1.8.4",
     "drawerStates": {
         "settings": {
-            "window": true
+            "window": true,
+            "addons": false
         }
     }
 }

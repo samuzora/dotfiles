@@ -1,0 +1,13 @@
+#!/bin/sh
+
+a=$(bluetoothctl devices Connected | cut -f 3- -d " ")
+readarray -t a <<<"$a"
+
+if [ -z "${a}" ] 
+then
+    a[0]="No devices connected"
+fi
+
+jq -cn '$ARGS.positional' --args -- "${a[@]}"
+
+#vim:set ft=bash

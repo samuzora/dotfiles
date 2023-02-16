@@ -1,0 +1,13 @@
+#!/bin/sh
+
+notifications=()
+list() {
+    echo $1;
+    notifications+=$1
+    echo $notifications
+    jq -cn '$ARGS.positional' --args -- "${notifications[@]}"
+}
+
+tiramisu -js | while IFS= read -r line ; do list $line ; done
+
+#vim:set ft=bash

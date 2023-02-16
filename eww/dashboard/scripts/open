@@ -1,0 +1,5 @@
+# make sure background is first to open - so it draws in bg
+# make sure launcher is last to open - so focus goes to it
+eww --config $HOME/.config/eww/dashboard open-many --toggle background notifications details launcher
+
+# vim:set ft=bash

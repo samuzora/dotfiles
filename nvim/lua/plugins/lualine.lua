@@ -1,3 +1,16 @@
+-- function cat_animation()
+--   local animated = {
+--     "(^•_•^)",
+--     "(^-_-^)",
+--     "(^•_•^)",
+--     "(^-_-^)",
+--     "(^•_•^)",
+--     "(^•_•^ )",
+--     "( ^•_•^)",
+--   }
+--   return animated[os.date("%S") % #animated + 1]
+-- end
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
@@ -5,7 +18,7 @@ return {
   },
   config = {
     options = {
-      -- theme = rose_pine,
+      theme = "tundra",
       globalstatus = true,
       refresh = {
         statusline = 100,
