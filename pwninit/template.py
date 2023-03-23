@@ -10,7 +10,6 @@ def conn():
     if args.LOCAL:
         p = process({proc_args})
         if args.GDB:
-            context.terminal = "kitty"
             gdb.attach(p)
     else:
         p = remote("addr", 1337)

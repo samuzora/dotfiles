@@ -1,0 +1,75 @@
+return {
+  -- neorg
+  {
+    "nvim-neorg/neorg",
+    dependencies = {
+      {
+        "folke/zen-mode.nvim",
+        config = true,
+        keys = {
+          { "<leader>za", ":ZenMode<CR>", desc = "Enter zen mode" },
+        },
+        lazy = false,
+      }
+    },
+    config = function()
+      require("neorg").setup({
+        load = {
+          ["core.defaults"] = {},
+          ["core.norg.concealer"] = {},
+          ["core.norg.completion"] = {
+            config = { engine = "nvim-cmp" },
+          },
+          ["core.norg.dirman"] = {
+            config = {
+              workspaces = {
+                todo = "~/todo"
+              },
+              autochdir = true,
+            },
+          },
+          ["core.norg.qol.toc"] = {},
+          ["core.presenter"] = {
+            config = {
+              zen_mode = "zen-mode",
+            },
+          },
+        },
+      })
+    end,
+    ft = "norg",
+  },
+  "max397574/neorg-contexts",
+
+  -- markdown
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    ft = { "markdown" },
+    keys = {
+      { "<leader>md", ":MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
+    }
+  },
+
+  -- latex
+  {
+    "lervag/vimtex",
+    ft = { 'tex' },
+  },
+
+
+  -- diagrams and stuff
+  {
+    "jbyuki/venn.nvim",
+    keys = {
+      { "<leader>v", ":set ve=all<CR><C-v>", desc = "Draw diagrams" }
+    }
+  },
+  {
+    "jbyuki/nabla.nvim",
+    keys = {
+      { "<leader>m", function() require("nabla").popup({ border = "rounded" }) end, desc = "Toggle math popup view" },
+      { "<leader>M", function() require("nabla").toggle_virt() end,                 desc = "Toggle math view" }
+    }
+  },
+}
