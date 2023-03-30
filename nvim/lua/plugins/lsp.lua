@@ -130,7 +130,7 @@ return {
     keys = {
       { "<leader>la", vim.lsp.buf.code_action, desc = "Execute LSP code action" },
       { "gd",         vim.lsp.buf.definition,  desc = "View LSP definition" },
-      { "gd",         vim.lsp.buf.references,  desc = "Jump to LSP references" },
+      { "gr",         vim.lsp.buf.references,  desc = "Jump to LSP references" },
       { "K",          vim.lsp.buf.hover,       desc = "Peek at LSP docs" }
     }
   },

@@ -24,7 +24,7 @@ return {
   -- oil.nvim (vim-like filesystem manipulation)
   {
     "stevearc/oil.nvim",
-    keys = { { "<leader>..", ":Oil<CR>", desc = "Open parent directory in Oil" } },
+    keys = { { "-", ":Oil<CR>", desc = "Open parent directory in Oil" } },
     config = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
