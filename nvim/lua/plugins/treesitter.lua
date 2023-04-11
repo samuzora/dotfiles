@@ -77,26 +77,18 @@ return {
       require('nvim-treesitter.install').update()
     end
   },
+
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    config = {
-      enable = true,
-      packages = {
-        default = {
-          'class',
-          'function',
-          'method',
-          'for',
-          'while',
-          'if',
-          'switch',
-          'case',
-        },
-      },
-      separator = '-'
-    }
+    "nvim-treesitter/playground",
+    setup = true,
   },
+
+  {
   "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter"
+    },
+  },
   {
     "windwp/nvim-ts-autotag",
     config = true,

@@ -13,38 +13,44 @@ return {
         }
       },
       {
-        "lukas-reineke/lsp-format.nvim",
-        config = function()
-          require("lsp-format").setup({})
-        end
-      }
+        "williamboman/mason.nvim",
+        opts = {
+          ui = {
+            border = "rounded"
+          }
+        }
+      },
+      {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+          ensure_installed = {
+            "lua_ls",
+          }
+        }
+      },
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      require("mason")
-
-      local lspconfig = require("lspconfig")
-
       vim.keymap.set("v", "K", "<Nop>")
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true
-      }
+
+      local lspconfig = require("lspconfig")
+
+      require("mason-lspconfig").setup_handlers({
+        function(server_name)
+          lspconfig[server_name].setup({
+            capabilities = capabilities,
+          })
+        end,
+      })
+
+      -- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
       lspconfig.pyright.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-        handlers = {
-          ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-            signs = false,
-            underline = false,
-          })
-        },
         settings = {
           python = {
             analysis = {
-              typeCheckingMode = "off",
               diagnosticSeverityOverrides = {
                 reportWildcardImportFromLibrary = "none",
               },
@@ -63,11 +69,6 @@ return {
       end
 
       lspconfig.tsserver.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          require("lsp-format").on_attach(client, bufnr)
-        end,
         commands = {
           OrganizeImports = {
             organize_imports,
@@ -75,81 +76,28 @@ return {
           }
         }
       })
-
-      lspconfig.jdtls.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          require("lsp-format").on_attach(client, bufnr)
-        end,
-      })
-
-      capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-      lspconfig.clangd.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-      })
-
-      lspconfig.intelephense.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-      })
-
-      lspconfig.prismals.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.texlab.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-      })
-
-      lspconfig.lua_ls.setup({
-        single_file_support = true,
-        capabilities = capabilities,
-        on_attach = require("lsp-format").on_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-          },
-        },
-      })
-
-      lspconfig.cssls.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.gopls.setup({
-        capabilities = capabilities,
-      })
     end,
     keys = {
-      { "<leader>la", vim.lsp.buf.code_action, desc = "Execute LSP code action" },
-      { "gd",         vim.lsp.buf.definition,  desc = "View LSP definition" },
-      { "gr",         vim.lsp.buf.references,  desc = "Jump to LSP references" },
-      { "K",          vim.lsp.buf.hover,       desc = "Peek at LSP docs" }
+      { "K",          vim.lsp.buf.hover,           desc = "Peek at LSP docs" },
+      { "gd",         vim.lsp.buf.definition,      desc = "Jump to definition" },
+      { "gD",         vim.lsp.buf.declaration,     desc = "Jump to declaration" },
+      { "gi",         vim.lsp.buf.implementation,  desc = "Jump to implementation" },
+      { "go",         vim.lsp.buf.type_definition, desc = "Jump to type definition" },
+      { "gr",         vim.lsp.buf.references,      desc = "List references" },
+      { "gs",         vim.lsp.buf.signature_help,  desc = "Display signatures in float" },
+      { "gl",         vim.diagnostic.open_float,   desc = "Show diagnostics in float" },
+      { "<leader>la", vim.lsp.buf.code_action,     desc = "Execute LSP code action" },
+      { "<leader>=",  vim.lsp.buf.format,          desc = "LSP format" }
     }
   },
 
-  -- mason
+
+  -- incremental rename using LSP
   {
-    "williamboman/mason.nvim",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim"
-    },
-    config = function()
-      require("mason").setup({
-        ui = {
-          border = "rounded"
-        }
-      })
-      require("mason-lspconfig").setup({
-        automatic_installation = true
-      })
-    end
+    "smjonas/inc-rename.nvim",
+    config = true,
+    keys = {
+      { "<leader>rn", ":IncRename ", desc = "Rename node" }
+    }
   },
 }

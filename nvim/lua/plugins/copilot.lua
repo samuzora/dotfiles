@@ -2,7 +2,19 @@ return {
   "zbirenbaum/copilot.lua",
   event = "InsertEnter",
   cmd = "Copilot",
-  config = {
+  setup = {
+    filetypes = {
+      javascript = true,
+      typescript = true,
+      lua = true,
+      python = true,
+      rust = true,
+      go = true,
+      c = true,
+      cpp = true,
+      java = true,
+      ["*"] = false
+    },
     panel = {
       auto_refresh = true,
       keymap = {

@@ -1,4 +1,5 @@
 return {
+  "tpope/vim-fugitive",
   {
     "f-person/git-blame.nvim",
     config = function()
@@ -18,4 +19,9 @@ return {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
   },
+
+  {
+    "pwntester/octo.nvim",
+    config = true,
+  }
 }

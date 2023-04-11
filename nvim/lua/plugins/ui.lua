@@ -1,77 +1,76 @@
 return {
   -- colorscheme
   {
-    "sam4llis/nvim-tundra",
-    dependencies = {
-      "kyazdani42/nvim-web-devicons"
-    },
+    "nyoom-engineering/oxocarbon.nvim",
     config = function()
-      -- catppuccin
-      -- require("catppuccin").setup({
-      --   transparent_background = true,
-      -- })
-      -- vim.cmd.colorscheme "catppuccin"
-      ---
-
-      -- rose-pine
-      -- vim.o.background = 'dark'
-      --
-      -- require('rose-pine').setup({
-      --   dark_variant = 'main',
-      --   disable_float_background = true,
-      --   disable_background = true,
-      -- })
-      -- local p = require('rose-pine.palette')
-      --
-      -- vim.cmd('colorscheme rose-pine')
-      --
-      -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = nil })
-      -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = nil })
-      -- vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = p.muted })
-      -- vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { fg = p.love })
-      -- vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { fg = p.gold })
-      -- vim.api.nvim_set_hl(0, 'TreesitterContextLineNumber', { fg = p.gold })
-      ---
-
-      -- oxocarbon
-      -- vim.opt.background = "dark"
-      -- vim.cmd.colorscheme "oxocarbon"
-      ---
-
-      -- tundra
-      require('nvim-tundra').setup({
-        transparent_background = true,
-        syntax = {
-          booleans = { bold = true, italic = true },
-          comments = { bold = true, italic = true },
-          conditionals = {},
-          constants = { bold = true },
-          fields = {},
-          functions = {},
-          keywords = {},
-          loops = {},
-          numbers = { bold = true },
-          operators = { bold = true },
-          punctuation = {},
-          strings = {},
-          types = { italic = true },
-        },
-        overwrite = {
-          highlights = {
-            LeapBackdrop = { link = "Comment" },
-            SpellBad = { fg = "", bg = "", bold = false },
-            ["NonText"] = { fg = "" },
-            ["@text.strong"] = { bold = true },
-            ["@text.emphasis"] = { italic = true },
-          }
-        }
-      })
-      vim.opt.background = 'dark'
-      vim.cmd('colorscheme tundra')
-      vim.api.nvim_set_hl(0, 'CopilotSuggestion', { fg = "#4B5563" })
-      ---
-    end,
+      -- base00: "#161616"
+      -- base01: "#262626"
+      -- base02: "#393939"
+      -- base03: "#525252"
+      -- base04: "#dde1e6"
+      -- base05: "#f2f4f8"
+      -- base06: "#ffffff"
+      -- base07: "#08bdba"
+      -- base08: "#3ddbd9"
+      -- base09: "#78a9ff"
+      -- base0A: "#ee5396"
+      -- base0B: "#33b1ff"
+      -- base0C: "#ff7eb6"
+      -- base0D: "#42be65"
+      -- base0E: "#be95ff"
+      -- base0F: "#82cfff"
+      vim.opt.background = "dark"
+      vim.cmd.colorscheme "oxocarbon"
+      vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#525252" })
+      vim.api.nvim_set_hl(0, "@text.strong", { fg = "#08bdba", bold = true })
+      vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#ff7eb6", italic = true })
+      vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = "#525252", italic = true })
+      vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#ff7eb6", italic = true })
+      vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {})
+      vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {})
+    end
   },
+  -- {
+  --   "sam4llis/nvim-tundra",
+  --   dependencies = {
+  --     "kyazdani42/nvim-web-devicons"
+  --   },
+  --   config = function()
+  --     -- tundra
+  --     require('nvim-tundra').setup({
+  --       transparent_background = true,
+  --       syntax = {
+  --         booleans = { bold = true, italic = true },
+  --         comments = { bold = true, italic = true },
+  --         conditionals = {},
+  --         constants = { bold = true },
+  --         fields = {},
+  --         functions = {},
+  --         keywords = {},
+  --         loops = {},
+  --         numbers = { bold = true },
+  --         operators = { bold = true },
+  --         punctuation = {},
+  --         strings = {},
+  --         types = { italic = true },
+  --       },
+  --       overwrite = {
+  --         highlights = {
+  --           LeapBackdrop = { link = "Comment" },
+  --           SpellBad = { fg = "", bg = "", bold = false },
+  --           ["NonText"] = { fg = "" },
+  --           ["@text.strong"] = { bold = true },
+  --           ["@text.emphasis"] = { italic = true },
+  --           NormalFloat = { bg = "" },
+  --         }
+  --       }
+  --     })
+  --     vim.opt.background = 'dark'
+  --     vim.cmd('colorscheme tundra')
+  --     vim.api.nvim_set_hl(0, 'CopilotSuggestion', { fg = "#4B5563" })
+  --     ---
+  --   end,
+  -- },
   -- noice, nui and notify
   {
     "folke/noice.nvim",
@@ -94,6 +93,12 @@ return {
             filter = {
               event = "msg_showmode"
             },
+          },
+          {
+            view = "split",
+            filter = {
+              event = "msg_show", min_height = 10
+            }
           },
           {
             filter = {
@@ -165,14 +170,17 @@ return {
       vim.keymap.set("n", "<leader>nd", require("notify").dismiss)
     end,
     event = "VimEnter",
+    keys = {
+      { "<leader>nd", function() require("notify").dismiss() end, "Dismiss all notifications" },
+    }
   },
 
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
-    config = {
+    opts = {
       options = {
-        theme = "tundra",
+        -- theme = "tundra",
         globalstatus = true,
         refresh = {
           statusline = 100,
@@ -217,13 +225,37 @@ return {
           },
         }
       },
-      tabline = {},
+      tabline = {
+        lualine_a = {
+          {
+            "tabs",
+            mode = 1,
+            separator = { '|', '|' },
+          },
+        },
+      },
       winbar = {},
       inactive_winbar = {},
       extensions = { 'quickfix' },
     }
   },
   "Isrothy/lualine-diagnostic-message",
+
+  -- dim unused code
+  {
+    "zbirenbaum/neodim",
+    branch = "v2",
+    event = "LspAttach",
+    config = true
+  },
+
+  -- show colours on colour codes
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end
+  },
 
   -- indent line
   {
@@ -282,11 +314,16 @@ return {
     }
   },
 
-  -- animations
+  -- show context using treesitter
   {
-    "echasnovski/mini.animate",
-    config = function()
-      require("mini.animate").setup()
-    end
-  }
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      mode = "topline",
+      separator = '-',
+      zindex = 1,
+    }
+  },
 }

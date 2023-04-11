@@ -54,6 +54,7 @@ return {
   -- latex
   {
     "lervag/vimtex",
+    lazy = false,
     ft = { 'tex' },
   },
 
