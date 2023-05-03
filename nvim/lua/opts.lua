@@ -19,24 +19,22 @@ vim.opt.linebreak      = true
 vim.opt.signcolumn     = "yes"
 vim.opt.cursorline     = false
 vim.opt.spell          = true
-vim.opt.lazyredraw     = false
 vim.opt.cmdheight      = 0
 vim.opt.showmode       = false
 vim.opt.termguicolors  = true
 vim.opt.conceallevel   = 2
 vim.opt.shell          = "fish"
 vim.opt.wrap           = false
-vim.o.foldcolumn       = "1"
-vim.o.foldlevel        = 99
-vim.o.foldlevelstart   = 99
-vim.o.foldenable       = true
 
 vim.g.clipboard        = {
   name = 'WslClipboard',
-  copy = { ['+'] = 'clip.exe',['*'] = 'clip.exe' },
-  paste = {
-    ['+'] = 'powershell.exe -noprofile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    ['*'] = 'powershell.exe -noprofile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  copy = {
+    ['+'] = 'win32yank.exe -i --crlf',
+    ['*'] = 'win32yank.exe -i --crlf',
   },
-  cache_enabled = 0,
+  paste = {
+    ['+'] = 'win32yank.exe -o --lf',
+    ['*'] = 'win32yank.exe -o --lf',
+  },
+  cache_enabled = 1,
 }

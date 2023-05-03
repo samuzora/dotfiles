@@ -2,34 +2,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "folke/trouble.nvim",
-        config = function()
-          require("trouble").setup()
-        end,
-        keys = {
-          { "<leader>lf", ":TroubleToggle<CR>", desc = "View LSP diagnostics" }
-        }
-      },
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          ui = {
-            border = "rounded"
-          }
-        }
-      },
-      {
-        "williamboman/mason-lspconfig.nvim",
-        opts = {
-          ensure_installed = {
-            "lua_ls",
-          }
-        }
-      },
-      "hrsh7th/cmp-nvim-lsp",
-    },
+    event = "VeryLazy",
     config = function()
       vim.keymap.set("v", "K", "<Nop>")
 
@@ -44,8 +17,6 @@ return {
           })
         end,
       })
-
-      -- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
       lspconfig.pyright.setup({
         settings = {
@@ -84,10 +55,52 @@ return {
       { "gi",         vim.lsp.buf.implementation,  desc = "Jump to implementation" },
       { "go",         vim.lsp.buf.type_definition, desc = "Jump to type definition" },
       { "gr",         vim.lsp.buf.references,      desc = "List references" },
-      { "gs",         vim.lsp.buf.signature_help,  desc = "Display signatures in float" },
       { "gl",         vim.diagnostic.open_float,   desc = "Show diagnostics in float" },
       { "<leader>la", vim.lsp.buf.code_action,     desc = "Execute LSP code action" },
       { "<leader>=",  vim.lsp.buf.format,          desc = "LSP format" }
+    }
+  },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+    event = "VeryLazy",
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+
+  -- list lsp errors etc
+  {
+    "folke/trouble.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("trouble").setup()
+    end,
+    keys = {
+      { "<leader>lf", ":TroubleToggle<CR>", desc = "View LSP diagnostics" }
+    }
+  },
+
+  -- mason
+  {
+    "williamboman/mason.nvim",
+    event = "VeryLazy",
+    opts = {
+      ui = {
+        border = "rounded"
+      }
+    }
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    event = "VeryLazy",
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+      }
     }
   },
 

@@ -5,14 +5,13 @@ return {
       "neovim/nvim-lspconfig",
       "kevinhwang91/promise-async"
     },
-    lazy = false,
+    event = "VeryLazy",
     config = function()
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-      vim.o.foldcolumn = "1"
-      vim.o.foldlevel = 99 
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-
+      vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      vim.opt.foldcolumn = "1"
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldenable = true
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.foldingRange = {

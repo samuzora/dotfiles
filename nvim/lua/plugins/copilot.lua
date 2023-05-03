@@ -2,7 +2,7 @@ return {
   "zbirenbaum/copilot.lua",
   event = "InsertEnter",
   cmd = "Copilot",
-  setup = {
+  opts = {
     filetypes = {
       javascript = true,
       typescript = true,

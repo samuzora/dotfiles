@@ -11,6 +11,7 @@ def conn():
         p = process({proc_args})
         if args.GDB:
             gdb.attach(p)
+            pause()
     else:
         p = remote("addr", 1337)
 

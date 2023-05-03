@@ -4,11 +4,11 @@ return {
     "akinsho/toggleterm.nvim",
     config = function()
       require("toggleterm").setup({
-        size = vim.o.columns * 0.4,
+        size = 15,
         open_mapping = "<leader>t",
         insert_mappings = false,
         terminal_mappings = false,
-        direction = "vertical",
+        direction = "horizontal",
         winbar = {
           enabled = false,
           name_formatter = function(term)
@@ -27,13 +27,14 @@ return {
       vim.keymap.set("t", "<M-[>", "<esc>")
     end,
     keys = {
-      { "<leader>t", desc = "Open terminal" }, { "<leader>gl", desc = "Open lazygit" }
+      { "<leader>t",  desc = "Open terminal" },
+      { "<leader>gl", desc = "Open lazygit" },
     }
   },
   {
     "chomosuke/term-edit.nvim",
     ft = "toggleterm",
-    version = "1.*",
+    enabled = true,
     opts = {
       prompt_end = "%$ "
     }

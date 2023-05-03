@@ -1,5 +1,8 @@
 return {
-  "tpope/vim-fugitive",
+  {
+    "tpope/vim-fugitive",
+    event = "VeryLazy",
+  },
   {
     "f-person/git-blame.nvim",
     config = function()
@@ -17,11 +20,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    event = "VeryLazy",
     dependencies = "nvim-lua/plenary.nvim",
   },
-
-  {
-    "pwntester/octo.nvim",
-    config = true,
-  }
 }

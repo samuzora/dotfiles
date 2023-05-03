@@ -1,8 +1,7 @@
 return {
   {
     "ggandor/leap.nvim",
-    dependencies = {
-    },
+    event = "VeryLazy",
     config = function()
       require('leap').add_default_mappings()
       vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
@@ -12,6 +11,7 @@ return {
   },
   {
     "ggandor/leap-spooky.nvim",
+    event = "VeryLazy",
     config = true
   },
 }

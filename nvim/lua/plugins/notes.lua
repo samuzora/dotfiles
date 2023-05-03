@@ -6,21 +6,21 @@ return {
       {
         "folke/zen-mode.nvim",
         config = true,
+        event = "VeryLazy",
         keys = {
           { "<leader>za", ":ZenMode<CR>", desc = "Enter zen mode" },
         },
-        lazy = false,
       }
     },
     config = function()
       require("neorg").setup({
         load = {
           ["core.defaults"] = {},
-          ["core.norg.concealer"] = {},
-          ["core.norg.completion"] = {
+          ["core.concealer"] = {},
+          ["core.completion"] = {
             config = { engine = "nvim-cmp" },
           },
-          ["core.norg.dirman"] = {
+          ["core.dirman"] = {
             config = {
               workspaces = {
                 todo = "~/todo"
@@ -28,7 +28,7 @@ return {
               autochdir = true,
             },
           },
-          ["core.norg.qol.toc"] = {},
+          ["core.qol.toc"] = {},
           ["core.presenter"] = {
             config = {
               zen_mode = "zen-mode",
@@ -39,7 +39,10 @@ return {
     end,
     ft = "norg",
   },
-  "max397574/neorg-contexts",
+  {
+    "max397574/neorg-contexts",
+    ft = "norg",
+  },
 
   -- markdown
   {
@@ -50,14 +53,6 @@ return {
       { "<leader>md", ":MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
     }
   },
-
-  -- latex
-  {
-    "lervag/vimtex",
-    lazy = false,
-    ft = { 'tex' },
-  },
-
 
   -- diagrams and stuff
   {

@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
     run = ":TSUpdate",
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -78,19 +79,23 @@ return {
     end
   },
 
+  -- show context using treesitter
   {
-    "nvim-treesitter/playground",
-    setup = true,
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      mode = "topline",
+      separator = '-',
+      zindex = 1,
+    }
   },
 
   {
-  "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter"
-    },
-  },
-  {
     "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
     config = true,
   }
 }

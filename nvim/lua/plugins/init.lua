@@ -1,22 +1,28 @@
 return {
+  "tpope/vim-repeat",
+
   {
     "folke/neodev.nvim",
+    event = "VeryLazy",
     config = true
   },
 
   {
     "echasnovski/mini.move",
+    event = "VeryLazy",
     config = function() require("mini.move").setup() end
   },
 
   {
     "echasnovski/mini.comment",
+    event = "VeryLazy",
     config = function() require("mini.comment").setup() end
   },
 
   {
     "folke/which-key.nvim",
-    config = {
+    event = "VeryLazy",
+    opts = {
       plugins = {
         spelling = {
           enabled = true,
@@ -24,8 +30,6 @@ return {
       }
     }
   },
-
-  "tpope/vim-repeat",
 
   {
     "mbbill/undotree",
@@ -46,6 +50,7 @@ return {
 
   {
     "chentoast/marks.nvim",
+    event = "VeryLazy",
     config = true,
   },
 

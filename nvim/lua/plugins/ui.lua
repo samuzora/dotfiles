@@ -1,35 +1,45 @@
 return {
   -- colorscheme
-  {
-    "nyoom-engineering/oxocarbon.nvim",
+  { 
+    "folke/tokyonight.nvim",
     config = function()
-      -- base00: "#161616"
-      -- base01: "#262626"
-      -- base02: "#393939"
-      -- base03: "#525252"
-      -- base04: "#dde1e6"
-      -- base05: "#f2f4f8"
-      -- base06: "#ffffff"
-      -- base07: "#08bdba"
-      -- base08: "#3ddbd9"
-      -- base09: "#78a9ff"
-      -- base0A: "#ee5396"
-      -- base0B: "#33b1ff"
-      -- base0C: "#ff7eb6"
-      -- base0D: "#42be65"
-      -- base0E: "#be95ff"
-      -- base0F: "#82cfff"
-      vim.opt.background = "dark"
-      vim.cmd.colorscheme "oxocarbon"
-      vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#525252" })
-      vim.api.nvim_set_hl(0, "@text.strong", { fg = "#08bdba", bold = true })
-      vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#ff7eb6", italic = true })
-      vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = "#525252", italic = true })
-      vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#ff7eb6", italic = true })
-      vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {})
-      vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {})
+      require("tokyonight").setup({
+        style = "storm",
+        transparent = true
+      })
+      vim.cmd[[colorscheme tokyonight]]
     end
   },
+  -- {
+  --   "nyoom-engineering/oxocarbon.nvim",
+  --   config = function()
+  --     -- base00: "#161616"
+  --     -- base01: "#262626"
+  --     -- base02: "#393939"
+  --     -- base03: "#525252"
+  --     -- base04: "#dde1e6"
+  --     -- base05: "#f2f4f8"
+  --     -- base06: "#ffffff"
+  --     -- base07: "#08bdba"
+  --     -- base08: "#3ddbd9"
+  --     -- base09: "#78a9ff"
+  --     -- base0A: "#ee5396"
+  --     -- base0B: "#33b1ff"
+  --     -- base0C: "#ff7eb6"
+  --     -- base0D: "#42be65"
+  --     -- base0E: "#be95ff"
+  --     -- base0F: "#82cfff"
+  --     vim.opt.background = "dark"
+  --     vim.cmd.colorscheme "oxocarbon"
+  --     vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#525252" })
+  --     vim.api.nvim_set_hl(0, "@text.strong", { fg = "#08bdba", bold = true })
+  --     vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#ff7eb6", italic = true })
+  --     vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = "#525252", italic = true })
+  --     vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#ff7eb6", italic = true })
+  --     vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {})
+  --     vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {})
+  --   end
+  -- },
   -- {
   --   "sam4llis/nvim-tundra",
   --   dependencies = {
@@ -71,6 +81,7 @@ return {
   --     ---
   --   end,
   -- },
+  
   -- noice, nui and notify
   {
     "folke/noice.nvim",
@@ -81,6 +92,7 @@ return {
     config = function()
       require("noice").setup({
         lsp = {
+          signature = { enabled = false },
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             ["vim.lsp.util.stylize_markdown"] = true,
@@ -180,7 +192,7 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
-        -- theme = "tundra",
+        theme = "tokyonight",
         globalstatus = true,
         refresh = {
           statusline = 100,
@@ -241,18 +253,11 @@ return {
   },
   "Isrothy/lualine-diagnostic-message",
 
-  -- dim unused code
-  {
-    "zbirenbaum/neodim",
-    branch = "v2",
-    event = "LspAttach",
-    config = true
-  },
-
   -- show colours on colour codes
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
+      vim.opt.termguicolors = true
       require("colorizer").setup()
     end
   },
@@ -260,6 +265,7 @@ return {
   -- indent line
   {
     "echasnovski/mini.indentscope",
+    event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup({
         draw = {
@@ -311,19 +317,6 @@ return {
     keys = {
       { "<leader>mf", function() require("mini.map").toggle_focus() end, desc = "Focus minimap" },
       { "<leader>mt", function() require("mini.map").toggle() end,       desc = "Toggle minimap" },
-    }
-  },
-
-  -- show context using treesitter
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {
-      mode = "topline",
-      separator = '-',
-      zindex = 1,
     }
   },
 }
