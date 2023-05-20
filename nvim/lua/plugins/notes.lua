@@ -1,25 +1,18 @@
 return {
+  -- typst
+  {
+    "kaarmu/typst.vim",
+    ft = "typst",
+  },
+
   -- neorg
   {
     "nvim-neorg/neorg",
-    dependencies = {
-      {
-        "folke/zen-mode.nvim",
-        config = true,
-        event = "VeryLazy",
-        keys = {
-          { "<leader>za", ":ZenMode<CR>", desc = "Enter zen mode" },
-        },
-      }
-    },
     config = function()
       require("neorg").setup({
         load = {
-          ["core.defaults"] = {},
+          ["core.integrations.treesitter"] = {},
           ["core.concealer"] = {},
-          ["core.completion"] = {
-            config = { engine = "nvim-cmp" },
-          },
           ["core.dirman"] = {
             config = {
               workspaces = {
@@ -29,11 +22,6 @@ return {
             },
           },
           ["core.qol.toc"] = {},
-          ["core.presenter"] = {
-            config = {
-              zen_mode = "zen-mode",
-            },
-          },
         },
       })
     end,

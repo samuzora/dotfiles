@@ -1,13 +1,17 @@
 return {
   "L3MON4D3/LuaSnip",
   event = "VeryLazy",
+  -- dependencies = {
+  --   "rafamadriz/friendly-snippets",
+  -- },
   config = function()
     require("luasnip").config.set_config({
       enable_autosnippets = true,
       store_selection_keys = "<Tab>",
     })
 
-    require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/lua/plugins/snippets"})
+    require("luasnip.loaders.from_vscode").lazy_load()
+    require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/lua/plugins/snippets"})
 
     vim.cmd [[
       " Use Tab to expand and jump through nodes

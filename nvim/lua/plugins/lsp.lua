@@ -13,6 +13,7 @@ return {
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           lspconfig[server_name].setup({
+            single_file_support = true,
             capabilities = capabilities,
           })
         end,
@@ -59,10 +60,6 @@ return {
       { "<leader>la", vim.lsp.buf.code_action,     desc = "Execute LSP code action" },
       { "<leader>=",  vim.lsp.buf.format,          desc = "LSP format" }
     }
-  },
-  {
-    "hrsh7th/cmp-nvim-lsp",
-    event = "VeryLazy",
   },
   {
     "ray-x/lsp_signature.nvim",
