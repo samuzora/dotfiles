@@ -18,20 +18,6 @@ return {
     end
   },
 
-  -- show context using treesitter
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {
-      mode = "topline",
-      separator = '-',
-      zindex = 1,
-    }
-  },
-
   {
     "windwp/nvim-ts-autotag",
     event = "VeryLazy",

@@ -8,6 +8,9 @@ return {
     },
     config = function()
       require("noice").setup({
+        messages = {
+          view_error = false,
+        },
         views = {
           cmdline_popup = {
             position = {
@@ -117,8 +120,8 @@ return {
     "folke/tokyonight.nvim",
     config = function()
       require("tokyonight").setup({
-        style = "storm",
-        transparent = true
+        style = "night",
+        transparent = false
       })
       vim.cmd [[colorscheme tokyonight]]
     end
@@ -209,14 +212,6 @@ return {
       local function ins_right(component)
         table.insert(config.sections.lualine_x, component)
       end
-
-      ins_left {
-        function()
-          return '▊'
-        end,
-        color = { fg = colors.blue },      -- Sets highlighting of component
-        padding = { left = 0, right = 1 }, -- We don't need space before this
-      }
 
       ins_left {
         -- mode component
@@ -310,20 +305,6 @@ return {
 
       -- Add components to right sections
       ins_right {
-        'o:encoding',       -- option component same as &encoding in viml
-        fmt = string.upper, -- I'm not sure why it's upper case either ;)
-        cond = conditions.hide_in_width,
-        color = { fg = colors.green, gui = 'bold' },
-      }
-
-      ins_right {
-        'fileformat',
-        fmt = string.upper,
-        icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-        color = { fg = colors.green, gui = 'bold' },
-      }
-
-      ins_right {
         'branch',
         icon = '',
         color = { fg = colors.violet, gui = 'bold' },
@@ -341,23 +322,33 @@ return {
         cond = conditions.hide_in_width,
       }
 
-      ins_right {
-        function()
-          return '▊'
-        end,
-        color = { fg = colors.blue },
-        padding = { left = 1 },
-      }
-
       -- Now don't forget to initialize lualine
       lualine.setup(config)
     end
   },
 
-  -- tabline
+  -- barbar
   {
     "romgrk/barbar.nvim",
     event = "VeryLazy",
-    config = true
+    config = true,
+    keys = {
+      { "<A-<>", ":BufferMovePrevious<CR>", desc = "Move to previous buffer" },
+      { "<A->>", ":BufferMoveNext<CR>",     desc = "Move to next buffer" },
+      { "<A-,>", ":BufferPrevious<CR>",     desc = "Go to previous buffer" },
+      { "<A-.>", ":BufferNext<CR>",         desc = "Go to next buffer" },
+      { "<A-1>", ":BufferGoto 1<CR>",       desc = "Go to buffer 1" },
+      { "<A-2>", ":BufferGoto 2<CR>",       desc = "Go to buffer 2" },
+      { "<A-3>", ":BufferGoto 3<CR>",       desc = "Go to buffer 3" },
+      { "<A-4>", ":BufferGoto 4<CR>",       desc = "Go to buffer 4" },
+      { "<A-5>", ":BufferGoto 5<CR>",       desc = "Go to buffer 5" },
+      { "<A-6>", ":BufferGoto 6<CR>",       desc = "Go to buffer 6" },
+      { "<A-7>", ":BufferGoto 7<CR>",       desc = "Go to buffer 7" },
+      { "<A-8>", ":BufferGoto 8<CR>",       desc = "Go to buffer 8" },
+      { "<A-9>", ":BufferGoto 9<CR>",       desc = "Go to buffer 9" },
+      { "<A-0>", ":BufferLast<CR>",         desc = "Go to last buffer 1" },
+      { "<A-p>", ":BufferPin<CR>",          desc = "Pin buffer" },
+      { "<A-c>", ":BufferClose<CR>",        desc = "Close buffer" }
+    }
   }
 }

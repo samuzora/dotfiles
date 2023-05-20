@@ -50,7 +50,7 @@ return {
       })
     end,
     keys = {
-      { "K",          vim.lsp.buf.hover,           desc = "Peek at LSP docs" },
+      { "K",          vim.lsp.buf.hover,           desc = "Show documentation" },
       { "gd",         vim.lsp.buf.definition,      desc = "Jump to definition" },
       { "gD",         vim.lsp.buf.declaration,     desc = "Jump to declaration" },
       { "gi",         vim.lsp.buf.implementation,  desc = "Jump to implementation" },
@@ -95,9 +95,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = "VeryLazy",
     opts = {
-      ensure_installed = {
-        "lua_ls",
-      }
+      ensure_installed = { }
     }
   },
 
@@ -107,7 +105,7 @@ return {
     "smjonas/inc-rename.nvim",
     config = true,
     keys = {
-      { "<leader>rn", ":IncRename ", desc = "Rename node" }
+      { "<leader>rn", ":IncRename ", desc = "Rename variable" }
     }
   },
 }

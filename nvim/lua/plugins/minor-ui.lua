@@ -2,6 +2,7 @@ return {
   -- show colours on colour codes
   {
     "norcalli/nvim-colorizer.lua",
+    lazy = false, -- if lazy loaded, plugin will break
     config = function()
       vim.opt.termguicolors = true
       require("colorizer").setup()
@@ -62,7 +63,7 @@ return {
     end,
     keys = {
       { "<leader>mf", function() require("mini.map").toggle_focus() end, desc = "Focus minimap" },
-      { "<leader>mt", function() require("mini.map").toggle() end,       desc = "Toggle minimap" },
+      { "<leader>mm", function() require("mini.map").toggle() end,       desc = "Toggle minimap" },
     }
   },
 
@@ -76,13 +77,21 @@ return {
         function()
           require("zen-mode").toggle({
             window = {
-              width = .85
+              width = .90
             }
           })
         end,
         desc = "zen mode"
       }
     }
-  }
+  },
+
+  -- fun
+  {
+    "Eandrju/cellular-automaton.nvim",
+    keys = {
+      { "<leader>vim", ":CellularAutomaton make_it_rain<CR>", desc = "Rain" }
+    },
+  },
 
 }

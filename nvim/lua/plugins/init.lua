@@ -11,24 +11,6 @@ return {
   },
 
   {
-    "echasnovski/mini.move",
-    event = "VeryLazy",
-    config = function() require("mini.move").setup() end
-  },
-
-  {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    config = function() require("mini.comment").setup() end
-  },
-
-  {
-    "echasnovski/mini.align",
-    event = "VeryLazy",
-    config = function() require("mini.align").setup() end
-  },
-
-  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
@@ -64,22 +46,7 @@ return {
   },
 
   {
-    "Eandrju/cellular-automaton.nvim",
-    keys = {
-      { "<leader>vim", ":CellularAutomaton make_it_rain<CR>", desc = "Rain" }
-    },
-  },
-
-  {
     "ziontee113/color-picker.nvim",
-    ft = {
-      "html",
-      "css",
-      "javascriptreact",
-      "scss",
-      "sass",
-      "conf",
-    },
     opts = {
       border = "rounded",
       icons = { "-", ">" },

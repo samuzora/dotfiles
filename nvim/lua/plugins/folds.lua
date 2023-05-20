@@ -1,11 +1,11 @@
 return {
   {
     "kevinhwang91/nvim-ufo",
+    lazy = false, -- if lazy loaded, folds will not be enabled by default
     dependencies = {
       "neovim/nvim-lspconfig",
       "kevinhwang91/promise-async"
     },
-    event = "VeryLazy",
     config = function()
       vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.opt.foldcolumn = "1"
