@@ -12,6 +12,11 @@ return {
           view_error = false,
         },
         views = {
+          hover = {
+            border = {
+              style = "rounded"
+            }
+          },
           cmdline_popup = {
             position = {
               row = "90%",

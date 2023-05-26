@@ -26,7 +26,15 @@ vim.opt.conceallevel   = 2
 vim.opt.shell          = "fish"
 vim.opt.wrap           = false
 
-vim.g.clipboard        = {
+if vim.g.neovide then
+  vim.g.neovide_scale_factor = 0.5
+  vim.g.neovide_padding_top = 5
+  vim.g.neovide_padding_bottom = 5
+  vim.g.neovide_padding_right = 5
+  vim.g.neovide_padding_left = 5
+end
+
+vim.g.clipboard = {
   name = 'WslClipboard',
   copy = {
     ['+'] = 'win32yank.exe -i --crlf',

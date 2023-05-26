@@ -2,6 +2,9 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+    },
     event = "VeryLazy",
     config = function()
       vim.keymap.set("v", "K", "<Nop>")
@@ -17,18 +20,6 @@ return {
             capabilities = capabilities,
           })
         end,
-      })
-
-      lspconfig.pyright.setup({
-        settings = {
-          python = {
-            analysis = {
-              diagnosticSeverityOverrides = {
-                reportWildcardImportFromLibrary = "none",
-              },
-            },
-          },
-        },
       })
 
       local function organize_imports()
@@ -51,6 +42,7 @@ return {
     end,
     keys = {
       { "K",          vim.lsp.buf.hover,           desc = "Show documentation" },
+      { "gc",         vim.lsp.buf.incoming_calls,  desc = "Jump to calls" },
       { "gd",         vim.lsp.buf.definition,      desc = "Jump to definition" },
       { "gD",         vim.lsp.buf.declaration,     desc = "Jump to declaration" },
       { "gi",         vim.lsp.buf.implementation,  desc = "Jump to implementation" },
@@ -64,7 +56,15 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
-    config = true,
+    opts = {
+      bind = true,
+      handler_opts = {
+        border = "rounded"
+      }
+    },
+    keys = {
+      { "gS", vim.lsp.buf.signature_help, desc = "Show signature" }
+    }
   },
 
   -- list lsp errors etc
@@ -95,7 +95,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = "VeryLazy",
     opts = {
-      ensure_installed = { }
+      ensure_installed = {}
     }
   },
 
@@ -105,7 +105,7 @@ return {
     "smjonas/inc-rename.nvim",
     config = true,
     keys = {
-      { "<leader>rn", ":IncRename ", desc = "Rename variable" }
+      { "gn", ":IncRename ", desc = "Rename variable" }
     }
   },
 }

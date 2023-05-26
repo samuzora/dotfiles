@@ -16,6 +16,22 @@ return {
     local cmp = require('cmp')
 
     cmp.setup({
+      perfomance = {
+        debounce = 0,
+        throttle = 0
+      },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        }
+      },
       formatting = {
         fields = { "abbr", "menu", "kind" },
         format = function(entry, item)
@@ -30,6 +46,7 @@ return {
           return item
         end
       },
+
       completion = {
         completeopt = "menu,menuone,noselect"
       },
