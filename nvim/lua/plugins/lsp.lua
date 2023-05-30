@@ -2,25 +2,44 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     dependencies = {
+      -- must load session before LSP
+      "rmagatti/auto-session",
+
       "hrsh7th/cmp-nvim-lsp",
+      -- mason
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          ui = {
+            border = "rounded"
+          }
+        }
+      },
+      {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+          ensure_installed = {}
+        }
+      },
+      {
+        "folke/neodev.nvim",
+        config = true
+      }
     },
-    event = "VeryLazy",
     config = function()
       vim.keymap.set("v", "K", "<Nop>")
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local lspconfig = require("lspconfig")
+      -- for nvim-ufo
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = true,
+        lineFoldingOnly = true
+      }
 
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({
-            single_file_support = true,
-            capabilities = capabilities,
-          })
-        end,
-      })
+      local lspconfig = require("lspconfig")
 
       local function organize_imports()
         local params = {
@@ -31,14 +50,41 @@ return {
         vim.lsp.buf.execute_command(params)
       end
 
-      lspconfig.tsserver.setup({
-        commands = {
-          OrganizeImports = {
-            organize_imports,
-            description = "Organize Imports"
+      local handlers = {
+        function(server_name)
+          lspconfig[server_name].setup({
+            single_file_support = true,
+            capabilities = capabilities,
+          })
+        end,
+        ["tsserver"] = function()
+          lspconfig.tsserver.setup {
+            single_file_support = true,
+            capabilities = capabilities,
+            settings = {
+              javascript = {
+                format = {
+                  semicolons = "remove"
+                }
+              }
+            },
+            commands = {
+              OrganizeImports = {
+                organize_imports,
+                description = "Organize Imports"
+              }
+            }
           }
-        }
-      })
+        end,
+        ["typst_lsp"] = function()
+          lspconfig.typst_lsp.setup {
+            single_file_support = true,
+            capabilities = capabilities,
+            settings = { exportPdf = "never" }
+          }
+        end
+      }
+      require("mason-lspconfig").setup({ handlers = handlers })
     end,
     keys = {
       { "K",          vim.lsp.buf.hover,           desc = "Show documentation" },
@@ -67,7 +113,7 @@ return {
     }
   },
 
-  -- list lsp errors etc
+  -- lsp quickfix
   {
     "folke/trouble.nvim",
     dependencies = {
@@ -81,26 +127,7 @@ return {
     }
   },
 
-  -- mason
-  {
-    "williamboman/mason.nvim",
-    event = "VeryLazy",
-    opts = {
-      ui = {
-        border = "rounded"
-      }
-    }
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = "VeryLazy",
-    opts = {
-      ensure_installed = {}
-    }
-  },
-
-
-  -- incremental rename using LSP
+  -- incremental rename
   {
     "smjonas/inc-rename.nvim",
     config = true,

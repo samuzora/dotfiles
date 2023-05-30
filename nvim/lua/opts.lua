@@ -5,26 +5,27 @@ vim.opt.softtabstop    = 4
 vim.opt.smartindent    = true
 vim.opt.autoindent     = true
 vim.opt.smarttab       = true
-vim.opt.textwidth      = 0
 vim.opt.splitbelow     = true
 vim.opt.splitright     = true
 vim.opt.undofile       = true
 vim.opt.backupdir      = "/home/samuzora/.local/share/nvim/backup"
 vim.opt.mouse          = "nv"
 vim.opt.number         = true
-vim.opt.relativenumber = true
 vim.opt.ignorecase     = true
 vim.opt.smartcase      = true
 vim.opt.linebreak      = true
 vim.opt.signcolumn     = "yes"
-vim.opt.cursorline     = false
 vim.opt.spell          = true
 vim.opt.cmdheight      = 0
 vim.opt.showmode       = false
 vim.opt.termguicolors  = true
 vim.opt.conceallevel   = 2
 vim.opt.shell          = "fish"
-vim.opt.wrap           = false
+vim.opt.smoothscroll   = true
+vim.opt.mousescroll = "ver:1,hor:1"
+
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
 
 if vim.g.neovide then
   vim.g.neovide_scale_factor = 0.5

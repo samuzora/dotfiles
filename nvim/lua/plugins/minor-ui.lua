@@ -1,12 +1,8 @@
 return {
   -- show colours on colour codes
   {
-    "norcalli/nvim-colorizer.lua",
-    lazy = false, -- if lazy loaded, plugin will break
-    config = function()
-      vim.opt.termguicolors = true
-      require("colorizer").setup()
-    end
+    "NvChad/nvim-colorizer.lua",
+    config = true
   },
 
   -- indent line

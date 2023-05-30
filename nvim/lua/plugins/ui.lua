@@ -8,9 +8,9 @@ return {
     },
     config = function()
       require("noice").setup({
-        messages = {
-          view_error = false,
-        },
+        -- messages = {
+        --   view_error = true,
+        -- },
         views = {
           hover = {
             border = {
@@ -124,9 +124,16 @@ return {
   {
     "folke/tokyonight.nvim",
     config = function()
+      vim.o.background = "dark"
       require("tokyonight").setup({
         style = "night",
-        transparent = false
+        light_style = "day",
+        transparent = false,
+        on_highlights = function(hl, c)
+          hl.WinSeparator = {
+            fg = c.fg_dark
+          }
+        end
       })
       vim.cmd [[colorscheme tokyonight]]
     end
@@ -136,6 +143,9 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
+    dependencies = {
+      "folke/noice.nvim",
+    },
     config = function()
       -- Eviline config for lualine
       -- Author: shadmansaleh
@@ -144,19 +154,36 @@ return {
 
       -- Color table for highlights
       -- stylua: ignore
-      local colors = {
-        bg       = '',
-        fg       = '#bbc2cf',
-        yellow   = '#ECBE7B',
-        cyan     = '#008080',
-        darkblue = '#081633',
-        green    = '#98be65',
-        orange   = '#FF8800',
-        violet   = '#a9a1e1',
-        magenta  = '#c678dd',
-        blue     = '#51afef',
-        red      = '#ec5f67',
-      }
+      local colors = {}
+      if (vim.o.background == 'dark') then
+        colors = {
+          bg = "#24283b",
+          fg = "#c0caf5",
+          yellow = "#e0af68",
+          cyan = "#7dcfff",
+          darkblue = "#3d59a1",
+          green = "#9ece6a",
+          orange = "#ff9e64",
+          violet = "#9d7cd8",
+          magenta = "#bb9af7",
+          blue = "#2ac3de",
+          red = "#f7768e",
+        }
+      elseif (vim.o.background == 'light') then
+        colors = {
+          bg = "#e1e2e7",
+          fg = "#3760bf",
+          yellow = "#8c6c3e",
+          cyan = "#007197",
+          darkblue = "#2e7de9",
+          green = "#587539",
+          orange = "#ea894f",
+          violet = "#7847bd",
+          magenta = "#9854f1",
+          blue = "#2ac3de",
+          red = "#f52a65",
+        }
+      end
 
       local conditions = {
         buffer_not_empty = function()
@@ -288,6 +315,12 @@ return {
       }
 
       ins_left {
+        require("noice").api.statusline.mode.get,
+        cond = require("noice").api.statusline.mode.has,
+        color = { fg = colors.orange },
+      }
+
+      ins_left {
         -- Lsp server name .
         function()
           local msg = 'No Active Lsp'
@@ -305,7 +338,7 @@ return {
           return msg
         end,
         icon = ' LSP:',
-        color = { fg = '#ffffff', gui = 'bold' },
+        color = { fg = colors.fg, gui = 'bold' },
       }
 
       -- Add components to right sections
@@ -355,5 +388,18 @@ return {
       { "<A-p>", ":BufferPin<CR>",          desc = "Pin buffer" },
       { "<A-c>", ":BufferClose<CR>",        desc = "Close buffer" }
     }
-  }
+  },
+
+  -- neoscroll
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require('neoscroll').setup()
+
+      local t = {}
+      t['gg'] = { 'scroll', { '-2*vim.api.nvim_buf_line_count(0)', 'true', '1', '5', e } }
+      t['G']  = { 'scroll', { '2*vim.api.nvim_buf_line_count(0)', 'true', '1', '5', e } }
+      require('neoscroll.config').set_mappings(t)
+    end
+  },
 }
