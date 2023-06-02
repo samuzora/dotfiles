@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     run = ":TSUpdate",
     config = function()
-      require('nvim-treesitter.configs').setup({
+      require "nvim-treesitter.configs".setup {
         auto_install = true,
         highlight = {
           enable = true,
@@ -13,8 +13,8 @@ return {
         indent = {
           enable = true,
         },
-      })
-      require('nvim-treesitter.install').update()
+      }
+      require "nvim-treesitter.install".update()
     end
   },
 

@@ -1,26 +1,8 @@
+-- misc stuff i couldn't find a better place for
 return {
   {
     "tpope/vim-repeat",
     event = "VeryLazy",
-  },
-
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      plugins = {
-        spelling = {
-          enabled = true,
-        }
-      }
-    }
-  },
-
-  {
-    "mbbill/undotree",
-    keys = {
-      { "<leader>u", ":UndotreeToggle<CR>", desc = "Toggle undo tree" }
-    }
   },
 
   {

@@ -1,9 +1,6 @@
 return {
-  "rmagatti/auto-session",
-  lazy = false, -- if lazy loaded, session will not be loaded by default
+  "olimorris/persisted.nvim",
   opts = {
-    session_lens = {
-      load_on_setup = false
-    }
-  },
+    autoload = true,
+  }
 }

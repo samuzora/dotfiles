@@ -9,7 +9,7 @@ return {
   {
     "nvim-neorg/neorg",
     config = function()
-      require("neorg").setup({
+      require "neorg".setup {
         load = {
           ["core.integrations.treesitter"] = {},
           ["core.concealer"] = {},
@@ -23,7 +23,7 @@ return {
           },
           ["core.qol.toc"] = {},
         },
-      })
+      }
     end,
     ft = "norg",
   },

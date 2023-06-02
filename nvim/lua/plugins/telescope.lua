@@ -5,20 +5,20 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
   },
   config = function()
-    require("telescope").setup({
+    require "telescope".setup {
       defaults = {
         mappings = {
           n = {
             ["<C-o>"] = function(prompt_bufnr)
-              require("telescope.actions").select_default(prompt_bufnr)
-              require("telescope.builtin")
+              require "telescope.actions".select_default(prompt_bufnr)
+              require "telescope.builtin"
                   .resume()
             end,
           }
         }
       }
-    })
-    require("telescope").load_extension("notify")
+    }
+    require "telescope".load_extension("notify")
   end,
   keys = {
     { "<leader>ff", ":Telescope find_files<CR>", desc = "Grep filenames" },

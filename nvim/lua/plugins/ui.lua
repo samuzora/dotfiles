@@ -7,7 +7,7 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function()
-      require("noice").setup({
+      require "noice".setup {
         -- messages = {
         --   view_error = true,
         -- },
@@ -25,6 +25,7 @@ return {
           }
         },
         lsp = {
+          hover = { enabled = false },
           signature = { enabled = false },
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -61,11 +62,11 @@ return {
           inc_rename = true,
           lsp_doc_border = false,
         },
-      })
+      }
 
       local stages_util = require("notify.stages.util")
 
-      require("notify").setup({
+      require "notify".setup {
         stages = {
           function(state)
             local next_height = state.message.height + 2
@@ -111,7 +112,7 @@ return {
           end,
         },
         background_colour = "#000000",
-      })
+      }
       vim.keymap.set("n", "<leader>nd", require("notify").dismiss)
     end,
     event = "VimEnter",
@@ -125,7 +126,7 @@ return {
     "folke/tokyonight.nvim",
     config = function()
       vim.o.background = "dark"
-      require("tokyonight").setup({
+      require "tokyonight".setup {
         style = "night",
         light_style = "day",
         transparent = false,
@@ -134,7 +135,7 @@ return {
             fg = c.fg_dark
           }
         end
-      })
+      }
       vim.cmd [[colorscheme tokyonight]]
     end
   },
@@ -157,7 +158,7 @@ return {
       local colors = {}
       if (vim.o.background == 'dark') then
         colors = {
-          bg = "#24283b",
+          bg = nil,
           fg = "#c0caf5",
           yellow = "#e0af68",
           cyan = "#7dcfff",
@@ -246,54 +247,27 @@ return {
       end
 
       ins_left {
-        -- mode component
-        function()
-          return ''
-        end,
-        color = function()
-          -- auto change color according to neovims mode
-          local mode_color = {
-            n = colors.red,
-            i = colors.green,
-            v = colors.blue,
-            [''] = colors.blue,
-            V = colors.blue,
-            c = colors.magenta,
-            no = colors.red,
-            s = colors.orange,
-            S = colors.orange,
-            [''] = colors.orange,
-            ic = colors.yellow,
-            R = colors.violet,
-            Rv = colors.violet,
-            cv = colors.red,
-            ce = colors.red,
-            r = colors.cyan,
-            rm = colors.cyan,
-            ['r?'] = colors.cyan,
-            ['!'] = colors.red,
-            t = colors.red,
-          }
-          return { fg = mode_color[vim.fn.mode()] }
-        end,
-        padding = { right = 1 },
+        'filename',
+        cond = conditions.buffer_not_empty,
+        color = { fg = colors.magenta, gui = 'bold' },
       }
 
       ins_left {
         -- filesize component
         'filesize',
         cond = conditions.buffer_not_empty,
+        color = { gui = 'bold' }
       }
 
       ins_left {
-        'filename',
-        cond = conditions.buffer_not_empty,
-        color = { fg = colors.magenta, gui = 'bold' },
+        'location',
+        color = { fg = colors.yellow }
       }
 
-      ins_left { 'location' }
-
-      ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+      ins_left {
+        'progress',
+        color = { fg = colors.yellow, gui = 'bold' }
+      }
 
       ins_left {
         'diagnostics',
@@ -310,21 +284,73 @@ return {
       -- for lualine it's any number greater then 2
       ins_left {
         function()
-          return '%='
+          return "%="
         end,
       }
 
       ins_left {
-        require("noice").api.statusline.mode.get,
-        cond = require("noice").api.statusline.mode.has,
+        require("noice").api.status.mode.get,
+        cond = require("noice").api.status.mode.has,
         color = { fg = colors.orange },
       }
 
       ins_left {
+        -- mode component
+        function()
+          return vim.fn.mode()
+        end,
+        color = function()
+          -- auto change color according to neovims mode
+          local mode_color = {
+            n = colors.red,
+            i = colors.green,
+            v = colors.blue,
+            [''] = colors.blue,
+            V = colors.blue,
+            c = colors.magenta,
+            no = colors.red,
+            s = colors.orange,
+            S = colors.orange,
+            ic = colors.yellow,
+            R = colors.violet,
+            Rv = colors.violet,
+            cv = colors.red,
+            ce = colors.red,
+            r = colors.cyan,
+            rm = colors.cyan,
+            ['r?'] = colors.cyan,
+            ['!'] = colors.red,
+            t = colors.red,
+          }
+          return { fg = mode_color[vim.fn.mode()] }
+        end,
+        padding = { right = 1 },
+      }
+
+      -- Add components to right sections
+      ins_left {
+        'branch',
+        icon = '',
+        color = { fg = colors.violet, gui = 'bold' },
+      }
+
+      ins_left {
+        'diff',
+        -- Is it me or the symbol for modified us really weird
+        symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+        diff_color = {
+          added = { fg = colors.green },
+          modified = { fg = colors.orange },
+          removed = { fg = colors.red },
+        },
+        cond = conditions.hide_in_width,
+      }
+
+      ins_right {
         -- Lsp server name .
         function()
           local msg = 'No Active Lsp'
-          local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+          local buf_ft = vim.api.nvim_buf_get_option()
           local clients = vim.lsp.get_active_clients()
           if next(clients) == nil then
             return msg
@@ -341,24 +367,6 @@ return {
         color = { fg = colors.fg, gui = 'bold' },
       }
 
-      -- Add components to right sections
-      ins_right {
-        'branch',
-        icon = '',
-        color = { fg = colors.violet, gui = 'bold' },
-      }
-
-      ins_right {
-        'diff',
-        -- Is it me or the symbol for modified us really weird
-        symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
-        diff_color = {
-          added = { fg = colors.green },
-          modified = { fg = colors.orange },
-          removed = { fg = colors.red },
-        },
-        cond = conditions.hide_in_width,
-      }
 
       -- Now don't forget to initialize lualine
       lualine.setup(config)
@@ -390,16 +398,144 @@ return {
     }
   },
 
-  -- neoscroll
+  -- smooth scrolling and other animations
   {
-    "karb94/neoscroll.nvim",
-    config = function()
-      require('neoscroll').setup()
+    "echasnovski/mini.animate",
+    event = "VeryLazy",
+    opts = {
+      cursor = {
+        enable = false
+      }
+    }
+  },
 
-      local t = {}
-      t['gg'] = { 'scroll', { '-2*vim.api.nvim_buf_line_count(0)', 'true', '1', '5', e } }
-      t['G']  = { 'scroll', { '2*vim.api.nvim_buf_line_count(0)', 'true', '1', '5', e } }
-      require('neoscroll.config').set_mappings(t)
-    end
+  -- automatic window resizing
+  {
+    "camspiers/lens.vim",
+    event = "VeryLazy",
+    dependencies = {
+      "camspiers/animate.vim"
+    },
+  },
+
+  -- expensive flower (for ray-x/navigator.lua)
+  {
+    "ray-x/guihua.lua",
+    lazy = true,
+    main = "guihua.maps",
+    build = "cd lua/fzy && make",
+    opts = {
+      close_view = "<esc>",
+    }
+  },
+
+
+  -- undo tree
+  {
+    "mbbill/undotree",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>u", ":UndotreeToggle<CR>", desc = "Toggle undo tree" }
+    }
+  },
+
+  -- memory loss
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      plugins = {
+        spelling = {
+          enabled = true,
+        }
+      }
+    }
+  },
+
+  -- indentline
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "VeryLazy",
+    opts = {
+      use_treesitter = true,
+      indent_level = 99,
+      show_current_context = true,
+    }
+  },
+
+  -- hex colours
+  {
+    "brenoprata10/nvim-highlight-colors",
+    event = "BufRead",
+    config = true
+  },
+  {
+    "ziontee113/color-picker.nvim",
+    opts = {
+      border = "rounded",
+      icons = { "-", ">" },
+      keymap = {
+        b = "<Plug>ColorPickerSlider10Decrease",
+      }
+    },
+    keys = {
+      { "<leader>c", ":PickColor<CR>", desc = "Colour picker" }
+    }
+  },
+
+  -- code map
+  {
+    "echasnovski/mini.map",
+    config = function()
+      require("mini.map").setup({
+        integrations = {
+          require "mini.map".gen_integration.builtin_search(),
+          require "mini.map".gen_integration.gitsigns(),
+          require "mini.map".gen_integration.diagnostic(),
+        },
+        symbols = {
+          encode = require("mini.map").gen_encode_symbols.dot("4x2")
+        },
+        window = {
+          side = "right",
+          show_integration_count = false,
+          winblend = 0,
+        }
+      })
+    end,
+    keys = {
+      { "<leader>mo", function() require "mini.map".open() end,         desc = "Open minimap" },
+      { "<leader>mc", function() require "mini.map".close() end,        desc = "Open minimap" },
+      { "<leader>mm", function() require "mini.map".toggle() end,       desc = "Toggle minimap" },
+      { "<leader>mf", function() require "mini.map".toggle_focus() end, desc = "Focus minimap" },
+      { "<leader>mr", function() require "mini.map".refresh() end,      desc = "Open minimap" },
+    }
+  },
+
+  -- zen mode
+  {
+    "folke/zen-mode.nvim",
+    config = true,
+    keys = {
+      {
+        "<leader>z",
+        function()
+          require("zen-mode").toggle({
+            window = {
+              width = .90
+            }
+          })
+        end,
+        desc = "zen mode"
+      }
+    }
+  },
+
+  -- ??
+  {
+    "Eandrju/cellular-automaton.nvim",
+    keys = {
+      { "<leader>vim", ":CellularAutomaton make_it_rain<CR>", desc = "Rain" }
+    },
   },
 }

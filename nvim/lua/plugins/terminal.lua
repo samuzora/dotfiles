@@ -3,7 +3,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     config = function()
-      require("toggleterm").setup({
+      require "toggleterm".setup {
         size = 15,
         open_mapping = "<leader>t",
         insert_mappings = false,
@@ -15,11 +15,11 @@ return {
             return term.name
           end
         }
-      })
+      }
 
       -- lazygit integration
-      local terminal = require("toggleterm.terminal").Terminal
-      local lazygit = terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
+      local terminal = require "toggleterm.terminal".Terminal
+      local lazygit = terminal:new { cmd = "lazygit", direction = "float", hidden = true }
       vim.keymap.set('', '<leader>gl', function() lazygit:toggle() end)
 
       -- remap escape in terminal mode

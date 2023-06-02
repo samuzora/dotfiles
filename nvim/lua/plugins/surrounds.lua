@@ -2,7 +2,17 @@ return {
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
-    config = true
+    opts = {
+      keymaps = {
+        normal = "yv",
+        normal_cur = "yvv",
+        normal_line = "yV",
+        normal_cur_line = "yVV",
+        delete = "dv",
+        change = "cv",
+        change_line = "cV",
+      }
+    }
   },
 
   {
@@ -14,9 +24,9 @@ return {
     "echasnovski/mini.ai",
     event = "VeryLazy",
     config = function()
-      require("mini.ai").setup({
+      require "mini.ai".setup {
         search_method = "cover_or_nearest",
-      })
+      }
     end
   },
 }

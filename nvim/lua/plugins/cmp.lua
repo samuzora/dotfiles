@@ -13,8 +13,9 @@ return {
 
   event = "VeryLazy",
   config = function()
-    local cmp = require('cmp')
+    local cmp = require 'cmp'
 
+    ---@diagnostic disable-next-line: redundant-parameter
     cmp.setup({
       perfomance = {
         debounce = 0,
@@ -68,7 +69,7 @@ return {
       }),
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body)
+          require 'luasnip'.lsp_expand(args.body)
         end
       }
     })

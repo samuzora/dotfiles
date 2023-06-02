@@ -1,4 +1,4 @@
-local ls = require("luasnip")
+local ls = require "luasnip"
 
 return {
   ls.snippet(
@@ -10,7 +10,7 @@ return {
       snippetType = "snippet"
     },
     {
-      ls.text_node{
+      ls.text_node {
         '#import "//home/samuzora/.config/typst/plugins/tablex/tablex.typ": *',
         '#import "//home/samuzora/.config/typst/plugins/canvas/canvas.typ": canvas',
         '',
@@ -31,7 +31,7 @@ return {
       snippetType = "snippet"
     },
     {
-      ls.text_node{
+      ls.text_node {
         "#set par(leading: 1.2em)",
         "#show par: set block(above: 2em, below: 2em)"
       }
@@ -47,7 +47,7 @@ return {
       snippetType = "snippet"
     },
     {
-      ls.text_node{
+      ls.text_node {
         '#canvas({',
         '    import "//home/samuzora/.config/typst/plugins/canvas/draw.typ": *',
         '})'
