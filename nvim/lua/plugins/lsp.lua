@@ -1,5 +1,5 @@
 return {
-  -- lsp interfaces
+  -- lsp interface
   {
     "ray-x/navigator.lua",
     dependencies = {
@@ -7,7 +7,7 @@ return {
       "ray-x/guihua.lua",
       "ray-x/lsp_signature.nvim",
 
-      "hrsh7th/cmp-nvim-lsp",
+      "ms-jpq/coq_nvim",
       "nvim-treesitter/nvim-treesitter",
       "neovim/nvim-lspconfig",
 
@@ -38,15 +38,46 @@ return {
     event = "VeryLazy",
     config = function()
       require "navigator".setup {
+        height = 0.5,
+        preview_height = 0.5,
         lsp = {
           format_on_save = false,
           format_options = { async = true },
-          servers = { "typst_lsp", "prismals" },
+          servers = { "typst_lsp", "prismals", "ruff_lsp", "pylyzer" },
+          hover = {
+            enable = true,
+            keymap = {
+              ["<C-k>"] = {
+                default = {
+                  function()
+                    local w = vim.fn.expand("<cWORD>")
+                    vim.lsp.buf.workspace_symbols(w)
+                  end,
+                },
+              },
+            },
+          },
+          display_diagnostic_qf = false,
           typst_lsp = {
+            single_file = true,
             settings = {
               exportPdf = false
             },
-          }
+          },
+          pylyzer = {},
+          pylsp = {
+            filetypes = {},
+          },
+          pyright = {
+            filetypes = {},
+          },
+          ruff_lsp = {},
+          flow = {
+            filetypes = {},
+          },
+          jedi_language_server = {
+            filetypes = {},
+          },
         },
         icons = {
           icons = true,
@@ -64,109 +95,97 @@ return {
         lsp_signature_help = true,
         signature_help_cfg = {
           bind = true,
-          hint_inline = function() return true end,
+          transparency = 30,
+          floating_window_above_cur_line = true,
+          toggle_key = "<M-x>",
           handler_opts = {
             border = "rounded"
           }
         },
+        ts_fold = false,
         mason = true,
         default_mapping = false,
         keymaps = {
           {
-            key = "gr",
+            key = "Kr",
             func = require("navigator.reference").async_ref,
             desc = "Show references"
           },
           {
-            key = "<C-k>",
+            key = "KK",
             func = vim.lsp.buf.signature_help,
             desc = "Show signature help"
           },
           {
-            key = "g0",
+            key = "Ks",
             func = require("navigator.symbols").document_symbols,
             desc = "Show all symbols in document"
           },
           {
-            key = "gW",
+            key = "KS",
             func = require("navigator.workspace").workspace_symbol_live,
             desc = "Show all symbols in workspace"
           },
           {
-            key = "gd",
+            key = "Kd",
             func = require("navigator.definition").definition_preview,
             desc = "Preview definition"
           },
           {
-            key = "gD",
+            key = "KD",
             func = vim.lsp.buf.definition,
             desc = "Go to definition"
           },
           {
-            key = "gT",
+            key = "Kt",
             func = require("navigator.definition").type_definition_preview,
             desc = "Preview type definition"
           },
           {
-            key = "gT",
+            key = "KT",
             func = vim.lsp.buf.type_definition,
             desc = "Go to type definition"
           },
           {
-            key = "gi",
+            key = "Ki",
             func = vim.lsp.buf.implementation,
             desc = "Go to implementation"
           },
           {
-            key = "ga",
+            key = "Ka",
             func = require("navigator.codeAction").code_action,
             mode = "n",
             desc = "Execute code action"
           },
           {
-            key = "ga",
+            key = "Ka",
             func = require("navigator.codeAction").range_code_action,
             mode = "v",
             desc = "Execute code action on selection"
           },
           {
-            key = "gI",
+            key = "K?",
             func = vim.lsp.buf.incoming_calls,
             desc = "Show incoming calls"
           },
           {
-            key = "gO",
+            key = "K!",
             func = vim.lsp.buf.outgoing_calls,
             desc = "Show outgoing calls"
           },
           {
-            key = "gf",
-            func = require("navigator.diagnostics").show_line_diagnostics,
-            desc = "Preview line diagnostics"
-          },
-          {
-            key = "gl",
-            func = require("navigator.diagnostics").show_buf_diagnostics,
-            desc = "Show buffer diagnostics"
-          },
-          {
-            key = "gL",
+            key = "Kl",
             func = require("navigator.diagnostics").show_diagnostics,
+            desc = "Show line diagnostics"
+          },
+          {
+            key = "KL",
+            func = require("navigator.diagnostics").show_buf_diagnostics,
             desc = "Show workspace diagnostics"
           },
           {
-            key = "]d",
-            func = vim.diagnostic.goto_next,
-            desc = "Go to next diagnostic"
-          },
-          {
-            key = "[d",
-            func = vim.diagnostic.goto_prev,
-            desc = "Go to previous diagnostic"
-          },
-          {
-            key = "gq",
-            func = vim.diagnostic.set_loclist,
+            key = "Kq",
+            func = vim.diagonstic.loclist,
             desc = "Show diagnostics in a quickfix"
           },
           {
@@ -182,18 +201,101 @@ return {
             desc = "Format selection"
           },
           {
-            key = "gk",
+            key = "Kh",
             func = require("navigator.dochighlight").hi_symbol,
             desc = "Highlight symbol under cursor"
           },
           {
-            key = "<Leader>la",
+            key = "Kc",
             func = require("navigator.codelens").run_action,
             desc = "Run code lens on line under cursor"
           },
         },
       }
+      require "guihua.maps".setup {
+        close_view = "<Esc>",
+        save = ":w",
+      }
+      vim.api.nvim_set_keymap("", "K", nil)
     end,
+  },
+
+  -- super fast cmp
+  {
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    event = "VeryLazy",
+    -- lazy = false,
+    dependencies = {
+      {
+        "ms-jpq/coq.artifacts",
+        branch = "artifacts"
+      },
+      {
+        "ms-jpq/coq.thirdparty",
+        branch = "3p",
+        config = function()
+          require("coq_3p") {
+            { src = "nvimlua", short_name = "nLUA", conf_only = true },
+            { src = "bc",      short_name = "MATH", precision = 6 },
+            { src = "figlet",  short_name = "BIG" },
+            { src = "cow",     trigger = "!cow" },
+          }
+        end
+      }
+    },
+
+    config = function()
+      vim.o.pumblend = 30
+      vim.g.coq_settings = {
+        keymap = {
+          pre_select = true
+        }
+      }
+      require "coq"
+    end
+  },
+
+  -- copilot
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    cmd = "Copilot",
+    opts = {
+      filetypes = {
+        javascript = true,
+        typescript = true,
+        lua = true,
+        python = true,
+        rust = true,
+        go = true,
+        c = true,
+        cpp = true,
+        java = true,
+        ["*"] = false
+      },
+      panel = {
+        auto_refresh = true,
+        keymap = {
+          open = "<C-Left>",
+        },
+        layout = {
+          position = "left",
+          ratio = 0.4
+        }
+      },
+      suggestion = {
+        auto_trigger = true,
+        debounce = 20,
+        keymap = {
+          accept = "<Right>",
+          accept_word = "<C-Right>",
+          accept_line = "<M-Right>",
+          next = "<M-]>",
+          prev = "<M-[>",
+        }
+      }
+    },
   },
 
   -- special neovim lsp

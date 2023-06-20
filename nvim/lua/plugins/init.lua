@@ -4,20 +4,25 @@ return {
     "tpope/vim-repeat",
     event = "VeryLazy",
   },
-
   {
-    "lambdalisue/suda.vim",
-    config = function()
-      vim.g["suda_smart_edit"] = 1
-    end,
+    "dccsillag/magma-nvim",
+    build = ":UpdateRemotePlugins",
     keys = {
-      { "<leader>w", ":SudaWrite<CR>", desc = "Sudo write" }
+      { "<leader>r",  ":MagmaEvaluateOperator<CR>" },
+      { "<leader>rr", ":MagmaEvaluateLine<CR>" },
+      { "<leader>rr", ":<C-u>MagmaEvaluateVisual<CR>", mode = "x" },
+      { "<leader>rc", ":MagmaReevaluateCell<CR>" },
+      { "<leader>rd", ":MagmaDelete<CR>" },
+      { "<leader>ro", ":MagmaShowOutput<CR>" },
     }
   },
 
+  -- session
   {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    config = true,
+    "olimorris/persisted.nvim",
+    opts = {
+      autosave = true,
+      autoload = true,
+    }
   },
 }

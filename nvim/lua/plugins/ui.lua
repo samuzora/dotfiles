@@ -1,4 +1,24 @@
 return {
+  -- colorscheme
+  {
+    "Mofiqul/vscode.nvim",
+    config = function()
+      local c = require "vscode.colors".get_colors()
+
+      require "vscode".setup {
+        style = "dark",
+        group_overrides = {
+          SpellBad = { fg = nil, underline = true },
+          LeapBackdrop = { fg = "#777777" }
+        }
+      }
+      require "vscode".load()
+      vim.api.nvim_create_autocmd({ "TermOpen" }, {
+        callback = function() vim.o.spell = false end
+      })
+    end
+  },
+
   -- noice, nui and notify
   {
     "folke/noice.nvim",
@@ -8,9 +28,12 @@ return {
     },
     config = function()
       require "noice".setup {
-        -- messages = {
-        --   view_error = true,
-        -- },
+        messages = {
+          view_error = false,
+        },
+        redirect = {
+          view = "popup"
+        },
         views = {
           hover = {
             border = {
@@ -117,33 +140,13 @@ return {
     end,
     event = "VimEnter",
     keys = {
-      { "<leader>nd", function() require("notify").dismiss() end, "Dismiss all notifications" },
+      { "<leader>nd", function() require("notify").dismiss() end, desc = "Dismiss all notifications" },
     }
-  },
-
-  -- colorscheme
-  {
-    "folke/tokyonight.nvim",
-    config = function()
-      vim.o.background = "dark"
-      require "tokyonight".setup {
-        style = "night",
-        light_style = "day",
-        transparent = false,
-        on_highlights = function(hl, c)
-          hl.WinSeparator = {
-            fg = c.fg_dark
-          }
-        end
-      }
-      vim.cmd [[colorscheme tokyonight]]
-    end
   },
 
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
     dependencies = {
       "folke/noice.nvim",
     },
@@ -350,7 +353,7 @@ return {
         -- Lsp server name .
         function()
           local msg = 'No Active Lsp'
-          local buf_ft = vim.api.nvim_buf_get_option()
+          local buf_ft = vim.api.nvim_get_option_value("filetype", {})
           local clients = vim.lsp.get_active_clients()
           if next(clients) == nil then
             return msg
@@ -367,55 +370,22 @@ return {
         color = { fg = colors.fg, gui = 'bold' },
       }
 
-
       -- Now don't forget to initialize lualine
       lualine.setup(config)
     end
   },
 
-  -- barbar
+  -- bufferline
   {
-    "romgrk/barbar.nvim",
-    event = "VeryLazy",
-    config = true,
-    keys = {
-      { "<A-<>", ":BufferMovePrevious<CR>", desc = "Move to previous buffer" },
-      { "<A->>", ":BufferMoveNext<CR>",     desc = "Move to next buffer" },
-      { "<A-,>", ":BufferPrevious<CR>",     desc = "Go to previous buffer" },
-      { "<A-.>", ":BufferNext<CR>",         desc = "Go to next buffer" },
-      { "<A-1>", ":BufferGoto 1<CR>",       desc = "Go to buffer 1" },
-      { "<A-2>", ":BufferGoto 2<CR>",       desc = "Go to buffer 2" },
-      { "<A-3>", ":BufferGoto 3<CR>",       desc = "Go to buffer 3" },
-      { "<A-4>", ":BufferGoto 4<CR>",       desc = "Go to buffer 4" },
-      { "<A-5>", ":BufferGoto 5<CR>",       desc = "Go to buffer 5" },
-      { "<A-6>", ":BufferGoto 6<CR>",       desc = "Go to buffer 6" },
-      { "<A-7>", ":BufferGoto 7<CR>",       desc = "Go to buffer 7" },
-      { "<A-8>", ":BufferGoto 8<CR>",       desc = "Go to buffer 8" },
-      { "<A-9>", ":BufferGoto 9<CR>",       desc = "Go to buffer 9" },
-      { "<A-0>", ":BufferLast<CR>",         desc = "Go to last buffer 1" },
-      { "<A-p>", ":BufferPin<CR>",          desc = "Pin buffer" },
-      { "<A-c>", ":BufferClose<CR>",        desc = "Close buffer" }
-    }
-  },
-
-  -- smooth scrolling and other animations
-  {
-    "echasnovski/mini.animate",
-    event = "VeryLazy",
-    opts = {
-      cursor = {
-        enable = false
+    "akinsho/bufferline.nvim",
+    config = function()
+      local bufferline = require "bufferline"
+      bufferline.setup {
+        options = {
+          mode = "tabs"
+        },
       }
-    }
-  },
-
-  -- automatic window resizing
-  {
-    "camspiers/lens.vim",
-    event = "VeryLazy",
-    dependencies = {
-      "camspiers/animate.vim"
-    },
+    end,
   },
 
   -- expensive flower (for ray-x/navigator.lua)
@@ -425,10 +395,12 @@ return {
     main = "guihua.maps",
     build = "cd lua/fzy && make",
     opts = {
-      close_view = "<esc>",
+      maps = {
+        close_view = "<Esc>",
+        save = "<C-s>",
+      }
     }
   },
-
 
   -- undo tree
   {
@@ -465,7 +437,7 @@ return {
 
   -- hex colours
   {
-    "brenoprata10/nvim-highlight-colors",
+    "echasnovski/mini.hipatterns",
     event = "BufRead",
     config = true
   },
@@ -481,6 +453,32 @@ return {
     keys = {
       { "<leader>c", ":PickColor<CR>", desc = "Colour picker" }
     }
+  },
+
+
+  -- telescope
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
+    run = ":TSUpdate",
+    config = function()
+      require "nvim-treesitter.configs".setup {
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {
+          enable = true,
+        },
+      }
+      require "nvim-treesitter.install".update()
+    end
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
+    config = true,
   },
 
   -- code map
@@ -499,16 +497,16 @@ return {
         window = {
           side = "right",
           show_integration_count = false,
-          winblend = 0,
+          winblend = 50,
         }
       })
     end,
     keys = {
       { "<leader>mo", function() require "mini.map".open() end,         desc = "Open minimap" },
-      { "<leader>mc", function() require "mini.map".close() end,        desc = "Open minimap" },
-      { "<leader>mm", function() require "mini.map".toggle() end,       desc = "Toggle minimap" },
+      { "<leader>mc", function() require "mini.map".close() end,        desc = "Close minimap" },
+      { "<leader>mt", function() require "mini.map".toggle() end,       desc = "Toggle minimap" },
       { "<leader>mf", function() require "mini.map".toggle_focus() end, desc = "Focus minimap" },
-      { "<leader>mr", function() require "mini.map".refresh() end,      desc = "Open minimap" },
+      { "<leader>mr", function() require "mini.map".refresh() end,      desc = "Refresh minimap" },
     }
   },
 
@@ -516,9 +514,10 @@ return {
   {
     "folke/zen-mode.nvim",
     config = true,
+    event = "VeryLazy",
     keys = {
       {
-        "<leader>z",
+        "zZ",
         function()
           require("zen-mode").toggle({
             window = {

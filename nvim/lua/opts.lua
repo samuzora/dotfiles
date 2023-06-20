@@ -23,6 +23,8 @@ vim.opt.conceallevel   = 2
 vim.opt.shell          = "fish"
 vim.opt.smoothscroll   = true
 vim.opt.mousescroll = "ver:1,hor:1"
+vim.opt.autochdir = false
+vim.opt.cursorline = true
 
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
