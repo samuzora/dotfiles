@@ -14,9 +14,5 @@ vim.opt.runtimepath:prepend(lazypath)
 -- these must be set BEFORE starting lazy
 vim.g.mapleader = " "
 vim.g.localmapleader = " "
--- coq options
-vim.g.coq_settings = {
-  auto_start = "shut-up",
-}
 
 require("lazy").setup("plugins")

@@ -7,7 +7,6 @@ return {
       "ray-x/guihua.lua",
       "ray-x/lsp_signature.nvim",
 
-      "ms-jpq/coq_nvim",
       "nvim-treesitter/nvim-treesitter",
       "neovim/nvim-lspconfig",
 
@@ -43,7 +42,7 @@ return {
         lsp = {
           format_on_save = false,
           format_options = { async = true },
-          servers = { "typst_lsp", "prismals", "ruff_lsp", "pylyzer" },
+          servers = { "typst_lsp", "prismals", "jedi_language_server", "ruff_lsp" },
           hover = {
             enable = true,
             keymap = {
@@ -64,18 +63,20 @@ return {
               exportPdf = false
             },
           },
-          pylyzer = {},
-          pylsp = {
-            filetypes = {},
+          ruff_lsp = {
+            settings = {
+              -- lint settings found at .config/ruff/ruff.toml
+              codeAction = {
+                fixViolation = {
+                  enable = false,
+                },
+                disableRuleComment = {
+                  enable = false,
+                },
+              }
+            }
           },
-          pyright = {
-            filetypes = {},
-          },
-          ruff_lsp = {},
           flow = {
-            filetypes = {},
-          },
-          jedi_language_server = {
             filetypes = {},
           },
         },
@@ -110,6 +111,11 @@ return {
             key = "Kr",
             func = require("navigator.reference").async_ref,
             desc = "Show references"
+          },
+          {
+            key = "Kk",
+            func = vim.lsp.buf.hover,
+            desc = "LSP hover"
           },
           {
             key = "KK",
@@ -185,7 +191,7 @@ return {
           },
           {
             key = "Kq",
-            func = vim.diagonstic.loclist,
+            func = vim.diagnostic.loclist,
             desc = "Show diagnostics in a quickfix"
           },
           {
@@ -216,44 +222,8 @@ return {
         close_view = "<Esc>",
         save = ":w",
       }
-      vim.api.nvim_set_keymap("", "K", nil)
+      vim.api.nvim_set_keymap("", "K", "", {})
     end,
-  },
-
-  -- super fast cmp
-  {
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    event = "VeryLazy",
-    -- lazy = false,
-    dependencies = {
-      {
-        "ms-jpq/coq.artifacts",
-        branch = "artifacts"
-      },
-      {
-        "ms-jpq/coq.thirdparty",
-        branch = "3p",
-        config = function()
-          require("coq_3p") {
-            { src = "nvimlua", short_name = "nLUA", conf_only = true },
-            { src = "bc",      short_name = "MATH", precision = 6 },
-            { src = "figlet",  short_name = "BIG" },
-            { src = "cow",     trigger = "!cow" },
-          }
-        end
-      }
-    },
-
-    config = function()
-      vim.o.pumblend = 30
-      vim.g.coq_settings = {
-        keymap = {
-          pre_select = true
-        }
-      }
-      require "coq"
-    end
   },
 
   -- copilot

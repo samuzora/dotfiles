@@ -2,6 +2,7 @@ return {
   -- colorscheme
   {
     "Mofiqul/vscode.nvim",
+    enabled = false,
     config = function()
       local c = require "vscode.colors".get_colors()
 
@@ -17,6 +18,15 @@ return {
         callback = function() vim.o.spell = false end
       })
     end
+  },
+
+  {
+    "EdenEast/nightfox.nvim",
+    main = "nightfox",
+    config = function()
+      require "nightfox".setup { }
+      vim.cmd 'colorscheme nightfox'
+    end,
   },
 
   -- noice, nui and notify
@@ -484,6 +494,7 @@ return {
   -- code map
   {
     "echasnovski/mini.map",
+    enabled = false,
     config = function()
       require("mini.map").setup({
         integrations = {
@@ -507,6 +518,15 @@ return {
       { "<leader>mt", function() require "mini.map".toggle() end,       desc = "Toggle minimap" },
       { "<leader>mf", function() require "mini.map".toggle_focus() end, desc = "Focus minimap" },
       { "<leader>mr", function() require "mini.map".refresh() end,      desc = "Refresh minimap" },
+    }
+  },
+
+  -- pretty scrollbar
+  {
+    "lewis6991/satellite.nvim",
+    main = "satellite",
+    opts = {
+
     }
   },
 

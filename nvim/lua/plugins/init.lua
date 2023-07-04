@@ -23,6 +23,9 @@ return {
     opts = {
       autosave = true,
       autoload = true,
+      ignored_dirs = {
+        "/home/samuzora",
+      }
     }
   },
 }
