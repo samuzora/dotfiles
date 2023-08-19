@@ -14,42 +14,13 @@ return {
 
     event = "VeryLazy",
     config = function()
-      local cmp = require 'cmp'
+      local cmp = require('cmp')
 
       vim.o.updatetime = 100
       vim.o.pumblend = 30
 
-      vim.api.nvim_create_autocmd({ "CursorHoldI" }, {
-        group = vim.api.nvim_create_augroup("cmp_complete_on_space", {}),
-        callback = function()
-          local line = vim.api.nvim_get_current_line()
-          local cursor = vim.api.nvim_win_get_cursor(0)[2]
-
-          if string.sub(line, cursor, cursor + 1) == " " then
-            require("cmp").complete()
-          end
-        end,
-      })
-
       ---@diagnostic disable-next-line: redundant-parameter
       cmp.setup({
-        perfomance = {
-          debounce = 0,
-          throttle = 0
-        },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.score,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          }
-        },
         formatting = {
           fields = { "abbr", "menu", "kind" },
           format = function(entry, item)
@@ -64,25 +35,33 @@ return {
             return item
           end
         },
-
-        completion = {
-          completeopt = "menu,menuone,noselect"
+        sorting = {
+          priority_weight = 1,
+          comparators = {
+            cmp.config.compare.locality,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.score, -- based on :  score = score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+            cmp.config.compare.offset,
+            cmp.config.compare.order,
+          }
         },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        mapping = cmp.mapping.preset.insert({
-          ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        mapping = {
+          ["<C-p>"] = cmp.mapping.complete(),
+          ["<C-j>"] = cmp.mapping.select_next_item(),
+          ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<Tab>"] = cmp.mapping.confirm({ select = true }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        }),
+          ["<C-c>"] = cmp.mapping.close()
+        },
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" }
+          { name = "nvim_lsp", priority = 3 },
+          { name = "luasnip",  priority = 2 },
+          { name = "path",     priority = 1 }
         }),
         snippet = {
           expand = function(args)

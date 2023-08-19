@@ -8,7 +8,8 @@ vim.opt.smarttab      = true
 vim.opt.splitbelow    = true
 vim.opt.splitright    = true
 vim.opt.undofile      = true
-vim.opt.backupdir     = "/home/samuzora/.local/share/nvim/backup"
+-- vim.opt.backupdir     = "/home/samuzora/.local/share/nvim/backup"
+vim.opt.backupcopy    = "yes"
 vim.opt.mouse         = "nv"
 vim.opt.number        = true
 vim.opt.ignorecase    = true
@@ -24,9 +25,13 @@ vim.opt.shell         = "nu"
 vim.opt.smoothscroll  = true
 vim.opt.mousescroll   = "ver:1,hor:1"
 vim.opt.autochdir     = false
-vim.opt.cursorline    = true
+vim.opt.cursorline    = false
+vim.opt.laststatus    = 3
+vim.opt.splitkeep     = "screen"
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
+vim.keymap.set("n", "K", "")
+vim.keymap.set("v", "K", "")
 
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function()

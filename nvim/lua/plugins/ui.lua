@@ -1,30 +1,20 @@
 return {
   -- colorscheme
   {
-    "Mofiqul/vscode.nvim",
-    enabled = false,
-    config = function()
-      local c = require "vscode.colors".get_colors()
-
-      require "vscode".setup {
-        style = "dark",
-        group_overrides = {
-          SpellBad = { fg = nil, underline = true },
-          LeapBackdrop = { fg = "#777777" }
-        }
-      }
-      require "vscode".load()
-      vim.api.nvim_create_autocmd({ "TermOpen" }, {
-        callback = function() vim.o.spell = false end
-      })
-    end
-  },
-
-  {
     "EdenEast/nightfox.nvim",
     main = "nightfox",
     config = function()
-      require "nightfox".setup { }
+      require "nightfox".setup {
+        groups = {
+          all = {
+            WinSeparator = { link = "Normal" },
+            LeapPrimary = { style = "bold" },
+          }
+        }
+      }
+      vim.api.nvim_create_autocmd({ "TermOpen" }, {
+        callback = function() vim.o.spell = false end
+      })
       vim.cmd 'colorscheme nightfox'
     end,
   },
@@ -38,9 +28,6 @@ return {
     },
     config = function()
       require "noice".setup {
-        messages = {
-          view_error = false,
-        },
         redirect = {
           view = "popup"
         },
@@ -157,6 +144,8 @@ return {
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
+    lazy = false,
+    -- event = "VeryLazy",
     dependencies = {
       "folke/noice.nvim",
     },
@@ -167,7 +156,6 @@ return {
       local lualine = require('lualine')
 
       -- Color table for highlights
-      -- stylua: ignore
       local colors = {}
       if (vim.o.background == 'dark') then
         colors = {
@@ -388,36 +376,42 @@ return {
   -- bufferline
   {
     "akinsho/bufferline.nvim",
+    event = "VeryLazy",
     config = function()
       local bufferline = require "bufferline"
       bufferline.setup {
         options = {
-          mode = "tabs"
+          mode = "tabs",
+          separator_style = "slant"
         },
       }
     end,
   },
 
-  -- expensive flower (for ray-x/navigator.lua)
+  -- sidebar
   {
-    "ray-x/guihua.lua",
-    lazy = true,
-    main = "guihua.maps",
-    build = "cd lua/fzy && make",
+    "sidebar-nvim/sidebar.nvim",
+    main = "sidebar-nvim",
+    lazy = false,
     opts = {
-      maps = {
-        close_view = "<Esc>",
-        save = "<C-s>",
-      }
+      open = false,
+      sections = {
+        "git",
+        "diagnostics",
+        "todos",
+      },
+    },
+    keys = {
+      { "<Leader>s", function() require("sidebar-nvim").toggle() end, desc = "Toggle sidebar" }
     }
   },
 
-  -- undo tree
+  -- symbols outline
   {
-    "mbbill/undotree",
-    event = "VeryLazy",
+    "simrat39/symbols-outline.nvim",
+    opts = {},
     keys = {
-      { "<leader>u", ":UndotreeToggle<CR>", desc = "Toggle undo tree" }
+      { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "Symbols outline" }
     }
   },
 
@@ -434,21 +428,10 @@ return {
     }
   },
 
-  -- indentline
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
-    opts = {
-      use_treesitter = true,
-      indent_level = 99,
-      show_current_context = true,
-    }
-  },
-
   -- hex colours
   {
     "echasnovski/mini.hipatterns",
-    event = "BufRead",
+    event = "VeryLazy",
     config = true
   },
   {
@@ -465,18 +448,19 @@ return {
     }
   },
 
-
-  -- telescope
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    -- lazy = false,
     event = "VeryLazy",
-    run = ":TSUpdate",
+    build = ":TSUpdate",
     config = function()
       require "nvim-treesitter.configs".setup {
         auto_install = true,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
+          use_languagetree = false,
         },
         indent = {
           enable = true,
@@ -491,63 +475,12 @@ return {
     config = true,
   },
 
-  -- code map
-  {
-    "echasnovski/mini.map",
-    enabled = false,
-    config = function()
-      require("mini.map").setup({
-        integrations = {
-          require "mini.map".gen_integration.builtin_search(),
-          require "mini.map".gen_integration.gitsigns(),
-          require "mini.map".gen_integration.diagnostic(),
-        },
-        symbols = {
-          encode = require("mini.map").gen_encode_symbols.dot("4x2")
-        },
-        window = {
-          side = "right",
-          show_integration_count = false,
-          winblend = 50,
-        }
-      })
-    end,
-    keys = {
-      { "<leader>mo", function() require "mini.map".open() end,         desc = "Open minimap" },
-      { "<leader>mc", function() require "mini.map".close() end,        desc = "Close minimap" },
-      { "<leader>mt", function() require "mini.map".toggle() end,       desc = "Toggle minimap" },
-      { "<leader>mf", function() require "mini.map".toggle_focus() end, desc = "Focus minimap" },
-      { "<leader>mr", function() require "mini.map".refresh() end,      desc = "Refresh minimap" },
-    }
-  },
-
   -- pretty scrollbar
   {
     "lewis6991/satellite.nvim",
-    main = "satellite",
-    opts = {
-
-    }
-  },
-
-  -- zen mode
-  {
-    "folke/zen-mode.nvim",
-    config = true,
     event = "VeryLazy",
-    keys = {
-      {
-        "zZ",
-        function()
-          require("zen-mode").toggle({
-            window = {
-              width = .90
-            }
-          })
-        end,
-        desc = "zen mode"
-      }
-    }
+    main = "satellite",
+    opts = {}
   },
 
   -- ??

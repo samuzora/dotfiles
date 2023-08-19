@@ -4,29 +4,20 @@ return {
     event = "VeryLazy",
     opts = {
       keymaps = {
-        normal = "yv",
-        normal_cur = "yvv",
-        normal_line = "yV",
-        normal_cur_line = "yVV",
-        delete = "dv",
-        change = "cv",
-        change_line = "cV",
+        normal = "yo",
+        normal_cur = "yoo",
+        normal_line = "yO",
+        normal_cur_line = "yOO",
+        delete = "do",
+        change = "co",
+        change_line = "coo",
       }
     }
   },
 
   {
     "windwp/nvim-autopairs",
-    event = "VeryLazy",
+    event = "InsertEnter",
     config = true
-  },
-  {
-    "echasnovski/mini.ai",
-    event = "VeryLazy",
-    config = function()
-      require "mini.ai".setup {
-        search_method = "cover_or_nearest",
-      }
-    end
   },
 }

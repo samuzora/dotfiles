@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     config = function() require("mini.move").setup() end
   },
-{
+  {
     "echasnovski/mini.align",
     event = "VeryLazy",
     config = function()
@@ -21,7 +21,21 @@ return {
       "JoosepAlviste/nvim-ts-context-commentstring"
     },
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      toggler = {
+        line = "<leader>cc",
+        block = "<leader>bb",
+      },
+      opleader = {
+        line = "<leader>c",
+        block = "<leader>b",
+      },
+      extra = {
+        above = "<leader>cO",
+        below = "<leader>co",
+        eol = "<leader>cA",
+      }
+    }
   },
 
   {
@@ -30,7 +44,14 @@ return {
       vim.g["suda_smart_edit"] = 1
     end,
     keys = {
-      { "<leader>w", ":SudaWrite<CR>", desc = "Sudo write" }
+      { "<leader>w", vim.cmd.SudaWrite, desc = "Sudo write" }
     }
   },
+
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<leader>u", vim.cmd.UndotreeToggle, desc = "Undotree" }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 return {
   {
     "ggandor/leap.nvim",
+    event = "VeryLazy",
     config = function()
       -- leap
       require 'leap'.add_default_mappings()
@@ -44,6 +45,7 @@ return {
   -- window resizing
   {
     "roxma/vim-window-resize-easy",
+    event = "VeryLazy",
   },
 
   -- marks

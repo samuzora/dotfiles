@@ -4,7 +4,8 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
-local handler = function(virtText, lnum, endLnum, width, truncate) local newVirtText = {}
+local handler = function(virtText, lnum, endLnum, width, truncate)
+  local newVirtText = {}
   local suffix = (' ...  %d '):format(endLnum - lnum)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
   local targetWidth = width - sufWidth
@@ -58,16 +59,15 @@ return {
       }
     },
     keys = {
-      { "zR", function() require "ufo".openAllFolds() end,         desc = "Open all folds" },
-      { "zM", function() require "ufo".closeAllFolds() end,        desc = "Close all folds" },
-      { "zr", function() require "ufo".openFoldsExceptKinds() end, desc = "Fold less" },
-      { "zm", function() require "ufo".closeFoldsWith() end,       desc = "Fold more" },
+      { "zR", function() require "ufo".openAllFolds() end,                   desc = "Open all folds" },
+      { "zM", function() require "ufo".closeAllFolds() end,                  desc = "Close all folds" },
+      { "zr", function(level) require "ufo".openFoldsExceptKinds(level) end, desc = "Fold less" },
+      { "zm", function(level) require "ufo".closeFoldsWith(level) end,       desc = "Fold more" },
       {
-        "K",
+        "zK",
         function()
           local winid = require "ufo".peekFoldedLinesUnderCursor()
           if not winid then
-            -- choose one of coc.nvim and nvim lsp
             vim.lsp.buf.hover()
           end
         end,

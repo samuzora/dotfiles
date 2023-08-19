@@ -5,7 +5,8 @@ return {
     config = function()
       require "toggleterm".setup {
         size = 20,
-        shade_terminals = false,
+        shade_terminals = true,
+        start_in_insert = false,
         open_mapping = "tt",
         insert_mappings = false,
         terminal_mappings = false,

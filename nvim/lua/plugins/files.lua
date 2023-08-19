@@ -5,6 +5,7 @@ return {
   -- telescope
   {
     "nvim-telescope/telescope.nvim",
+    event = "VimEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
@@ -44,16 +45,17 @@ return {
     }
   },
 
-  -- oil.nvim (vim-like filesystem manipulation)
+  -- oil.nvim (buffer filesystem manipulation)
   {
     "stevearc/oil.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons"
     },
+    lazy = false,
     keys = {
       {
         "-",
-        function() require("oil").open_float() end,
+        function() require("oil").open() end,
         desc = "Open parent directory in Oil"
       },
     },
@@ -64,8 +66,13 @@ return {
         show_hidden = true
       },
       keymaps = {
-        ["<esc>"] = "actions.close"
+        ["q"] = "actions.close"
       },
     }
+  },
+
+  -- buffer quickfix list manipulation
+  {
+    "stefandtw/quickfix-reflector.vim",
   }
 }
