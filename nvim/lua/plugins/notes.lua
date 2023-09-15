@@ -25,7 +25,7 @@ return {
         },
       }
     end,
-    ft = "norg",
+    ft = { "norg" },
   },
 
   -- markdown
@@ -34,7 +34,7 @@ return {
     build = "cd app && npm install",
     ft = { "markdown" },
     keys = {
-      { "<leader>md", ":MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
+      { "<leader>md", "<cmd>MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
     }
   }
 }

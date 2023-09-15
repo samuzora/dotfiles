@@ -16,8 +16,9 @@ return {
   },
 
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    opts = {
+    }
   },
 }

@@ -7,7 +7,7 @@ return {
       vim.g.gitblame_date_format = '%r'
     end,
     keys = {
-      { "<leader>gb", ":GitBlameToggle<CR>", desc = "Git blame" }
+      { "<leader>gb", vim.cmd.GitBlameToggle, desc = "Git blame" }
     }
   },
   {

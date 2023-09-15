@@ -1,37 +1,57 @@
-vim.opt.expandtab     = true
-vim.opt.tabstop       = 4
-vim.opt.shiftwidth    = 4
-vim.opt.softtabstop   = 4
-vim.opt.smartindent   = true
-vim.opt.autoindent    = true
-vim.opt.smarttab      = true
-vim.opt.splitbelow    = true
-vim.opt.splitright    = true
-vim.opt.undofile      = true
--- vim.opt.backupdir     = "/home/samuzora/.local/share/nvim/backup"
-vim.opt.backupcopy    = "yes"
-vim.opt.mouse         = "nv"
-vim.opt.number        = true
-vim.opt.ignorecase    = true
-vim.opt.smartcase     = true
-vim.opt.linebreak     = true
-vim.opt.signcolumn    = "yes"
-vim.opt.spell         = true
-vim.opt.cmdheight     = 0
-vim.opt.showmode      = false
-vim.opt.termguicolors = true
-vim.opt.conceallevel  = 2
-vim.opt.shell         = "nu"
-vim.opt.smoothscroll  = true
-vim.opt.mousescroll   = "ver:1,hor:1"
-vim.opt.autochdir     = false
-vim.opt.cursorline    = false
-vim.opt.laststatus    = 3
-vim.opt.splitkeep     = "screen"
+local options = {
+  smartindent   = true,
+  autoindent    = true,
+
+  smarttab      = true,
+  expandtab     = true,
+  tabstop       = 4,
+  softtabstop   = 4,
+
+  splitkeep     = "screen",
+  splitbelow    = true,
+  splitright    = true,
+
+  undofile      = true,
+  backupcopy    = "yes",
+
+  number        = true,
+  cursorline    = true,
+  mouse         = "nv",
+
+  signcolumn    = "yes",
+
+  ignorecase    = true,
+  smartcase     = true,
+
+  linebreak     = true,
+  autochdir     = false,
+
+  spell         = true,
+
+  showmode      = false,
+  cmdheight     = 0,
+  conceallevel  = 2,
+  termguicolors = true,
+  laststatus    = 3,
+
+  smoothscroll  = true,
+  mousescroll   = "ver:1,hor:1",
+
+  shell         = "nu",
+}
+
+for k, v in pairs(options) do vim.opt[k] = v end
+
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "K", "")
 vim.keymap.set("v", "K", "")
+vim.keymap.set("n", "U", "<C-r>")
+
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_tutor_mode_plugin = 1
 
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function()

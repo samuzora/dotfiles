@@ -42,16 +42,16 @@ return {
     config = true
   },
 
+  -- enhanced w-e-b motions
+  {
+    "chrisgrieser/nvim-spider",
+    opts = {},
+    event = "VeryLazy",
+  },
+
   -- window resizing
   {
     "roxma/vim-window-resize-easy",
     event = "VeryLazy",
-  },
-
-  -- marks
-  {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    config = true,
   },
 }

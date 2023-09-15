@@ -1,52 +1,65 @@
 local ls = require "luasnip"
 
+local s, i, t = ls.s, ls.insert_node, ls.text_node
+local fmt = require "luasnip.extras.fmt".fmt
+
 return {
-  ls.snippet(
-    {
-      trig = "tikz",
-      dscr = "Tikzpicture snippet",
-      regTrig = false,
-      priority = 100,
-      snippetType = "snippet"
-    },
-    {
-      ls.text_node { "\\begin{figure}[!htb]", "\t\\begin{center}", "\t\t\\begin{tikzpicture}", "" },
-      ls.insert_node(3),
-      ls.text_node { "", "\t\t\\end{tikzpicture}", "\t\t\\caption{" },
-      ls.insert_node(1),
-      ls.text_node { "}", "\t\t\\label{fig:" },
-      ls.insert_node(2),
-      ls.text_node { "}", "\t\\end{center}", "\\end{figure}" },
-    }
+  -- tikzpicture
+  s(
+    "tikz",
+    fmt([[
+      \begin{{figure}}[!htb]
+          \begin{{center}}
+              \begin{{tikzpicture}}
+                  {}
+              \end{{tikzpicture}}
+              \caption{{{}}}
+              \label{{fig:{}}}
+          \end{{center}}
+      \end{{figure}}
+      ]],
+      {
+        i(3),
+        i(1),
+        i(2),
+      }
+    )
   ),
-  ls.snippet(
-    {
-      trig = "eqn",
-      dscr = "Equation",
-      regTrig = false,
-      priority = 100,
-      snippetType = "snippet"
-    },
-    {
-      ls.text_node { "\\begin{equation}", "\t\\begin{split}", "\t\t" },
-      ls.insert_node(1),
-      ls.text_node { "", "\t\\end{split}", "\\end{equation}" },
-    }
+
+  -- equations
+  s(
+    "eqn",
+    fmt([[
+      \begin{{equation}}
+          \begin{{split}}
+              {}
+          \end{{split}}
+      \end{{equation}}
+    ]],
+      {
+        i(0)
+      }
+    )
   ),
-  ls.snippet(
-    {
-      trig = "table",
-      dscr = "Table",
-      regTrig = false,
-      priority = 100,
-      snippetType = "snippet",
-    },
-    {
-      ls.text_node { "\\begin{figure}[!htb]", "\t\\begin{center}", "\t\t\\begin{tabu} to \textwidth {" },
-      ls.insert_node(1),
-      ls.text_node { "} \\hline" },
-      ls.insert_node(2),
-      ls.text_node { "", "\t\t\\end{tabu}", "\t\\end{center}", "\\end{figure}" }
-    }
+
+  -- tables
+  s(
+    "table",
+    fmt([[
+      \begin{{figure}}[!htb]
+          \begin{{center}}
+              \begin{{tabu}} to \textwidth {{}}
+                  \hline
+                  {}
+                  \hline
+              \end{{tabu}}
+          \end{{center}}
+      \end{{figure}}
+    ]],
+      {
+        i(1),
+        i(2),
+      }
+    )
   )
 }

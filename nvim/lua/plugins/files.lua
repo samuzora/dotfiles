@@ -5,10 +5,10 @@ return {
   -- telescope
   {
     "nvim-telescope/telescope.nvim",
-    event = "VimEnter",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
       require "telescope".setup {
@@ -21,6 +21,7 @@ return {
                 require "telescope.actions".select_default(prompt_bufnr)
                 require "telescope.builtin".resume()
               end,
+              ["q"] = require("telescope.actions").close,
             },
           },
         },
@@ -37,11 +38,11 @@ return {
       require "telescope".load_extension("notify")
     end,
     keys = {
-      { "ff", ":Telescope find_files<CR>", desc = "Grep filenames" },
-      { "fg", ":Telescope live_grep<CR>",  desc = "Grep text" },
-      { "fb", ":Telescope buffers<CR>",    desc = "Grep buffer names" },
-      { "fh", ":Telescope help_tags<CR>",  desc = "Grep help" },
-      { "fn", ":Telescope notify<CR>",     desc = "Grep notifications" },
+      { "ff", "<cmd>Telescope find_files<CR>", desc = "Grep filenames" },
+      { "fg", "<cmd>Telescope live_grep<CR>",  desc = "Grep text" },
+      { "fb", "<cmd>Telescope buffers<CR>",    desc = "Grep buffer names" },
+      { "fh", "<cmd>Telescope help_tags<CR>",  desc = "Grep help" },
+      { "fn", "<cmd>Telescope notify<CR>",     desc = "Grep notifications" },
     }
   },
 
@@ -51,12 +52,14 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons"
     },
-    lazy = false,
     keys = {
       {
         "-",
         function() require("oil").open() end,
-        desc = "Open parent directory in Oil"
+      },
+      {
+        "<leader>o",
+        function() require("oil").open_float() end,
       },
     },
     opts = {
@@ -65,14 +68,42 @@ return {
       view_options = {
         show_hidden = true
       },
-      keymaps = {
-        ["q"] = "actions.close"
+      float = {
+        win_options = {
+          winblend = 30,
+        }
       },
-    }
+      keymaps = {
+        ["q"] = "actions.close",
+      },
+    },
+    init = function()
+      if vim.fn.argc() == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        -- Capture the protocol and lazy load oil if it is "oil-ssh", besides also lazy
+        -- loading it when the first argument is a directory.
+        local adapter = string.match(vim.fn.argv(0), "^([%l-]*)://")
+        if (stat and stat.type == "directory") or adapter == "oil-ssh" then
+          require("lazy").load({ plugins = { "oil.nvim" } })
+        end
+      end
+      if not require("lazy.core.config").plugins["oil.nvim"]._.loaded then
+        vim.api.nvim_create_autocmd("BufNew", {
+          callback = function()
+            if vim.fn.isdirectory(vim.fn.expand("<afile>")) == 1 then
+              require("lazy").load({ plugins = { "oil.nvim" } })
+              -- Once oil is loaded, we can delete this autocmd
+              return true
+            end
+          end,
+        })
+      end
+    end,
   },
 
-  -- buffer quickfix list manipulation
+  -- quickfix manipulation
   {
     "stefandtw/quickfix-reflector.vim",
+    event = "VeryLazy",
   }
 }
