@@ -56,4 +56,10 @@ return {
     build = 'sh install.sh yarn',
     config = true
   },
+
+  -- edgedb syntax highlighting
+  {
+    "edgedb/edgedb-vim",
+    ft = { "esdl", "edgeql" }
+  }
 }

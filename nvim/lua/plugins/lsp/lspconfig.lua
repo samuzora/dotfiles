@@ -34,17 +34,7 @@ return {
       clangd = {
         single_file_support = true,
       },
-      tsserver = {
-        settings = {
-          suggest = {
-            autoImports = false,
-          }
-        }
-      },
       lua_ls = {},
-      rust_analyzer = {
-        single_file_support = true,
-      },
       intelephense = {
         single_file_support = true,
       },
@@ -67,9 +57,7 @@ return {
       typst_lsp = {
         single_file_support = true,
         settings = {
-          ["typst-lsp"] = {
-            exportPdf = "never",
-          }
+          exportPdf = "never",
         }
       },
       texlab = {},

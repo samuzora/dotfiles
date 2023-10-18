@@ -46,7 +46,7 @@ return {
     "smjonas/inc-rename.nvim",
     config = true,
     keys = {
-      { "<Leader>rn", "<cmd>IncRename ", desc = "Rename variable" },
+      { "<Leader>rn", ":IncRename ", desc = "Rename variable" },
     }
   },
 

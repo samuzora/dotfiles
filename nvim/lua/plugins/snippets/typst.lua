@@ -7,12 +7,12 @@ return {
   -- preamble
   s(
     "setup",
-    {
-      t(
-        [[
+    fmt(
+      [[
         #import "@preview/tablex:0.0.5": tablex, cellx, rowspanx, colspanx
-        #import "@preview/cetz:0.0.2"
-        #import "@preview/metro:0.1.0": unit, units, prefixes
+        #import "@preview/cetz:0.1.2"
+        #import "@preview/oxifmt:0.2.0": strfmt
+        #import "@preview/metro:0.1.1": unit, units, prefixes
         #import units: *
         #import prefixes: *
 
@@ -20,56 +20,57 @@ return {
         #set heading(numbering: "1.1")
         #set math.equation(numbering: "(1)")
         #set text(size: 12pt)
-      ]]
-      )
-    }
+      ]],
+      {}
+    )
   ),
 
 
   -- double spacing for lines
   s(
     "doublespacing",
-    {
-      t(
-        [[
+    fmt(
+      [[
         #set par(leading: 1.2em)
         #show par: set block(above: 2em, below: 2em)
-      ]]
-      )
-    }
+      ]],
+      {}
+    )
   ),
 
 
   -- diagrams
   s(
     "canvas",
-    {
-      t(
-        [[
+
+    fmt(
+      [[
         #figure(
           cetz.canvas({{
             import cetz.draw: *
           }})
         )
-      ]]
-      )
-    }
+      ]],
+      {}
+    )
+
   ),
 
 
   -- axes for econs graphs
   s("econs",
-    {
-      t(
-        [[
+
+    fmt(
+      [[
         #figure(
           cetz.canvas({{
             import cetz.draw: *
             line((0, 10), (0, 0), (10, 0), mark: ( start: ">", end: ">" ))
           }})
-      ]]
-      )
-    }
+      ]],
+      {}
+    )
+
   ),
 
 
@@ -92,10 +93,11 @@ return {
   s("unit",
     fmt(
       [[
-        unit(${}$)
+        #unit(${}$){}
       ]],
       {
-        i(0)
+        i(1),
+        i(2),
       }
     )),
 
@@ -103,37 +105,38 @@ return {
   -- chem formulae
   s(
     "whalogen",
-    {
-      t(
-        [[
+    fmt(
+      [[
           #import "@preview/whalogen:0.1.0": ce
-        ]]
-      )
-    }
+        ]],
+      {}
+    )
+
   ),
-  s("chem", fmt(
-    [[
+  s("chemicalformula",
+    fmt(
+      [[
       #ce("{}")
     ]],
-    {
-      i(0)
-    }
-  )),
+      {
+        i(0)
+      }
+    )
+  ),
 
 
   -- wordcount function
   s(
     "wordcount",
-    {
-      t(
-        [[
-        #let count-words(it) = {{
+    fmt(
+      [[
+      #let count-words(it) = {{
         let fn = repr(it.func())
-        if fn == "sequence" {{ it.children.map(count-words).sum() }}
+        if fn == "sequence" {{ it.children.map(count-words).sum(default: 0) }}
         else if fn == "text" {{ it.text.split().len() }}
         else if fn in ("emph", "strong", "listitem", "align", "enumitem") {{ count-words(it.body) }}
         else if fn == "styled" {{ count-words(it.child) }}
-        else if fn = box {{ count-words(it.body) }}
+        else if fn == box {{ count-words(it.body) }}
         else if fn in ("footnote", "heading", "equation") {{ 0 }}
         else {{ 0 }}
       }}
@@ -142,7 +145,8 @@ return {
         let n = count-words(rest)
         rest + align([(#n words)])
       }}
-    ]])
-    }
+    ]],
+      {}
+    )
   )
 }

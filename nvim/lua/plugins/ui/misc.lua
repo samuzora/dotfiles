@@ -22,6 +22,7 @@ return {
   -- color picker
   {
     "uga-rosa/ccc.nvim",
+    -- ft = { "html", "javascript", "typescript" },
     event = { "BufRead", "BufNew" },
     config = function()
       local ColorInput = require("ccc.input")

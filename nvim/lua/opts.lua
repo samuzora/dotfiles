@@ -39,34 +39,21 @@ local options = {
 
   shell         = "nu",
 }
-
 for k, v in pairs(options) do vim.opt[k] = v end
 
+-- keymappings
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
-vim.keymap.set("n", "K", "")
-vim.keymap.set("v", "K", "")
+vim.keymap.set({ "n", "v" }, "K", "k")
 vim.keymap.set("n", "U", "<C-r>")
 
+-- disable unused vim plugins
 vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.loaded_gzip = 1
 vim.g.loaded_tutor_mode_plugin = 1
 
-vim.api.nvim_create_autocmd({ "VimLeave" }, {
-  callback = function()
-    vim.opt.guicursor = "a:ver25"
-  end
-})
-
-if vim.g.neovide then
-  vim.g.neovide_scale_factor = 0.5
-  vim.g.neovide_padding_top = 5
-  vim.g.neovide_padding_bottom = 5
-  vim.g.neovide_padding_right = 5
-  vim.g.neovide_padding_left = 5
-end
-
+-- wsl clipboard
 vim.g.clipboard = {
   name = 'WslClipboard',
   copy = {
@@ -79,3 +66,19 @@ vim.g.clipboard = {
   },
   cache_enabled = 1,
 }
+
+-- i forgot what this does
+vim.api.nvim_create_autocmd({ "VimLeave" }, {
+  callback = function()
+    vim.opt.guicursor = "a:ver25"
+  end
+})
+
+-- some neovide suppport
+if vim.g.neovide then
+  vim.g.neovide_scale_factor = 0.5
+  vim.g.neovide_padding_top = 5
+  vim.g.neovide_padding_bottom = 5
+  vim.g.neovide_padding_right = 5
+  vim.g.neovide_padding_left = 5
+end
