@@ -1,20 +1,22 @@
 return {
+  -- surround operators
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     opts = {
       keymaps = {
-        normal = "yo",
-        normal_cur = "yoo",
-        normal_line = "yO",
-        normal_cur_line = "yOO",
-        delete = "do",
-        change = "co",
-        change_line = "coo",
+        normal = "yr",
+        normal_cur = "yrr",
+        normal_line = "yR",
+        normal_cur_line = "yRR",
+        delete = "dr",
+        change = "cr",
+        change_line = "crr",
       }
     }
   },
 
+  -- autopairing
   {
     "altermo/ultimate-autopair.nvim",
     event = { "InsertEnter", "CmdlineEnter" },

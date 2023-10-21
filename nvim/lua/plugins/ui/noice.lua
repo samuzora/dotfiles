@@ -4,10 +4,12 @@ return {
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
   },
   config = function()
     require "noice".setup {
+      notify = {
+        view = "mini",
+      },
       redirect = {
         view = "popup"
       },
@@ -37,7 +39,7 @@ return {
         },
         routes = {
           {
-            view = "notify",
+            view = "mini",
             filter = {
               event = "msg_showmode"
             },
@@ -119,13 +121,5 @@ return {
       end,
       { silent = true, expr = true }
     )
-
-    require "notify".setup {
-      timeout = 3,
-      fps = 240,
-    }
   end,
-  keys = {
-    { "dn", function() require("notify").dismiss() end, desc = "Dismiss all notifications" },
-  }
 }

@@ -23,9 +23,4 @@ return {
       require "nvim-treesitter.install".update()
     end
   },
-  {
-    "windwp/nvim-ts-autotag",
-    ft = { "html", "javascript", "javascriptreact", "typescriptreact", "svelte", "vue" },
-    config = true,
-  },
 }

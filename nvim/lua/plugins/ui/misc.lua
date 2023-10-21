@@ -22,7 +22,6 @@ return {
   -- color picker
   {
     "uga-rosa/ccc.nvim",
-    -- ft = { "html", "javascript", "typescript" },
     event = { "BufRead", "BufNew" },
     config = function()
       local ColorInput = require("ccc.input")
@@ -121,13 +120,5 @@ return {
       { "<leader>cp", vim.cmd.CccPick,    desc = "Color picker" },
       { "<leader>ct", vim.cmd.CccConvert, desc = "Convert between color types" }
     }
-  },
-
-  -- ??
-  {
-    "Eandrju/cellular-automaton.nvim",
-    keys = {
-      { "<leader>jkjk", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "Rain" }
-    },
   },
 }

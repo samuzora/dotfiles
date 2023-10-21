@@ -8,58 +8,16 @@ return {
     }
   },
 
-  -- pretty typescript diagnostics
-  {
-    "cseickel/diagnostic-window.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    keys = {
-      { "g?", vim.cmd.DiagWindowShow, desc = "Diagnostic window" },
-    }
-  },
-
-
   -- diagnostics list
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
     opts = {},
     keys = {
       { "gw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "List workspace diagnostics" }
     }
   },
-
-  -- lsp lines
-  -- {
-  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  --   config = function()
-  --     require("lsp_lines").setup()
-  --     vim.diagnostic.config({
-  --       virtual_text = false,
-  --       virtual_lines = {
-  --         only_current_line = true
-  --       }
-  --     })
-  --     vim.api.nvim_create_autocmd("WinEnter", {
-  --       callback = function()
-  --         local floating = vim.api.nvim_win_get_config(0).relative ~= ""
-  --         vim.diagnostic.config({
-  --           virtual_text = floating,
-  --           virtual_lines = not floating,
-  --         })
-  --       end,
-  --     })
-  --   end,
-  --   event = "LspAttach",
-  --   keys = {
-  --     {
-  --       "gL",
-  --       function()
-  --         require("lsp_lines").toggle()
-  --       end,
-  --       desc = "LSP lines"
-  --     },
-  --   }
-  -- },
 
   -- lspsaga
   {

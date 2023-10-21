@@ -35,14 +35,14 @@ return {
           }
         }
       }
-      require "telescope".load_extension("notify")
+      require("telescope").load_extension("noice")
     end,
     keys = {
       { "ff", "<cmd>Telescope find_files<CR>", desc = "Grep filenames" },
       { "fg", "<cmd>Telescope live_grep<CR>",  desc = "Grep text" },
       { "fb", "<cmd>Telescope buffers<CR>",    desc = "Grep buffer names" },
       { "fh", "<cmd>Telescope help_tags<CR>",  desc = "Grep help" },
-      { "fn", "<cmd>Telescope notify<CR>",     desc = "Grep notifications" },
+      { "fn", "<cmd>Noice telescope<CR>",     desc = "Grep notifications" },
     }
   },
 

@@ -19,7 +19,7 @@ return {
     }
   },
 
-  -- selection
+  -- treesitter-based node selection
   {
     "SUSTech-data/wildfire.nvim",
     event = "VeryLazy",
@@ -49,17 +49,4 @@ return {
     config = true,
   },
 
-  -- typescript import cost
-  {
-    "barrett-ruth/import-cost.nvim",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-    build = 'sh install.sh yarn',
-    config = true
-  },
-
-  -- edgedb syntax highlighting
-  {
-    "edgedb/edgedb-vim",
-    ft = { "esdl", "edgeql" }
-  }
 }

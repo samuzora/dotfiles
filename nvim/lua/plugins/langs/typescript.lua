@@ -1,6 +1,8 @@
 return {
+  -- better tsserver
   {
     "pmizio/typescript-tools.nvim",
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("typescript-tools").setup {
@@ -13,8 +15,36 @@ return {
       }
     end
   },
+
+  -- to lint whole workspace
   {
     "dmmulroy/tsc.nvim",
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     opts = {}
-  }
+  },
+
+  -- typescript import cost
+  {
+    "barrett-ruth/import-cost.nvim",
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    build = 'sh install.sh yarn',
+    config = true
+  },
+
+  -- tsx tags
+  {
+    "windwp/nvim-ts-autotag",
+    ft = { "html", "javascript", "javascriptreact", "typescriptreact", "svelte", "vue" },
+    config = true,
+  },
+
+  -- pretty typescript diagnostics
+  {
+    "cseickel/diagnostic-window.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    keys = {
+      { "g?", vim.cmd.DiagWindowShow, desc = "Diagnostic window" },
+    }
+  },
+
 }

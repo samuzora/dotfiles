@@ -1,11 +1,4 @@
 return {
-  -- typst
-  {
-    "kaarmu/typst.vim",
-    enabled = false,
-    ft = "typst",
-  },
-
   -- neorg
   {
     "nvim-neorg/neorg",
@@ -30,12 +23,12 @@ return {
   },
 
   -- markdown
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    ft = { "markdown" },
-    keys = {
-      { "<leader>md", "<cmd>MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
-    }
-  }
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   build = "cd app && npm install",
+  --   ft = { "markdown" },
+  --   keys = {
+  --     { "<leader>md", "<cmd>MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
+  --   }
+  -- }
 }

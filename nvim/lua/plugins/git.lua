@@ -1,4 +1,5 @@
 return {
+  -- git blame
   {
     "f-person/git-blame.nvim",
     config = function()
@@ -10,11 +11,15 @@ return {
       { "<leader>gb", vim.cmd.GitBlameToggle, desc = "Git blame" }
     }
   },
+
+  -- guttersigns
   {
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
     config = true,
   },
+
+  -- nicer git diff
   {
     "sindrets/diffview.nvim",
     event = "VeryLazy",

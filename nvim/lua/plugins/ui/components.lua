@@ -197,7 +197,7 @@ return {
     end
   },
 
-  -- tabby
+  -- tabline
   {
     "nanozuki/tabby.nvim",
     event = "VeryLazy",
@@ -221,22 +221,5 @@ return {
         },
       })
     end
-  },
-
-  -- sidebar
-  {
-    "sidebar-nvim/sidebar.nvim",
-    main = "sidebar-nvim",
-    event = "VeryLazy",
-    opts = {
-      open = false,
-      sections = {
-        "todos",
-        "symbols",
-      },
-    },
-    keys = {
-      { "<C-s>", function() require("sidebar-nvim").toggle() end, desc = "Toggle sidebar" }
-    }
   },
 }

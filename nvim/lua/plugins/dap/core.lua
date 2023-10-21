@@ -8,6 +8,7 @@ return {
       { "<leader>bl", function() require("dap").run_last() end },
     }
   },
+
   {
     "rcarriga/nvim-dap-ui",
     main = "dapui",
@@ -18,8 +19,10 @@ return {
       { "<leader>dt", function() require("dapui").toggle() end },
     }
   },
+
   {
     "theHamsta/nvim-dap-virtual-text",
+    event = "VeryLazy",
     opts = {}
   }
 }
