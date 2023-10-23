@@ -42,18 +42,37 @@ return {
   -- diagrams
   s(
     "canvas",
-
     fmt(
       [[
         #figure(
           cetz.canvas({{
             import cetz.draw: *
+            {}
           }})
         )
       ]],
-      {}
+      {i(1)}
     )
+  ),
 
+  s(
+    "plot",
+    fmt(
+      [[
+        #figure(
+          cetz.canvas({{
+            import cetz.draw: *
+            plot.plot(
+              size: (10, 5),
+              {{
+                {}
+              }}
+            )
+          }})
+        )
+      ]],
+      {i(1)}
+    )
   ),
 
 
