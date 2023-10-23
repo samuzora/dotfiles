@@ -11,7 +11,7 @@ return {
     },
     "hrsh7th/cmp-nvim-lsp",
   },
-  event = "VeryLazy",
+  lazy = false,
   config = function()
     local lspconfig = require("lspconfig")
 
