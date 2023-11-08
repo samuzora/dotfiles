@@ -49,4 +49,11 @@ return {
     config = true,
   },
 
+  -- run code snippets
+  {
+    "michaelb/sniprun",
+    build = "sh ./install.sh",
+    opts = {
+    }
+  }
 }

@@ -5,6 +5,7 @@ local options = {
   smarttab      = true,
   expandtab     = true,
   tabstop       = 4,
+  shiftwidth    = 4,
   softtabstop   = 4,
 
   splitkeep     = "screen",
@@ -44,7 +45,6 @@ for k, v in pairs(options) do vim.opt[k] = v end
 -- keymappings
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
-vim.keymap.set({ "n", "v" }, "K", "k")
 vim.keymap.set("n", "U", "<C-r>")
 
 -- disable unused vim plugins

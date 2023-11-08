@@ -8,41 +8,59 @@ return {
     }
   },
 
-  -- diagnostics list
+  -- listing various lsp stuff
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "gw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "List workspace diagnostics" }
+      { "gd", function() require("trouble").toggle("lsp_definitions") end, desc = "List definitions" },
+      { "gr", function() require("trouble").toggle("lsp_references") end,  desc = "List references" },
+      { "gw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "List workspace diagnostics" },
+      { "gb", function() require("trouble").toggle("document_diagnostics") end, desc = "Show buffer diagnostics" },
     }
   },
 
-  -- lspsaga
+  -- hover menu
   {
-    "nvimdev/lspsaga.nvim",
+    "lewis6991/hover.nvim",
+    config = function()
+      --- @diagnostic disable-next-line: redundant-parameter
+      require("hover").setup {
+        init = function()
+          -- Require providers
+          require("hover.providers.lsp")
+          require('hover.providers.gh')
+          require('hover.providers.gh_user')
+        end,
+        preview_opts = {
+          border = nil
+        },
+        preview_window = false,
+        title = true
+      }
+    end,
+    keys = {
+      { "K", function() require("hover").hover() end, desc = "Hover" },
+      { "gK", function() require("hover").hover_select() end, desc = "Select provider for hover" }
+    }
+  },
+
+  -- better code action menu
+  {
+    "luckasRanarison/clear-action.nvim",
+    event = "VeryLazy",
     opts = {
-      finder_action_keys = {
-        open = 'o',
-        vsplit = 's',
-        split = 'i',
-        quit = 'q',
-        scroll_down = '<C-f>',
-        scroll_up = '<C-b>'
-      },
+      signs = {
+        combine = true,
+        show_label = true,
+      }
     },
     keys = {
-      { "gk", "<cmd>Lspsaga hover_doc<CR>",             desc = "LSP hover" },
-      { "gK", "<cmd>Lspsaga hover_doc ++keep<CR>",      desc = "LSP hover and pin to top right" },
-      { "gr", "<cmd>Lspsaga finder ref<CR>",            desc = "Show symbol references" },
-      { "gp", "<cmd>Lspsaga peek_definition<CR>",       desc = "Peek definition" },
-      { "gd", "<cmd>Lspsaga goto_definition<CR>",       desc = "Go to definition" },
-      { "gy", "<cmd>Lspsaga peek_type_definition<CR>",  desc = "Peek type definition" },
-      { "gf", "<cmd>Lspsaga code_action<CR>",           desc = "Code action" },
-      { "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", desc = "Show line diagnostics" },
-      { "gb", "<cmd>Lspsaga show_buf_diagnostics<CR>",  desc = "Show buffer diagnostics" },
-      { "go", "<cmd>Lspsaga outline<CR>",               desc = "Show outline" },
-    },
+      {
+        "gx", function() require("clear-action").code_action() end,
+      }
+    }
   },
 }

@@ -19,12 +19,13 @@ return {
         typst = true,
         markdown = true,
         sh = true,
+        yaml = true,
         txt = true,
       },
       panel = {
         auto_refresh = true,
         keymap = {
-          open = "<C-r>",
+          open = "<C-c>",
         },
         layout = {
           position = "bottom",

@@ -1,6 +1,9 @@
+vim.o.updatetime = 0
+
 return {
   {
     "hrsh7th/nvim-cmp",
+    event = "VeryLazy",
     dependencies = {
       -- cmp sources
       "hrsh7th/cmp-nvim-lsp",
@@ -14,11 +17,8 @@ return {
       "onsails/lspkind.nvim",
     },
 
-    event = "VeryLazy",
     config = function()
       local cmp = require('cmp')
-
-      vim.o.updatetime = 0
 
       ---@diagnostic disable-next-line: redundant-parameter
       cmp.setup({

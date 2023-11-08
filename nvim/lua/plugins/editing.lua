@@ -1,27 +1,41 @@
 return {
+  -- move blocks of text
   {
     "echasnovski/mini.move",
     event = "VeryLazy",
     config = function() require("mini.move").setup() end
   },
+
+  -- live command preview
   {
-    "echasnovski/mini.align",
-    event = "VeryLazy",
+    "smjonas/live-command.nvim",
     config = function()
-      require "mini.align".setup {
-        mappings = {
-          start_with_preview = "<M-a>"
+      require("live-command").setup {
+        commands = {
+          Norm = { cmd = "norm" },
+          Reg = {
+            cmd = "norm",
+            -- This will transform ":5Reg a" into ":norm 5@a"
+            args = function(opts)
+              return (opts.count == -1 and "" or opts.count) .. "@" .. opts.args
+            end,
+            range = "",
+          }
         }
       }
     end
   },
+
+  -- auto template string
+  {
+    "axelvc/template-string.nvim",
+    opts = {}
+  },
+
+  -- comments
   {
     "numToStr/Comment.nvim",
     dependencies = {
-      {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte", "vue" },
-      }
     },
     event = "VeryLazy",
     opts = {
@@ -40,37 +54,17 @@ return {
       }
     }
   },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte", "vue" },
+  },
 
   -- rename variables
   {
     "smjonas/inc-rename.nvim",
     config = true,
     keys = {
-      { "<Leader>rn", ":IncRename ", desc = "Rename variable" },
+      { "gR", ":IncRename ", desc = "Rename variable" },
     }
   },
-
-  -- search and replace
-  {
-    "cshuaimin/ssr.nvim",
-    config = function()
-      require("ssr").setup {
-        border = "rounded",
-        min_width = 50,
-        min_height = 5,
-        max_width = 120,
-        max_height = 25,
-        keymaps = {
-          close = "q",
-          next_match = "n",
-          prev_match = "N",
-          replace_confirm = "<cr>",
-          replace_all = "<leader><cr>",
-        },
-      }
-    end,
-    keys = {
-      { "<leader>sr", function() require("ssr").open() end, desc = "Search and replace" }
-    }
-  }
 }

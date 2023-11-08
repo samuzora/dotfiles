@@ -4,6 +4,8 @@ return {
     require("conform").setup({
       formatters_by_ft = {
         typst = { "typstfmt" },
+        python = { "ruff_format" },
+        yaml = { "yamlfmt" },
       },
       formatters = {
         typstfmt = {

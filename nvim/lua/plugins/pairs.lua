@@ -5,13 +5,13 @@ return {
     event = "VeryLazy",
     opts = {
       keymaps = {
-        normal = "yr",
-        normal_cur = "yrr",
-        normal_line = "yR",
-        normal_cur_line = "yRR",
-        delete = "dr",
-        change = "cr",
-        change_line = "crr",
+        normal = "yp",
+        normal_cur = "ypp",
+        normal_line = "yP",
+        normal_cur_line = "yPP",
+        delete = "dp",
+        change = "cp",
+        change_line = "cpp",
       }
     }
   },

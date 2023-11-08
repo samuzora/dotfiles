@@ -5,7 +5,6 @@ return {
   -- telescope
   {
     "nvim-telescope/telescope.nvim",
-    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -38,11 +37,11 @@ return {
       require("telescope").load_extension("noice")
     end,
     keys = {
-      { "ff", "<cmd>Telescope find_files<CR>", desc = "Grep filenames" },
-      { "fg", "<cmd>Telescope live_grep<CR>",  desc = "Grep text" },
-      { "fb", "<cmd>Telescope buffers<CR>",    desc = "Grep buffer names" },
-      { "fh", "<cmd>Telescope help_tags<CR>",  desc = "Grep help" },
-      { "fn", "<cmd>Noice telescope<CR>",     desc = "Grep notifications" },
+      { "ff", "<cmd>Telescope find_files<CR>",                  desc = "Grep filenames" },
+      { "fg", "<cmd>Telescope live_grep<CR>",                   desc = "Grep text" },
+      { "fb", "<cmd>Telescope buffers<CR>",                     desc = "Grep buffer names" },
+      { "fh", "<cmd>Telescope help_tags<CR>",                   desc = "Grep help" },
+      { "fn", "<cmd>Noice telescope<CR>",                       desc = "Grep notifications" },
     }
   },
 
@@ -104,6 +103,6 @@ return {
   -- quickfix manipulation
   {
     "stefandtw/quickfix-reflector.vim",
-    event = "VeryLazy",
+    ft = { "qf" },
   }
 }

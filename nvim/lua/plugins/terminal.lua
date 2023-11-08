@@ -14,9 +14,9 @@ return {
       }
 
       -- lazygit integration
-      local terminal = require "toggleterm.terminal".Terminal
-      local lazygit = terminal:new { cmd = "lazygit", direction = "float", hidden = true }
-      vim.keymap.set("", "tg", function() lazygit:toggle() end)
+      -- local terminal = require "toggleterm.terminal".Terminal
+      -- local lazygit = terminal:new { cmd = "lazygit", direction = "float", hidden = true }
+      -- vim.keymap.set("", "tg", function() lazygit:toggle() end)
 
       -- remap escape in terminal mode
       vim.keymap.set("t", "<Esc>", [[<c-\><c-n>]])

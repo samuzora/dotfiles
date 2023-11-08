@@ -1,4 +1,10 @@
 return {
+  -- vim.ui.select
+  {
+    "stevearc/dressing.nvim",
+    opts = {}
+  },
+
   -- matchparen
   {
     "utilyre/sentiment.nvim",
@@ -121,4 +127,29 @@ return {
       { "<leader>ct", vim.cmd.CccConvert, desc = "Convert between color types" }
     }
   },
+
+  -- show nesting levels using treesitter
+  {
+    "andersevenrud/nvim_context_vt",
+    opts = {}
+  },
+
+  -- cool floating window animation plugin
+  {
+    "tamton-aquib/flirt.nvim",
+    opts = {
+      close_command = 'Q',
+      speed = 100
+    }
+  },
+
+  -- screensaver???
+  {
+    "tamton-aquib/zone.nvim",
+    event = "VeryLazy",
+    opts = {
+      style = "vanish",
+      after = 1800,
+    }
+  }
 }

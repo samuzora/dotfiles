@@ -3,7 +3,6 @@ return {
     "ggandor/leap.nvim",
     event = "VeryLazy",
     config = function()
-      -- leap
       require 'leap'.add_default_mappings()
       require 'leap'.setup {
         equivalence_classes = {
@@ -40,18 +39,5 @@ return {
       "ggandor/leap.nvim"
     },
     config = true
-  },
-
-  -- enhanced w-e-b motions
-  {
-    "chrisgrieser/nvim-spider",
-    opts = {},
-    event = "VeryLazy",
-  },
-
-  -- window resizing
-  {
-    "roxma/vim-window-resize-easy",
-    event = "VeryLazy",
   },
 }

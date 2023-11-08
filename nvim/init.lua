@@ -1,2 +1,2 @@
-require("lazy-manager")
 require("opts")
+require("lazy-manager")

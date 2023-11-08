@@ -5,6 +5,7 @@ return {
     event = "VeryLazy",
     dependencies = {
       "folke/noice.nvim",
+      "rmagatti/auto-session",
     },
     config = function()
       local lualine = require('lualine')
@@ -128,6 +129,19 @@ return {
         require("noice").api.status.mode.get,
         cond = require("noice").api.status.mode.has,
         color = { fg = colors.orange },
+      }
+
+      -- python venv
+      ins_right {
+        'swenv',
+        icon = "venv:",
+        color = { fg = colors.green }
+      }
+
+      -- session
+      ins_right {
+        require('auto-session.lib').current_session_name,
+        color = { fg = colors.green }
       }
 
       ins_right {
