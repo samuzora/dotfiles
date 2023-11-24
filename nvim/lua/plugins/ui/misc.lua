@@ -120,6 +120,10 @@ return {
           auto_enable = true,
           lsp = true,
         },
+        outputs = {
+          ccc.output.css_rgb,
+          ccc.output.hex,
+        }
       })
     end,
     keys = {
@@ -134,22 +138,11 @@ return {
     opts = {}
   },
 
-  -- cool floating window animation plugin
+  -- ???
   {
-    "tamton-aquib/flirt.nvim",
-    opts = {
-      close_command = 'Q',
-      speed = 100
-    }
-  },
-
-  -- screensaver???
-  {
-    "tamton-aquib/zone.nvim",
-    event = "VeryLazy",
-    opts = {
-      style = "vanish",
-      after = 1800,
+    "Eandrju/cellular-automaton.nvim",
+    keys = {
+      { "<leader>asdf", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "???" }
     }
   }
 }

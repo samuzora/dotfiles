@@ -1,3 +1,33 @@
+local servers = {
+  clangd = {
+    single_file_support = true,
+  },
+  lua_ls = {},
+  intelephense = {
+    init_options = {
+      globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+    },
+    single_file_support = true,
+  },
+  pyright = {
+    single_file_support = true,
+  },
+  typst_lsp = {
+    single_file_support = true,
+    settings = {
+      exportPdf = "never",
+    }
+  },
+  prismals = {},
+  cssls = {},
+  gopls = {},
+}
+
+local server_names = {}
+for server, _ in pairs(servers) do
+  table.insert(server_names, server)
+end
+
 -- setup order:
 -- 1. mason
 -- 2. mason-lspconfig
@@ -9,7 +39,9 @@ return {
 
     {
       "williamboman/mason-lspconfig.nvim",
-      opts = {},
+      opts = {
+        automatic_installation = true
+      },
       dependencies = {
         {
           "williamboman/mason.nvim",
@@ -32,21 +64,16 @@ return {
   config = function()
     -- border
     require("lspconfig.ui.windows").default_options.border = "rounded"
+
     -- configure file watch (for lagging lsp servers)
     local FSWATCH_EVENTS = {
       Created = 1,
       Updated = 2,
       Removed = 3,
-      -- Renamed
       OwnerModified = 2,
       AttributeModified = 2,
       MovedFrom = 1,
       MovedTo = 3
-      -- IsFile
-      -- IsDir
-      -- IsSymLink
-      -- Link
-      -- Overflow
     }
 
     --- @param data string
@@ -124,33 +151,6 @@ return {
         allow_incremental_sync = true,
       },
     }
-
-    local servers = {
-      clangd = {
-        single_file_support = true,
-      },
-      lua_ls = {},
-      intelephense = {
-        single_file_support = true,
-      },
-      pyright = {
-        single_file_support = true,
-      },
-      typst_lsp = {
-        single_file_support = true,
-        settings = {
-          exportPdf = "never",
-        }
-      },
-      prismals = {},
-      cssls = {},
-      gopls = {},
-    }
-
-    local server_names = {}
-    for server, _ in pairs(servers) do
-      table.insert(server_names, server)
-    end
 
     -- setup all servers specified above
     for server, config in pairs(servers) do

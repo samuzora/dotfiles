@@ -3,7 +3,7 @@ return {
   config = function()
     require('kanagawa').setup {
       compile = false,
-      undercurl = false,
+      undercurl = true,
       transparent = true,
       background = {
         dark = "wave",
@@ -44,7 +44,7 @@ return {
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
 
-          SpellBad = { bg = palette.winterRed },
+          SpellBad = { undercurl = true, bg = palette.winterRed },
 
           -- Save an hlgroup with dark background and dimmed foreground
           -- so that you can use it where your still want darker windows.

@@ -42,7 +42,7 @@ return {
       }
     end,
     keys = {
-      { "K", function() require("hover").hover() end, desc = "Hover" },
+      { "K", function() require("hover").hover() end, mode = { "n", "v" }, desc = "Hover" },
       { "gK", function() require("hover").hover_select() end, desc = "Select provider for hover" }
     }
   },

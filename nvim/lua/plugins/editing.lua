@@ -26,6 +26,12 @@ return {
     end
   },
 
+  -- tabout
+  {
+    "abecodes/tabout.nvim",
+    opts = {}
+  },
+
   -- auto template string
   {
     "axelvc/template-string.nvim",
