@@ -5,8 +5,8 @@ local options = {
   smarttab      = true,
   expandtab     = true,
   tabstop       = 4,
-  shiftwidth    = 4,
-  softtabstop   = 4,
+  shiftwidth    = 0,
+  softtabstop   = -1,
 
   splitkeep     = "screen",
   splitbelow    = true,
@@ -42,39 +42,36 @@ local options = {
 }
 for k, v in pairs(options) do vim.opt[k] = v end
 
--- keymappings
+vim.opt.shortmess:append('I')
+
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "U", "<C-r>")
 
--- disable unused vim plugins
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_gzip = 1
+vim.g.loaded_matchit           = 1
+vim.g.loaded_gzip              = 1
+vim.g.loaded_zip               = 1
+vim.g.loaded_zipPlugin         = 1
 vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_2html_plugin      = 1
+vim.g.loaded_tar               = 1
+vim.g.loaded_tarPlugin         = 1
+vim.g.loaded_vimball           = 1
+vim.g.loaded_vimballPlugin     = 1
 
--- wsl clipboard
-vim.g.clipboard = {
+vim.g.clipboard                = {
   name = 'WslClipboard',
   copy = {
-    ['+'] = 'win32yank.exe -i --crlf',
-    ['*'] = 'win32yank.exe -i --crlf',
+    ['+'] = 'clip.exe',
+    ['*'] = 'clip.exe',
   },
   paste = {
-    ['+'] = 'win32yank.exe -o --lf',
-    ['*'] = 'win32yank.exe -o --lf',
+    ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
   },
-  cache_enabled = 1,
+  cache_enabled = 0,
 }
 
--- i forgot what this does
-vim.api.nvim_create_autocmd({ "VimLeave" }, {
-  callback = function()
-    vim.opt.guicursor = "a:ver25"
-  end
-})
-
--- some neovide suppport
 if vim.g.neovide then
   vim.g.neovide_scale_factor = 0.5
   vim.g.neovide_padding_top = 5

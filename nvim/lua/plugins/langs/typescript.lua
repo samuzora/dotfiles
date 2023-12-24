@@ -2,8 +2,8 @@ return {
   -- better tsserver
   {
     "pmizio/typescript-tools.nvim",
-    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     config = function()
       require("typescript-tools").setup {
         settings = {
@@ -44,7 +44,8 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     keys = {
       { "g?", vim.cmd.DiagWindowShow, desc = "Diagnostic window" },
-    }
+    },
+    config = true,
   },
 
 }

@@ -1,7 +1,7 @@
 return {
   {
     "ggandor/leap.nvim",
-    event = "VeryLazy",
+    keys = { "s", "S" },
     config = function()
       require 'leap'.add_default_mappings()
       require 'leap'.setup {
@@ -31,13 +31,5 @@ return {
         },
       }
     end,
-  },
-  {
-    "ggandor/leap-spooky.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "ggandor/leap.nvim"
-    },
-    config = true
   },
 }

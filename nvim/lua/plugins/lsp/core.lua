@@ -18,6 +18,7 @@ local servers = {
       exportPdf = "never",
     }
   },
+  solidity = {},
   prismals = {},
   cssls = {},
   gopls = {},
@@ -28,44 +29,26 @@ for server, _ in pairs(servers) do
   table.insert(server_names, server)
 end
 
--- setup order:
--- 1. mason
--- 2. mason-lspconfig
--- 3. nvim-lspconfig
 return {
   "neovim/nvim-lspconfig",
-  lazy = false, -- NEVER set to true - it breaks single_file_mode!!
+  -- lazy = false, -- NEVER set to true - it breaks single_file_mode!!
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
-
     {
-      "williamboman/mason-lspconfig.nvim",
+      "williamboman/mason.nvim",
       opts = {
-        automatic_installation = true
+        ui = {
+          border = "rounded"
+        }
       },
-      dependencies = {
-        {
-          "williamboman/mason.nvim",
-          cmd = { "Mason", "MasonInstall", "MasonUninstall" },
-          config = function()
-            require("mason").setup()
-          end,
-          opts = {
-            ui = {
-              border = "rounded"
-            }
-          },
-        },
-      }
     },
-
-    "hrsh7th/cmp-nvim-lsp",
   },
 
   config = function()
     -- border
     require("lspconfig.ui.windows").default_options.border = "rounded"
 
-    -- configure file watch (for lagging lsp servers)
+    -- configure file watch (for lagging lsp servers eg. pyright)
     local FSWATCH_EVENTS = {
       Created = 1,
       Updated = 2,
@@ -142,6 +125,7 @@ return {
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local default_lsp_config = {
       on_attach = on_attach,

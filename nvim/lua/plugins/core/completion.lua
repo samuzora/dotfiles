@@ -3,7 +3,7 @@ vim.o.updatetime = 0
 return {
   {
     "hrsh7th/nvim-cmp",
-    event = "VeryLazy",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       -- cmp sources
       "hrsh7th/cmp-nvim-lsp",
@@ -74,6 +74,7 @@ return {
         }
       })
 
+      ---@diagnostic disable-next-line: redundant-parameter
       cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
@@ -81,6 +82,7 @@ return {
         },
       })
 
+      ---@diagnostic disable-next-line: redundant-parameter
       cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
@@ -94,5 +96,60 @@ return {
         }),
       })
     end
+  },
+
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    cmd = "Copilot",
+    opts = {
+      filetypes = {
+        javascript = true,
+        typescript = true,
+        javascriptreact = true,
+        typescriptreact = true,
+        lua = true,
+        python = true,
+        rust = true,
+        go = true,
+        c = true,
+        cpp = true,
+        java = true,
+        typst = true,
+        markdown = true,
+        sh = true,
+        yaml = true,
+        txt = true,
+      },
+      panel = {
+        auto_refresh = true,
+        keymap = {
+          open = "<C-s>",
+        },
+        layout = {
+          position = "bottom",
+          ratio = 0.3
+        }
+      },
+      suggestion = {
+        auto_trigger = true,
+        debounce = 20,
+        keymap = {
+          accept = "<Right>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-Right>",
+          prev = "<M-Left>",
+        }
+      },
+      server_opts_overrides = {
+        settings = {
+          advanced = {
+            listCount = 10,
+            inlineSuggestCount = 10,
+          }
+        },
+      }
+    },
   }
 }

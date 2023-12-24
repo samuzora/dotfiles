@@ -1,8 +1,9 @@
 return {
   "rebelot/kanagawa.nvim",
+  event = "UIEnter",
   config = function()
     require('kanagawa').setup {
-      compile = false,
+      compile = true,
       undercurl = true,
       transparent = true,
       background = {
@@ -91,5 +92,6 @@ return {
       end
     }
     vim.cmd 'colorscheme kanagawa'
+    vim.schedule(vim.cmd.KanagawaCompile)
   end
 }

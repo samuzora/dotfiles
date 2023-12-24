@@ -7,9 +7,9 @@ return {
     config = function()
       require "nvim-treesitter.configs".setup {
         modules = {},
-        ensure_installed = "all",
-        sync_install = false,
+        ensure_installed = {},
         ignore_install = {},
+        sync_install = false,
         auto_install = true,
         highlight = {
           enable = true,
@@ -39,6 +39,9 @@ return {
         },
       }
       require "nvim-treesitter.install".update()
+
+      vim.treesitter.language.register("html", "ejs")
+      vim.treesitter.language.register("javascript", "ejs")
     end
   },
 }

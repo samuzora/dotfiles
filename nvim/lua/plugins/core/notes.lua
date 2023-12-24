@@ -2,6 +2,7 @@ return {
   -- neorg
   {
     "nvim-neorg/neorg",
+    ft = "norg",
     config = function()
       require "neorg".setup {
         load = {
@@ -19,16 +20,5 @@ return {
         },
       }
     end,
-    ft = { "norg" },
   },
-
-  -- markdown
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   build = "cd app && npm install",
-  --   ft = { "markdown" },
-  --   keys = {
-  --     { "<leader>md", "<cmd>MarkdownPreviewToggle", desc = "Toggle markdown preview in browser" }
-  --   }
-  -- }
 }

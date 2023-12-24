@@ -4,6 +4,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim"
     },
+    keys = {
+      { "gV", function() require('swenv.api').pick_venv() end, desc = "Pick virtualenv" },
+    },
     config = function()
       require("swenv").setup {
         venvs_path = vim.fn.expand("~/.cache/pypoetry/virtualenvs/"),
@@ -15,8 +18,5 @@ return {
         end
       }
     end,
-    keys = {
-      { "gV", function() require('swenv.api').pick_venv() end, desc = "Pick virtualenv" },
-    }
   }
 }

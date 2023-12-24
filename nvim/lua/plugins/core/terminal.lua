@@ -1,7 +1,19 @@
 return {
+  -- term-edit
+  {
+    "chomosuke/term-edit.nvim",
+    ft = "toggleterm",
+    opts = {
+      prompt_end = "%$ "
+    }
+  },
+
   -- toggleterm
   {
     "akinsho/toggleterm.nvim",
+    keys = {
+      { "tt", desc = "Open terminal" },
+    },
     config = function()
       require "toggleterm".setup {
         size = 20,
@@ -13,18 +25,9 @@ return {
         direction = "horizontal",
       }
 
-      -- lazygit integration
-      -- local terminal = require "toggleterm.terminal".Terminal
-      -- local lazygit = terminal:new { cmd = "lazygit", direction = "float", hidden = true }
-      -- vim.keymap.set("", "tg", function() lazygit:toggle() end)
-
       -- remap escape in terminal mode
       vim.keymap.set("t", "<Esc>", [[<c-\><c-n>]])
       vim.keymap.set("t", "<M-[>", "<esc>")
     end,
-    keys = {
-      { "tt", desc = "Open terminal" },
-      { "tg", desc = "Open lazygit" },
-    }
   },
 }

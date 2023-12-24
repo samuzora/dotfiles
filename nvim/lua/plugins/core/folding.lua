@@ -32,21 +32,36 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
   return newVirtText
 end
 
+-- fix bug with ccc.nvim where colours don't show correctly
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "ccc-ui" },
-    callback = function()
-      require("ufo").detach()
-      vim.opt_local.foldenable = false
-    end
+  pattern = { "ccc-ui" },
+  callback = function()
+    require("ufo").detach()
+    vim.opt_local.foldenable = false
+  end
 })
 
 
 return {
   {
     "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
     event = "VeryLazy",
-    dependencies = {
-      "kevinhwang91/promise-async"
+    keys = {
+      { "zR", function() require "ufo".openAllFolds() end,                   desc = "Open all folds" },
+      { "zM", function() require "ufo".closeAllFolds() end,                  desc = "Close all folds" },
+      { "zr", function(level) require "ufo".openFoldsExceptKinds(level) end, desc = "Fold less" },
+      { "zm", function(level) require "ufo".closeFoldsWith(level) end,       desc = "Fold more" },
+      {
+        "zK",
+        function()
+          local winid = require "ufo".peekFoldedLinesUnderCursor()
+          if not winid then
+            vim.lsp.buf.hover()
+          end
+        end,
+        desc = "Preview text under fold"
+      },
     },
     opts = {
       fold_virt_text_handler = handler,
@@ -66,21 +81,5 @@ return {
         }
       }
     },
-    keys = {
-      { "zR", function() require "ufo".openAllFolds() end,                   desc = "Open all folds" },
-      { "zM", function() require "ufo".closeAllFolds() end,                  desc = "Close all folds" },
-      { "zr", function(level) require "ufo".openFoldsExceptKinds(level) end, desc = "Fold less" },
-      { "zm", function(level) require "ufo".closeFoldsWith(level) end,       desc = "Fold more" },
-      {
-        "zK",
-        function()
-          local winid = require "ufo".peekFoldedLinesUnderCursor()
-          if not winid then
-            vim.lsp.buf.hover()
-          end
-        end,
-        desc = "Preview text under fold"
-      },
-    }
   },
 }

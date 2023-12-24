@@ -1,11 +1,11 @@
 return {
-  -- lualine
+  -- status line
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    event = "UIEnter",
     dependencies = {
       "folke/noice.nvim",
-      "rmagatti/auto-session",
+      "AckslD/swenv.nvim",
     },
     config = function()
       local lualine = require('lualine')
@@ -110,7 +110,14 @@ return {
 
       ins_left {
         'filename',
-        cond = conditions.buffer_not_empty,
+        path = 1,
+        cond = function() return vim.bo.filetype ~= "oil" end,
+        color = { fg = colors.magenta, gui = 'bold' },
+        shorting_target = 50,
+      }
+      ins_left {
+        function() return require("oil").get_current_dir() end,
+        cond = function() return vim.bo.filetype == "oil" end,
         color = { fg = colors.magenta, gui = 'bold' },
       }
 
@@ -135,13 +142,10 @@ return {
       ins_right {
         'swenv',
         icon = "venv:",
-        color = { fg = colors.green }
-      }
-
-      -- session
-      ins_right {
-        require('auto-session.lib').current_session_name,
-        color = { fg = colors.green }
+        color = { fg = colors.green },
+        cond = function()
+          return vim.bo.filetype == "python"
+        end,
       }
 
       ins_right {
@@ -214,7 +218,7 @@ return {
   -- tabline
   {
     "nanozuki/tabby.nvim",
-    event = "VeryLazy",
+    event = "UIEnter",
     config = function()
       vim.o.showtabline = 2
       require('tabby.tabline').use_preset('active_wins_at_tail', {
@@ -235,4 +239,157 @@ return {
       })
     end
   },
+
+  -- keymap view
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      plugins = {
+        registers = false,
+        spelling = {
+          enabled = true,
+        }
+      }
+    }
+  },
+
+  -- nicer quickfix list
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "<leader>ld", function() require("trouble").toggle("lsp_definitions") end,       desc = "Symbol definitions" },
+      { "<leader>lr", function() require("trouble").toggle("lsp_references") end,        desc = "Symbol references" },
+      { "<leader>db", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
+      { "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Workspace diagnostics" },
+    },
+    opts = {
+      position = "right",
+      auto_fold = { "document_diagnostics", "workspace_diagnostics", "lsp_references", "lsp_definitions", "lsp_type_definitions", "loclist" },
+      auto_preview = true,
+    },
+  },
+
+  -- noice, nui and notify
+  {
+    "folke/noice.nvim",
+    event = "UIEnter",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      -- "nvim-treesitter/nvim-treesitter",
+    },
+    init = function()
+      vim.keymap.set({ "n", "i" }, "<c-e>",
+        function()
+          if not require("noice.lsp").scroll(1) then
+            return "<c-e>"
+          end
+        end,
+        { silent = true, expr = true }
+      )
+      vim.keymap.set({ "n", "i" }, "<c-y>",
+        function()
+          if not require("noice.lsp").scroll(-1) then
+            return "<c-y>"
+          end
+        end,
+        { silent = true, expr = true }
+      )
+      vim.keymap.set({ "n", "i" }, "<c-f>",
+        function()
+          if not require("noice.lsp").scroll(4) then
+            return "<c-f>"
+          end
+        end,
+        { silent = true, expr = true }
+      )
+      vim.keymap.set({ "n", "i" }, "<c-b>",
+        function()
+          if not require("noice.lsp").scroll(-4) then
+            return "<c-b>"
+          end
+        end,
+        { silent = true, expr = true }
+      )
+      vim.keymap.set({ "n", "i" }, "<c-d>",
+        function()
+          if not require("noice.lsp").scroll(10) then
+            return "<c-d>"
+          end
+        end,
+        { silent = true, expr = true }
+      )
+      vim.keymap.set({ "n", "i" }, "<c-u>",
+        function()
+          if not require("noice.lsp").scroll(-10) then
+            return "<c-u>"
+          end
+        end,
+        { silent = true, expr = true }
+      )
+    end,
+    opts = {
+      notify = {
+        view = "mini",
+      },
+      redirect = {
+        view = "popup"
+      },
+      views = {
+        cmdline_popup = {
+          position = {
+            row = "90%",
+            col = "50%",
+          }
+        },
+        lsp = {
+          documentation = {
+            win_options = {
+              concealcursor = 'n',
+              conceallevel = 3,
+              winhighlight = {
+                Normal = 'PMenu',
+                FloatBorder = 'PMenu',
+              },
+            },
+          },
+        },
+        routes = {
+          {
+            view = "mini",
+            filter = {
+              event = "msg_showmode"
+            },
+          },
+          {
+            view = "split",
+            filter = {
+              event = "msg_show", min_height = 10
+            }
+          },
+          {
+            filter = {
+              event = 'msg_show',
+              any = {
+                { find = '%d+L, %d+B' },
+                { find = '; after #%d+' },
+                { find = '; before #%d+' },
+                { find = '%d fewer lines' },
+                { find = '%d more lines' },
+              },
+            },
+            opts = { skip = true },
+          }
+        },
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = true,
+          lsp_doc_border = false,
+        },
+      }
+    }
+  }
 }

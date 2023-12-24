@@ -16,6 +16,12 @@ vim.g.mapleader = " "
 vim.g.localmapleader = " "
 
 require("lazy").setup("plugins", {
+  defaults = {
+    lazy = true,
+  },
+  install = {
+    colorscheme = { "kanagawa" }
+  },
   performance = {
     rtp = {
       disabled_plugins = {

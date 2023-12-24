@@ -1,7 +1,8 @@
 return {
-  -- vim.ui.select
+  -- better vim.ui.select
   {
     "stevearc/dressing.nvim",
+    event = "VeryLazy",
     opts = {}
   },
 
@@ -16,12 +17,36 @@ return {
     end,
   },
 
-  -- zen-mode
+  -- live command preview
   {
-    "folke/zen-mode.nvim",
-    opts = {},
+    "smjonas/live-command.nvim",
+    event = "CmdlineEnter",
+    config = function()
+      require("live-command").setup {
+        commands = {
+          Norm = { cmd = "norm" },
+          Reg = {
+            cmd = "norm",
+            -- This will transform ":5Reg a" into ":norm 5@a"
+            args = function(opts)
+              return (opts.count == -1 and "" or opts.count) .. "@" .. opts.args
+            end,
+            range = "",
+          }
+        }
+      }
+    end
+  },
+
+  -- undo view
+  {
+    "mbbill/undotree",
+    config = function()
+      vim.g.undotree_WindowLayout = 4
+      vim.g.undotree_SetFocusWhenToggle = 1
+    end,
     keys = {
-      { "<leader>z", function() require("zen-mode").toggle() end, desc = "Toggle zen mode" }
+      { "<leader>u", vim.cmd.UndotreeToggle, desc = "Undotree" }
     }
   },
 
@@ -130,12 +155,6 @@ return {
       { "<leader>cp", vim.cmd.CccPick,    desc = "Color picker" },
       { "<leader>ct", vim.cmd.CccConvert, desc = "Convert between color types" }
     }
-  },
-
-  -- show nesting levels using treesitter
-  {
-    "andersevenrud/nvim_context_vt",
-    opts = {}
   },
 
   -- ???
