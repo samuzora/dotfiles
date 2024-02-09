@@ -16,6 +16,11 @@ return {
         typst = { "prettypst" },
         python = { "ruff_format" },
         yaml = { "yamlfmt" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
+        xml = { "xmllint" },
       },
       formatters = {
         typstfmt = {

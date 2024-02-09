@@ -37,7 +37,7 @@ return {
   {
     "luckasRanarison/clear-action.nvim",
     keys = {
-      { "<leader>la", function() require("clear-action").code_action() end }
+      { "<leader>ca", function() require("clear-action").code_action() end }
     },
     opts = {
       signs = {
@@ -46,4 +46,23 @@ return {
       }
     },
   },
+
+  -- highlights + textobjs for current LSP keyword under cursor
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").configure({
+        providers = { "lsp", "treesitter" },
+        delay = 50,
+        filetypes_denylist = {
+          "oil",
+          "Trouble",
+          "TelescopePrompt",
+          "qf",
+          "toggleterm",
+          "DiffviewFiles",
+        }
+      })
+    end
+  }
 }

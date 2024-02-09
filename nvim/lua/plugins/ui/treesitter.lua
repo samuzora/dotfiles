@@ -36,6 +36,7 @@ return {
         },
         indent = {
           enable = true,
+          disable = { "yaml" }
         },
       }
       require "nvim-treesitter.install".update()

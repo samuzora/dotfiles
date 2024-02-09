@@ -8,14 +8,6 @@ return {
         load = {
           ["core.integrations.treesitter"] = {},
           ["core.concealer"] = {},
-          ["core.dirman"] = {
-            config = {
-              workspaces = {
-                todo = "~/todo"
-              },
-              autochdir = true,
-            },
-          },
           ["core.qol.toc"] = {},
         },
       }

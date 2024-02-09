@@ -2,7 +2,7 @@ return {
   -- surround operators
   {
     "kylechui/nvim-surround",
-    keys = { "yp", "yP", "ypp", "yPP", "dp", "cpp", "cp" },
+    keys = { "yp", "yP", "ypp", "yPP", "dp", "cpp", "cp", { "P", mode = "v" }, { "gP", mode = "v" } },
     opts = {
       keymaps = {
         normal = "yp",
@@ -12,9 +12,29 @@ return {
         delete = "dp",
         change = "cp",
         change_line = "cpp",
+        visual = "P",
+        visual_line = "gP"
+      },
+      surrounds = {
+        ["$"] = {
+          add = function()
+            return { { "$" }, { "$" } }
+          end
+        },
+        ["c"] = {
+          add = function()
+            local config = require("nvim-surround.config")
+            local result = config.get_input("Markdown code block language: ")
+            return {
+              { "```" .. result, "" },
+              { "", "```" },
+            }
+          end,
+        },
       }
     }
   },
+
 
   -- autopairing
   {
@@ -22,20 +42,17 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     opts = {
       { "$", "$", ft = { "typst", "tex" }, fly = true, space = true, newline = true, dosuround = true },
+      config_internal_pairs = {
+        { "```", "```", ft = { "markdown", "typst" } },
+      },
+      fastwarp = {
+        enable = true,
+        nocursormove = false,
+        multiline = true,
+        faster = true,
+        map = "<C-l>",
+        cmap = "<C-l>"
+      },
     }
-  },
-
-  -- auto-exit pairs in insert mode by pressing tab
-  {
-    "abecodes/tabout.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-cmp"
-    },
-    keys = {
-      { "<Tab>",   mode = "i" },
-      { "<S-Tab>", mode = "i" }
-    },
-    config = true,
   },
 }

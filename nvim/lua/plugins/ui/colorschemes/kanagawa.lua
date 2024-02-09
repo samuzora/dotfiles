@@ -41,6 +41,8 @@ return {
           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
           TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 
+          Pmenu = { bg = palette.sumiInk2 },
+
           NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },

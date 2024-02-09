@@ -254,32 +254,39 @@ return {
     }
   },
 
-  -- nicer quickfix list
+  -- nicer lists for various stuff
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { "<leader>ld", function() require("trouble").toggle("lsp_definitions") end,       desc = "Symbol definitions" },
-      { "<leader>lr", function() require("trouble").toggle("lsp_references") end,        desc = "Symbol references" },
-      { "<leader>db", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
-      { "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Workspace diagnostics" },
+      { "<leader>sd", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
+      { "<leader>sw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Workspace diagnostics" },
     },
     opts = {
       position = "right",
-      auto_fold = { "document_diagnostics", "workspace_diagnostics", "lsp_references", "lsp_definitions", "lsp_type_definitions", "loclist" },
+      auto_fold = { "document_diagnostics", "workspace_diagnostics", "lsp_type_definitions", "loclist" },
       auto_preview = true,
     },
   },
 
-  -- noice, nui and notify
+  -- very cool ui
   {
     "folke/noice.nvim",
     event = "UIEnter",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      -- "nvim-treesitter/nvim-treesitter",
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          stages = "fade",
+          render = "wrapped-compact",
+          max_width = "100",
+        }
+      },
+      "nvim-treesitter/nvim-treesitter",
     },
     init = function()
+      -- scrolling in lsp docs
       vim.keymap.set({ "n", "i" }, "<c-e>",
         function()
           if not require("noice.lsp").scroll(1) then
@@ -328,22 +335,76 @@ return {
         end,
         { silent = true, expr = true }
       )
+
+      -- edit cmdline in popup
+      vim.keymap.set("c", "<S-Enter>",
+        function()
+          require("noice").redirect(vim.fn.getcmdline())
+        end,
+        { desc = "Redirect cmdline to popup window" }
+      )
     end,
     opts = {
-      notify = {
-        view = "mini",
+      -- some presets
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        inc_rename = true,
+        lsp_doc_border = false,
       },
+
+      -- when calling require("noice").redirect(<command>), the output will appear in a popup
       redirect = {
         view = "popup"
       },
+
+      -- use notify as notifications backend
+      notify = {
+        view = "notify",
+      },
+
+      -- notifications filtering
+      routes = {
+        -- move any notifications longer than 10 lines to a split window
+        -- these only apply to "msg_show" events (check :h ui-messages) for list of events
+        {
+          view = "split",
+          filter = {
+            event = "msg_show", min_height = 10
+          }
+        },
+
+        -- don't show notifications matching these
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+              { find = "%d fewer lines" }, -- on deleting lines
+              { find = "%d more lines" }, -- on pasting lines
+              { find = "\"%s\" %dL, %dB written" }, -- file write notification
+            },
+          },
+          opts = { skip = true },
+        }
+      },
+
+      -- other ui components
       views = {
+        --
+        -- cmdline
         cmdline_popup = {
           position = {
             row = "90%",
             col = "50%",
           }
         },
+
         lsp = {
+          -- lsp docs
           documentation = {
             win_options = {
               concealcursor = 'n',
@@ -354,40 +415,11 @@ return {
               },
             },
           },
-        },
-        routes = {
-          {
-            view = "mini",
-            filter = {
-              event = "msg_showmode"
-            },
-          },
-          {
-            view = "split",
-            filter = {
-              event = "msg_show", min_height = 10
-            }
-          },
-          {
-            filter = {
-              event = 'msg_show',
-              any = {
-                { find = '%d+L, %d+B' },
-                { find = '; after #%d+' },
-                { find = '; before #%d+' },
-                { find = '%d fewer lines' },
-                { find = '%d more lines' },
-              },
-            },
-            opts = { skip = true },
+
+          -- function signature
+          signature = {
+            enabled = true
           }
-        },
-        presets = {
-          bottom_search = true,
-          command_palette = true,
-          long_message_to_split = true,
-          inc_rename = true,
-          lsp_doc_border = false,
         },
       }
     }

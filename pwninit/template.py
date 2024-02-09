@@ -1,30 +1,20 @@
 #!/usr/bin/env python3
 
 from pwn import *
+import time
 
 {bindings}
 
 context.binary = {bin_name}
 
-def conn():
-    if args.LOCAL:
-        p = process({proc_args})
-        if args.GDB:
-            gdb.attach(p)
-            pause()
-    else:
-        p = remote("addr", 1337)
+if args.LOCAL:
+    p = process({proc_args})
+    if args.GDB:
+        gdb.attach(p)
+        pause()
+else:
+    p = remote("addr", 1337)
 
-    return p
+# good luck pwning :)
 
-
-def main():
-    p = conn()
-
-    # good luck pwning :)
-
-    p.interactive()
-
-
-if __name__ == "__main__":
-    main()
+p.interactive()

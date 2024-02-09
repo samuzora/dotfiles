@@ -17,6 +17,13 @@ return {
     end,
   },
 
+  -- todo comments
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {}
+  },
+
   -- live command preview
   {
     "smjonas/live-command.nvim",
@@ -53,7 +60,7 @@ return {
   -- color picker
   {
     "uga-rosa/ccc.nvim",
-    event = { "BufRead", "BufNew" },
+    ft = { "css", "scss", "html", "javascript", "typescript", "javascriptextended", "typescriptextended" },
     config = function()
       local ColorInput = require("ccc.input")
       local convert = require("ccc.utils.convert")

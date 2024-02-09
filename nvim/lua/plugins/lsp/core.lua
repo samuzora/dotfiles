@@ -18,6 +18,32 @@ local servers = {
       exportPdf = "never",
     }
   },
+  yamlls = {
+    capabilities = {
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        },
+      },
+    },
+    settings = {
+      yaml = {
+        format = {
+          enable = true
+        },
+        validate = {
+          enable = true
+        },
+        hover = {
+          enable = true
+        },
+        completion = {
+          enable = true
+        },
+      }
+    }
+  },
   solidity = {},
   prismals = {},
   cssls = {},
@@ -42,6 +68,7 @@ return {
         }
       },
     },
+    "hrsh7th/cmp-nvim-lsp",
   },
 
   config = function()

@@ -1,19 +1,18 @@
 add_newline = false
-format = '''[●](bold red) $directory $character
-[\$](bold blue) '''
+format = '''$character $directory
+[\$](cyan) '''
 command_timeout = 5000
 
 [character]
 format = '$symbol'
-success_symbol = '[\(^._.^\)](bold white)'
-error_symbol = '[\(^x.x^\)](bold red)' 
-vicmd_symbol = '[\(^v.v^\)](bold green)'
+success_symbol = '[●](bold green)'
+error_symbol = '[●](bold red)' 
 
 [directory]
 format = '[$read_only]($read_only_style)[$path]($style)'
 style = 'cyan'
-read_only = 'ro!! '
-truncation_length = 3
+read_only = '🔒 '
+truncation_length = 5
 
 [git_branch]
 disabled = true
