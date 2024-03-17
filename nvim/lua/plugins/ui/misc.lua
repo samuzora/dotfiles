@@ -164,6 +164,15 @@ return {
     }
   },
 
+  -- zen mode
+  {
+    "folke/zen-mode.nvim",
+    opts = {},
+    keys = {
+      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Zen mode" }
+    }
+  },
+
   -- ???
   {
     "Eandrju/cellular-automaton.nvim",

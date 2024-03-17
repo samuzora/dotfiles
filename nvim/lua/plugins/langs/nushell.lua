@@ -1,5 +1,6 @@
 return {
   "LhKipp/nvim-nu",
+  enabled = false,
   ft = "nu",
   run = ":TSInstall nu",
   opts = {

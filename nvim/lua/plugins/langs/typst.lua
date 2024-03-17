@@ -1,3 +1,9 @@
+vim.keymap.set("n", "<leader>t", function()
+  vim.cmd[[LspStart]]
+  vim.cmd[[TypstPin]]
+  vim.cmd[[TypstWatch]]
+end)
+
 return {
   {
     "kaarmu/typst.vim",

@@ -10,12 +10,10 @@ return {
     fmt(
       [[
         #import "@preview/tablex:0.0.8": tablex, gridx, cellx, rowspanx, colspanx, hlinex, vlinex
-        #import "@preview/cetz:0.2.0"
+        #import "@preview/cetz:0.2.1"
         #import cetz.plot
         #import "@preview/oxifmt:0.2.0": strfmt
-        #import "@preview/metro:0.1.1": unit, units, prefixes, num
-        #import units: *
-        #import prefixes: *
+        #import "@preview/metro:0.2.0": *
       ]],
       {}
     )
@@ -24,9 +22,9 @@ return {
   -- preamble
   s(
     "template",
-    t(
+    fmt(
       [[
-        #let project = (title: "", body) => {
+        #let project = (title: "", body) => {{
           set text(size: 11pt)
           set par(justify: true, leading: 1em)
           show par: set block(above: 1.5em, below: 1.5em)
@@ -38,7 +36,7 @@ return {
 
           set page(
             "a4",
-            numbering: (cur, max) => strfmt("Page {} of {}", cur, max),
+            numbering: (cur, max) => strfmt("Page {{}} of {{}}", cur, max),
           )
 
 
@@ -49,8 +47,9 @@ return {
             ))
             #body
           ]
-        }
-      ]]
+        }}
+      ]],
+      {}
     )
   ),
 
@@ -145,14 +144,15 @@ return {
 
 
   -- units
-  s("unit",
+  s("qty",
     fmt(
       [[
-        #unit(${}$){}
+        qty("{}", "{}"){}
       ]],
       {
         i(1),
         i(2),
+        i(3),
       }
     )
   ),

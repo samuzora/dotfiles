@@ -38,33 +38,8 @@ return {
     config = true,
   },
 
-  -- snippets
   {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    event = "VeryLazy",
-    config = function()
-      local ls = require "luasnip"
-
-      require "luasnip".config.set_config {
-        history = true,
-        updateevents = "TextChanged,TextChangedI",
-        enable_autosnippets = true,
-        store_selection_keys = "<Tab>",
-      }
-
-      vim.keymap.set({ "i" }, "<C-L>", function() ls.expand() end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-k>", function() ls.jump(-1) end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-E>", function()
-        if ls.choice_active() then
-          ls.change_choice(1)
-        end
-      end, { silent = true })
-
-      require "luasnip.loaders.from_vscode".lazy_load()
-      require "luasnip.loaders.from_lua".lazy_load { paths = "~/.config/nvim/lua/plugins/snippets" }
-    end
+    "nvim-tree/nvim-web-devicons",
   },
 
   -- files
@@ -76,11 +51,12 @@ return {
       { "-", function() require("oil").open() end },
     },
     init = function()
-      if vim.fn.argc() == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+      local arg = vim.fn.argv(0)
+      if vim.fn.argc() == 1 and type(arg) == "string" then
+        local stat = vim.loop.fs_stat(arg)
         -- Capture the protocol and lazy load oil if it is "oil-ssh", besides also lazy
         -- loading it when the first argument is a directory.
-        local adapter = string.match(vim.fn.argv(0), "^([%l-]*)://")
+        local adapter = string.match(arg, "^([%l-]*)://")
         if (stat and stat.type == "directory") or adapter == "oil-ssh" then
           require("lazy").load({ plugins = { "oil.nvim" } })
         end
@@ -164,7 +140,9 @@ return {
       { "<CR>", mode = "n" }
     },
     config = true,
-  },
+  }, 
+
+
 
   -- sudo write
   {

@@ -12,7 +12,7 @@ return {
   {
     "lewis6991/hover.nvim",
     keys = {
-      { "K", function() require("hover").hover() end, mode = { "n", "v" }, desc = "Hover" },
+      { "K",  function() require("hover").hover() end,        mode = { "n", "v" },               desc = "Hover" },
       { "gK", function() require("hover").hover_select() end, desc = "Select provider for hover" }
     },
     config = function()
@@ -37,7 +37,7 @@ return {
   {
     "luckasRanarison/clear-action.nvim",
     keys = {
-      { "<leader>ca", function() require("clear-action").code_action() end }
+      { "<leader>f", function() require("clear-action").code_action() end }
     },
     opts = {
       signs = {
@@ -64,5 +64,36 @@ return {
         }
       })
     end
+  },
+
+  -- lsp lines
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    event = "LspAttach",
+    config = function()
+      vim.diagnostic.config({
+        virtual_text = true,
+        virtual_lines = false,
+      })
+      require("lsp_lines").setup()
+    end,
+    keys = {
+      {
+        "<leader>ll",
+        function()
+          local enabled = require("lsp_lines").toggle()
+          if enabled then
+            vim.diagnostic.config({
+              virtual_text = false
+            })
+          else
+            vim.diagnostic.config({
+              virtual_text = true
+            })
+          end
+        end,
+        desc = "Toggle LSP lines"
+      }
+    }
   }
 }

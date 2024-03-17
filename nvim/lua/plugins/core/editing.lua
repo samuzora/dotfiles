@@ -11,6 +11,16 @@ return {
     config = true,
   },
 
+  -- align text
+  {
+    "echasnovski/mini.align",
+    keys = {
+      { "ga", mode = { "n", "v" }, desc = "Align text" },
+      { "gA", mode = { "n", "v" }, desc = "Align text with preview" }
+    },
+    config = true
+  },
+
   -- auto template string
   {
     "axelvc/template-string.nvim",

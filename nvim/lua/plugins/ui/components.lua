@@ -5,7 +5,7 @@ return {
     event = "UIEnter",
     dependencies = {
       "folke/noice.nvim",
-      "AckslD/swenv.nvim",
+      -- "AckslD/swenv.nvim",
     },
     config = function()
       local lualine = require('lualine')
@@ -139,14 +139,14 @@ return {
       }
 
       -- python venv
-      ins_right {
-        'swenv',
-        icon = "venv:",
-        color = { fg = colors.green },
-        cond = function()
-          return vim.bo.filetype == "python"
-        end,
-      }
+      -- ins_right {
+      --   'swenv',
+      --   icon = "venv:",
+      --   color = { fg = colors.green },
+      --   cond = function()
+      --     return vim.bo.filetype == "python"
+      --   end,
+      -- }
 
       ins_right {
         'diagnostics',
@@ -259,11 +259,11 @@ return {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { "<leader>sd", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
-      { "<leader>sw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Workspace diagnostics" },
+      { "<leader>dd", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
+      { "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Workspace diagnostics" },
     },
     opts = {
-      position = "right",
+      position = "bottom",
       auto_fold = { "document_diagnostics", "workspace_diagnostics", "lsp_type_definitions", "loclist" },
       auto_preview = true,
     },
@@ -272,6 +272,14 @@ return {
   -- very cool ui
   {
     "folke/noice.nvim",
+    keys = {
+      { "<C-l>", function()
+        require("notify").dismiss()
+        vim.opt.hlsearch = false
+        vim.cmd[[diffupdate]]
+      end, desc = "Refresh screen and clear notifications"
+      }
+    },
     event = "UIEnter",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -388,13 +396,12 @@ return {
               { find = "\"%s\" %dL, %dB written" }, -- file write notification
             },
           },
-          opts = { skip = true },
+          opts = { view = true },
         }
       },
 
       -- other ui components
       views = {
-        --
         -- cmdline
         cmdline_popup = {
           position = {

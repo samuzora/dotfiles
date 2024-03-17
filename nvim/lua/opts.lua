@@ -44,7 +44,7 @@ local options = {
   spell         = true,
   smoothscroll  = true,
   mousescroll   = "ver:1,hor:1",
-  shell         = "nu",
+  shell         = "/bin/bash", -- to allow !cmd to work
 }
 for k, v in pairs(options) do vim.opt[k] = v end
 

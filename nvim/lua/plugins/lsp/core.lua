@@ -11,12 +11,55 @@ local servers = {
   },
   pyright = {
     single_file_support = true,
+    settings = {
+      -- python = {
+      --   pythonPath = vim.fn.isdirectory(".venv") and ".venv" or ""
+      -- }
+    }
   },
   typst_lsp = {
     single_file_support = true,
     settings = {
       exportPdf = "never",
-    }
+    },
+    on_attach = function()
+      -- pin current buffer to main file
+      vim.api.nvim_create_user_command(
+        "TypstPin",
+        function()
+          local filename = vim.api.nvim_buf_get_name(0)
+          local uri = "file://" .. filename
+          local params = { command = "typst-lsp.doPinMain", arguments = { uri }, title = '' }
+          vim.lsp.buf_request(0, "workspace/executeCommand", params,
+            function(err, result, context, config)
+              if err then
+                vim.notify(err.message, "error")
+              else
+                vim.notify("Pinned " .. filename .. " to main", "info")
+              end
+            end
+          )
+        end,
+        { desc = "Pin main file to typst-lsp" }
+      )
+
+      vim.api.nvim_create_user_command(
+        "TypstUnpin",
+        function()
+          local params = { command = "typst-lsp.doPinMain", arguments = { "detached" }, title = '' }
+          vim.lsp.buf_request(0, "workspace/executeCommand", params,
+            function(err, result, context, config)
+              if err then
+                vim.notify(err.message, "error")
+              else
+                vim.notify("Unpinned main file")
+              end
+            end
+          )
+        end,
+        { desc = "Unpin main file from typst-lsp" }
+      )
+    end
   },
   yamlls = {
     capabilities = {
@@ -55,9 +98,22 @@ for server, _ in pairs(servers) do
   table.insert(server_names, server)
 end
 
+-- nushell lsp config
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.nu" },
+  callback = function()
+    if vim.fn.executable('nu') == 1 then
+      vim.lsp.start({
+        name = "nu-lsp",
+        cmd = { "nu", "--lsp" },
+      })
+    end
+  end
+})
+
 return {
   "neovim/nvim-lspconfig",
-  -- lazy = false, -- NEVER set to true - it breaks single_file_mode!!
+  -- lazy = false, -- don't set to true - it breaks single_file_mode!!
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     {
@@ -69,6 +125,10 @@ return {
       },
     },
     "hrsh7th/cmp-nvim-lsp",
+    {
+      "artemave/workspace-diagnostics.nvim",
+      opts = {}
+    },
   },
 
   config = function()
@@ -148,7 +208,10 @@ return {
     local lspconfig = require("lspconfig")
 
     local function on_attach(client, bufnr)
-      -- any code i want to run on attach
+      -- any code to run on startup
+
+      -- populate workspace diagnostics
+      require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
     end
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()

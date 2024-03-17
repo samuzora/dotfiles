@@ -9,6 +9,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
 
@@ -19,6 +20,8 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local copilot = require("copilot.suggestion")
+
       local types = require('cmp.types')
       local compare = cmp.config.compare
 
@@ -32,47 +35,69 @@ return {
       cmp.setup({
         enabled = function()
           local in_prompt = vim.api.nvim_get_option_value("buftype", {}) == "prompt"
-          if in_prompt then -- this will disable cmp in the Telescope window (taken from the default config)
+          if in_prompt then -- disable cmp in Telescope
             return false
           end
           local context = require("cmp.config.context")
+          -- disable cmp in comments
           return not (context.in_treesitter_capture("comment") == true or context.in_syntax_group("Comment"))
         end,
         mapping = {
+          -- manually trigger completion menu
           ["<C-p>"] = cmp.mapping.complete(),
           ["<Down>"] = cmp.mapping.select_next_item(),
           ["<Up>"] = cmp.mapping.select_prev_item(),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.confirm({
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true
-              })
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping.confirm({
-            select = true, behavior = cmp.ConfirmBehavior.Replace
-          }),
+
           ["<C-y>"] = cmp.mapping.scroll_docs(-1),
           ["<C-e>"] = cmp.mapping.scroll_docs(1),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-c>"] = cmp.mapping.close()
+
+          -- close completion menu
+          ["<C-c>"] = cmp.mapping.close(),
+
+          -- Super-tab mapping
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              -- regular selection
+              cmp.confirm({
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true
+              })
+            elseif copilot.is_visible() then
+              copilot.accept()
+            elseif luasnip.expand_or_locally_jumpable() then
+              -- trigger snippet
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              -- if non-whitespace before cursor, trigger completion menu
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              -- consume word after cursor (<Tab> behaviour is to prepend to it)
+              cmp.confirm({
+                select = true, behavior = cmp.ConfirmBehavior.Replace
+              })
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end),
         },
         sources = cmp.config.sources(
           {
             { name = "html-css" },
             { name = "nvim_lsp" },
+            { name = "emoji" },
             { name = "luasnip" },
             { name = "path" }
           }
-        -- {
-        --   { name = "buffer" }
-        -- }
         ),
         matching = {
           disallow_fuzzy_matching = true,
@@ -143,13 +168,45 @@ return {
           },
         }),
       })
+    end
+  },
 
-      cmp.event:on("menu_opened", function()
-        vim.b.copilot_suggestion_hidden = true
-      end)
-      cmp.event:on("menu_closed", function()
-        vim.b.copilot_suggestion_hidden = false
-      end)
+  -- snippets
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    event = "VeryLazy",
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      local ls = require "luasnip"
+
+      require "luasnip".setup {
+        update_events = { "TextChanged", "TextChangedI" },
+        -- region_check_events = { "CursorMoved" },
+        delete_check_events = { "TextChanged" },
+        enable_autosnippets = true,
+        store_selection_keys = "<Tab>",
+      }
+
+      -- vim.keymap.set({ "i" }, "<C-L>", function() ls.expand() end, { silent = true })
+      -- vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end, { silent = true })
+
+      vim.keymap.set({ "i", "s" }, "<C-j>", function()
+        if ls.choice_active() then
+          return ls.change_choice(1)
+        end
+      end, { noremap = true })
+
+      vim.keymap.set({ "i", "s" }, "<C-k>", function()
+        if ls.choice_active() then
+          return ls.change_choice(-1)
+        end
+      end, { noremap = true })
+
+      require "luasnip.loaders.from_vscode".lazy_load()
+      require "luasnip.loaders.from_lua".lazy_load { paths = { "~/.config/nvim/lua/plugins/snippets" } }
     end
   },
 
@@ -158,13 +215,6 @@ return {
     event = "InsertEnter",
     cmd = "Copilot",
     config = function()
-      vim.keymap.set('i', '<Tab>', function()
-        if require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
-        else
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-        end
-      end, { desc = "Super Tab" })
       require("copilot").setup({
         filetypes = {
           javascript = true,
@@ -205,27 +255,19 @@ return {
             prev = "<Up>",
           }
         },
-        server_opts_overrides = {
-          settings = {
-            advanced = {
-              listCount = 10,
-              inlineSuggestCount = 10,
-            }
-          },
-        }
       })
+
+      local cmp = require("cmp")
+      cmp.event:on("menu_opened",
+        function()
+          vim.b.copilot_suggestion_hidden = true
+        end
+      )
+      cmp.event:on("menu_closed",
+        function()
+          vim.b.copilot_suggestion_hidden = false
+        end
+      )
     end,
-    -- opts = {},
-    -- keys = {
-    --   { "<Tab>", function()
-    --     vim.notify("accepting suggestion")
-    --     if require("copilot.suggestion").is_visible() then
-    --       require("copilot.suggestion").accept()
-    --     else
-    --       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-    --     end
-    --   end, { desc = "Copilot super tab", mode = { "i", "v" } }
-    --   }
-    -- }
   },
 }
