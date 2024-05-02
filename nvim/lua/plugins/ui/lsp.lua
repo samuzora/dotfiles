@@ -1,19 +1,19 @@
 return {
-  -- symbols outline
-  {
-    "simrat39/symbols-outline.nvim",
-    keys = {
-      { "gs", "<cmd>SymbolsOutline<cr>", desc = "Symbols outline" }
-    },
-    opts = {},
-  },
-
   -- lsp hover window
   {
     "lewis6991/hover.nvim",
     keys = {
-      { "K",  function() require("hover").hover() end,        mode = { "n", "v" },               desc = "Hover" },
-      { "gK", function() require("hover").hover_select() end, desc = "Select provider for hover" }
+      {
+        "K",
+        function() require("hover").hover() end,
+        mode = { "n", "v" },
+        desc = "Hover"
+      },
+      {
+        "gK",
+        function() require("hover").hover_select() end,
+        desc = "Select provider for hover"
+      }
     },
     config = function()
       --- @diagnostic disable-next-line: redundant-parameter
@@ -33,27 +33,14 @@ return {
     end,
   },
 
-  -- better code action menu
-  {
-    "luckasRanarison/clear-action.nvim",
-    keys = {
-      { "<leader>f", function() require("clear-action").code_action() end }
-    },
-    opts = {
-      signs = {
-        combine = true,
-        show_label = true,
-      }
-    },
-  },
-
-  -- highlights + textobjs for current LSP keyword under cursor
+  -- highlights + jumps for current LSP keyword under cursor
   {
     "RRethy/vim-illuminate",
+    event = "VeryLazy",
     config = function()
       require("illuminate").configure({
         providers = { "lsp", "treesitter" },
-        delay = 50,
+        delay = 300,
         filetypes_denylist = {
           "oil",
           "Trouble",
@@ -69,7 +56,6 @@ return {
   -- lsp lines
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = "LspAttach",
     config = function()
       vim.diagnostic.config({
         virtual_text = true,

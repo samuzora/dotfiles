@@ -6,6 +6,8 @@ return {
     keys = {
       { "ff", "<cmd>Telescope find_files<CR>",                               desc = "Find file" },
       { "fg", "<cmd>Telescope live_grep<CR>",                                desc = "Find text" },
+      { "fh", "<cmd>Telescope help_tags<CR>",                                desc = "Find help" },
+      { "fd", "<cmd>Telescope diagnostics<CR>",                              desc = "Workspace diagnostics" },
       { "fn", "<cmd>Noice telescope<CR>",                                    desc = "List notifications" },
 
       -- telescope lsp finders
@@ -15,13 +17,13 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "folke/trouble.nvim",
+      -- "folke/trouble.nvim",
     },
     config = function()
       local actions = require "telescope.actions"
       local action_state = require "telescope.actions.state"
 
-      local trouble = require "trouble"
+      -- local trouble = require "trouble"
 
       require "telescope".setup {
         defaults = {
@@ -42,10 +44,11 @@ return {
                 else
                   actions.send_selected_to_qflist(prompt_bufnr)
                 end
-                -- actions.open_qflist(prompt_bufnr)
-                trouble.open("quickfix")
+                actions.open_qflist(prompt_bufnr)
+                -- trouble.open("quickfix")
               end,
               ["q"] = actions.close,
+              ["<Esc>"] = function() end, -- disable escape
             },
           },
         },

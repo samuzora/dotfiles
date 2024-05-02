@@ -38,10 +38,6 @@ return {
     config = true,
   },
 
-  {
-    "nvim-tree/nvim-web-devicons",
-  },
-
   -- files
   {
     "stevearc/oil.nvim",
@@ -132,18 +128,6 @@ return {
     config = true,
   },
 
-  -- select blocks of treesitter nodes
-  {
-    "SUSTech-data/wildfire.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", },
-    keys = {
-      { "<CR>", mode = "n" }
-    },
-    config = true,
-  }, 
-
-
-
   -- sudo write
   {
     "lambdalisue/suda.vim",
@@ -153,5 +137,34 @@ return {
     config = function()
       vim.g["suda_smart_edit"] = 1
     end,
+  },
+
+  -- neorg
+  -- {
+  --   "vhyrro/luarocks.nvim",
+  --   priority = 1000,
+  --   config = true,
+  -- },
+  {
+    "nvim-neorg/neorg",
+    -- dependencies = { "luarocks.nvim" },
+    -- lazy = false,
+    version = "v7.0.0",
+    ft = "norg",
+    config = function()
+      require "neorg".setup {
+        load = {
+          ["core.integrations.treesitter"] = {},
+          ["core.concealer"] = {},
+          ["core.qol.toc"] = {},
+        },
+      }
+    end,
+  },
+
+  -- ascii drawing
+  {
+    "jbyuki/venn.nvim",
+    cmd = "VBox",
   },
 }

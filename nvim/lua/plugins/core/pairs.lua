@@ -1,5 +1,5 @@
 return {
-  -- surround operators
+  -- surround operations
   {
     "kylechui/nvim-surround",
     keys = { "yp", "yP", "ypp", "yPP", "dp", "cpp", "cp", { "P", mode = "v" }, { "gP", mode = "v" } },
@@ -50,8 +50,10 @@ return {
         nocursormove = false,
         multiline = true,
         faster = true,
-        map = "<C-l>",
-        cmap = "<C-l>"
+        map = "<M-l>",
+        rmap = "<M-h>",
+        cmap = "<M-l>",
+        rcmap = "<M-h>",
       },
     }
   },

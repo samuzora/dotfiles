@@ -33,13 +33,13 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 end
 
 -- fix bug with ccc.nvim where colours don't show correctly
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "ccc-ui" },
-  callback = function()
-    require("ufo").detach()
-    vim.opt_local.foldenable = false
-  end
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "ccc-ui" },
+--   callback = function()
+--     require("ufo").detach()
+--     vim.opt_local.foldenable = false
+--   end
+-- })
 
 
 return {

@@ -257,6 +257,7 @@ return {
   -- nicer lists for various stuff
   {
     "folke/trouble.nvim",
+    enabled = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<leader>dd", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
@@ -275,7 +276,7 @@ return {
     keys = {
       { "<C-l>", function()
         require("notify").dismiss()
-        vim.opt.hlsearch = false
+        vim.cmd[[noh]]
         vim.cmd[[diffupdate]]
       end, desc = "Refresh screen and clear notifications"
       }

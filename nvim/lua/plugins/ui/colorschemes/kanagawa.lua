@@ -54,41 +54,15 @@ return {
           -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
           NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
 
+          -- vim-illuminate
+          IlluminatedWordText = { link = "Search" },
+          IlluminatedWordRead = { link = "Search" },
+          IlluminatedWordWrite = { link = "Search" },
+
           -- Popular plugins that open floats will link to NormalFloat by default;
           -- set their background accordingly if you wish to keep them dark and borderless
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-
-          -- typst highlights
-          -- since treesitter is now here this is not necessary
-          -- ["@lsp.type.comment.typst"] = { link = "@comment" },
-          -- ["@lsp.type.string.typst"] = { link = "@string" },
-          -- ["@lsp.type.keyword.typst"] = { link = "@keyword" },
-          -- ["@lsp.type.operator.typst"] = { link = "@operator" },
-          -- ["@lsp.type.number.typst"] = { link = "@number" },
-          -- ["@lsp.type.pol.typst"] = { link = "@parameter" }, -- variables
-          -- ["@lsp.type.decorator.typst"] = { link = "@comment" }, -- unused
-          -- ["@lsp.type.bool.typst"] = { link = "@boolean" },
-          -- ["@lsp.type.punct.typst"] = { link = "@punctuation.bracket" },
-          -- ["@lsp.type.escape.typst"] = { link = "@text" },
-          -- ["@lsp.type.raw.typst"] = { link = "@function" }, -- ending quotes doesn't work
-          -- ["@lsp.type.delim.typst"] = { link = "@punctuation.special" },
-          -- ["@lsp.type.interpolated.typst"] = { link = "@constant" },
-          -- ["@lsp.type.error.typst"] = { fg = palette.samuraiRed }, -- unused?
-          -- ["@lsp.type.heading.typst"] = { fg = palette.lightBlue },
-          -- ["@lsp.type.marker.typst"] = { link = "@operator" },
-          -- ["@lsp.type.link.typst"] = { fg = palette.crystalBlue, underline = true },
-          -- ["@lsp.type.term.typst"] = { link = "@operator" }, -- check docs
-          -- ["@lsp.type.label.typst"] = { link = "@string.escape" },
-          -- ["@lsp.type.ref.typst"] = { link = "@string.escape" },
-          -- ["@lsp.mod.strong.typst"] = { link = "@text.strong" },
-          -- ["@lsp.typemod.punct.strong.typst"] = { link = "@text.strong" },
-          -- ["@lsp.mod.emph.typst"] = { link = "@text.emphasis" },
-          -- ["@lsp.mod.math.typst"] = { fg = palette.boatYellow2 },
-          -- ["@lsp.typemod.pol.math.typst"] = { link = "@parameter" }, -- math variables
-          -- ["@lsp.typemod.text.math.typst"] = { fg = palette.fujiWhite },
-          -- ["@lsp.typemod.string.math.typst"] = { link = "@string" },
-          -- ["@lsp.typemod.comment.math.typst"] = { link = "@comment" },
         }
       end
     }
