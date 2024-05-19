@@ -90,7 +90,10 @@ return {
         }
       end
 
+      -- remote range
       spooky.create_text_object("arr", leap_anywhere, spooky.selectors.range)
+
+      -- remote line range
       spooky.create_text_object("arR", leap_anywhere, function(state)
         spooky.selectors.range(state)
         vim.cmd [[normal! V]]
@@ -99,7 +102,7 @@ return {
       spooky.create_text_object('aa', leap_anywhere, spooky.selectors.lines)
 
 
-      -- "Inner remote line" object, with custom selector function.
+      -- remote line
       spooky.create_text_object('ii', leap_anywhere, function()
         local mode = vim.fn.mode(true)
         -- Exit Visual mode if already in it.

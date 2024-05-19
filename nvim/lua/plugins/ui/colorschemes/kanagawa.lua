@@ -3,7 +3,7 @@ return {
   event = "UIEnter",
   config = function()
     require('kanagawa').setup {
-      compile = true,
+      compile = false,
       undercurl = true,
       transparent = false,
       background = {
@@ -23,7 +23,7 @@ return {
         local colors = require("kanagawa.colors").setup()
         local palette = colors.palette
         local theme = colors.theme
-        return {
+        return {         
           WinSeparator = { fg = palette.springViolet1 },
 
           -- leap
@@ -67,6 +67,5 @@ return {
       end
     }
     vim.cmd 'colorscheme kanagawa'
-    vim.schedule(vim.cmd.KanagawaCompile)
   end
 }

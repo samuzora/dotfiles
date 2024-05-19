@@ -11,9 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
--- these must be set BEFORE starting lazy
-vim.g.mapleader = " "
-vim.g.localmapleader = " "
+-- these must be set before starting lazy
 
 require("lazy").setup("plugins", {
   defaults = {
@@ -21,6 +19,15 @@ require("lazy").setup("plugins", {
   },
   install = {
     colorscheme = { "kanagawa" }
+  },
+  checker = {
+    enabled = true,
+  },
+  change_detection = {
+    notify = false,
+  },
+  diff = {
+    cmd = "diffview.nvim"
   },
   performance = {
     rtp = {

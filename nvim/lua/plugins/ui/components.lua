@@ -138,6 +138,12 @@ return {
         color = { fg = colors.orange },
       }
 
+      ins_left {
+        require("lazy.status").updates,
+        cond = require("lazy.status").has_updates,
+        color = { fg = "#ff9e64" },
+      }
+
       -- python venv
       -- ins_right {
       --   'swenv',
@@ -273,14 +279,6 @@ return {
   -- very cool ui
   {
     "folke/noice.nvim",
-    keys = {
-      { "<C-l>", function()
-        require("notify").dismiss()
-        vim.cmd[[noh]]
-        vim.cmd[[diffupdate]]
-      end, desc = "Refresh screen and clear notifications"
-      }
-    },
     event = "UIEnter",
     dependencies = {
       "MunifTanjim/nui.nvim",

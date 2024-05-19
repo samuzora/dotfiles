@@ -6,6 +6,103 @@ return {
     opts = {}
   },
 
+  -- change colour of cursorline etc
+  {
+    "rasulomaroff/reactive.nvim",
+    dependencies = {
+      "rebelot/kanagawa.nvim",
+    },
+    event = "VeryLazy",
+    config = function()
+      local colors = require("kanagawa.colors").setup()
+      local palette = colors.palette
+      local theme = colors.theme
+      local Color = require("kanagawa.lib.color")
+
+      local darkViolet = Color(palette.oniViolet):brighten(-0.55):to_hex()
+
+      require("reactive").add_preset {
+        name = "kanagawa",
+        static = {
+          winhl = {
+            inactive = {
+              CursorLine = { bg = palette.winterBlue, }
+            }
+          }
+        },
+        modes = {
+          -- Normal
+          n = {
+            winhl = {
+              CursorLine = { bg = theme.ui.bg_p2 }
+            }
+          },
+
+          -- Insert
+          i = {
+            winhl = {
+              CursorLine = { bg = palette.winterGreen }
+            }
+          },
+
+          -- Replace
+          R = {
+            winhl = {
+              CursorLine = { bg = darkViolet }
+            }
+          },
+
+          -- C-o in Insert
+          niI = {
+            winhl = {
+              CursorLine = { bg = Color(palette.winterGreen):blend(theme.ui.bg_p2, 0.5):to_hex() }
+            }
+          },
+
+          -- C-o in Replace
+          niR = {
+            winhl = {
+              CursorLine = { bg = Color(darkViolet):blend(theme.ui.bg_p2, 0.5):to_hex() }
+            }
+          },
+          -- takes no effect since cursorline disabled in visual mode
+          -- niV = {
+          --   winhl = {
+          --      = { bg = Color(palette.waveBlue1):blend(theme.ui.bg_p2, 0.5):to_hex() }
+          --   }
+          -- },
+
+          -- Normal op-pending
+          no = {
+            winhl = {
+              CursorLine = { bg = theme.ui.bg_m3 }
+            },
+            operators = {
+              [{ "gu", "gU", "g~", "~" }] = {
+                CursorLine = { bg = Color(palette.waveBlue2):blend(theme.ui.bg_p2, 0.5):to_hex() }
+              },
+              c = {
+                winhl = {
+                  CursorLine = { bg = palette.winterYellow }
+                }
+              },
+              d = {
+                winhl = {
+                  CursorLine = { bg = palette.winterRed }
+                }
+              },
+              y = {
+                winhl = {
+                  CursorLine = { bg = Color(palette.sakuraPink):brighten(-0.6):to_hex() }
+                }
+              }
+            }
+          }
+        }
+      }
+    end,
+  },
+
   -- matchparen
   {
     "utilyre/sentiment.nvim",

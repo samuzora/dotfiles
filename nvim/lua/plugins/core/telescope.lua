@@ -4,11 +4,11 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = { "Telescope" },
     keys = {
-      { "ff", "<cmd>Telescope find_files<CR>",                               desc = "Find file" },
-      { "fg", "<cmd>Telescope live_grep<CR>",                                desc = "Find text" },
-      { "fh", "<cmd>Telescope help_tags<CR>",                                desc = "Find help" },
-      { "fd", "<cmd>Telescope diagnostics<CR>",                              desc = "Workspace diagnostics" },
-      { "fn", "<cmd>Noice telescope<CR>",                                    desc = "List notifications" },
+      { "<leader>ff", "<cmd>Telescope find_files<CR>",                               desc = "Find file" },
+      { "<leader>fg", "<cmd>Telescope live_grep<CR>",                                desc = "Find text" },
+      { "<leader>fh", "<cmd>Telescope help_tags<CR>",                                desc = "Find help" },
+      { "<leader>fd", "<cmd>Telescope diagnostics<CR>",                              desc = "Workspace diagnostics" },
+      { "<leader>fn", "<cmd>Noice telescope<CR>",                                    desc = "List notifications" },
 
       -- telescope lsp finders
       { "gd", function() require("telescope.builtin").lsp_definitions() end, desc = "Symbol definitions" },
@@ -28,7 +28,7 @@ return {
       require "telescope".setup {
         defaults = {
           layout_strategy = "flex",
-          initial_mode = "normal",
+          initial_mode = "insert",
           mappings = {
             n = {
               ["<C-o>"] = function(prompt_bufnr)
@@ -45,10 +45,7 @@ return {
                   actions.send_selected_to_qflist(prompt_bufnr)
                 end
                 actions.open_qflist(prompt_bufnr)
-                -- trouble.open("quickfix")
               end,
-              ["q"] = actions.close,
-              ["<Esc>"] = function() end, -- disable escape
             },
           },
         },
