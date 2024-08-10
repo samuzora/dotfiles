@@ -3,28 +3,36 @@ return {
     "ggandor/leap.nvim",
     event = "VeryLazy",
     init = function()
-      -- Hide the (real) cursor when leaping, and restore it afterwards.
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'LeapEnter',
+      -- Hide the (real) cursor when leaping
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LeapEnter",
         callback = function()
-          vim.cmd.hi('Cursor', 'blend=100')
-          vim.opt.guicursor:append { 'a:Cursor/lCursor' }
+          vim.cmd.hi("Cursor", "blend=100")
+          vim.opt.guicursor:append { "a:Cursor/lCursor" }
         end,
-      }
-      )
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'LeapLeave',
+      })
+
+      -- and restore it afterwards.
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LeapLeave",
         callback = function()
-          vim.cmd.hi('Cursor', 'blend=0')
-          vim.opt.guicursor:remove { 'a:Cursor/lCursor' }
+          vim.cmd.hi("Cursor", "blend=0")
+          vim.opt.guicursor:remove { "a:Cursor/lCursor" }
         end,
-      }
-      )
+      })
     end,
     config = function()
-      require 'leap'.add_default_mappings()
-      require 'leap'.setup {
-        substitute_chars = { ['\r'] = '¬' },
+      -- mappings
+      require "leap".create_default_mappings()
+
+      -- jump to target, do something, and then jump back
+      vim.keymap.set({ "n", "o" }, "gs", function()
+        require("leap.remote").action()
+      end)
+
+
+      require "leap".setup {
+        substitute_chars = { ["\r"] = "¬" },
         equivalence_classes = {
           " \t\r\n",
           "~`",
@@ -61,6 +69,7 @@ return {
 
   {
     "ggandor/spooky.nvim",
+    enabled = false,
     event = "VeryLazy",
     dependencies = "ggandor/leap.nvim",
     init = function()

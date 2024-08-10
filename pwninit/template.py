@@ -5,15 +5,22 @@ from pwn import *
 {bindings}
 
 context.binary = {bin_name}
-context.terminal = ["tmux", "splitw", "-v"]
 
-def rol(val: int, r_bits: int = 0x11, max_bits: int = 64) -> int:
-    return (val << r_bits % max_bits) & (2 ** max_bits - 1) | ((val & (2 ** max_bits - 1)) >> (max_bits - (r_bits % max_bits)))
+def exit_funcs_encrypt(val: int, key: int):
+    r_bits = 0x11
+    max_bits = 64
+    enc = val ^ key
+    return (enc << r_bits % max_bits) & (2 ** max_bits - 1) | ((enc & (2 ** max_bits - 1)) >> (max_bits - (r_bits % max_bits)))
 
-def encrypt(pos: int, ptr: int):
+def exit_funcs_decrypt(val: int, key: int):
+    r_bits = 0x11
+    rotated = (2**64-1)&(val>>r_bits|val<<(64-r_bits))
+    return rotated ^ key
+
+def fastbin_encrypt(pos: int, ptr: int):
     return (pos >> 12) ^ ptr
 
-def decrypt(val: int):
+def fastbin_decrypt(val: int):
     mask = 0xfff << 52
     while mask:
         v = val & mask

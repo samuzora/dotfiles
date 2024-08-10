@@ -5,7 +5,6 @@ return {
     event = "UIEnter",
     dependencies = {
       "folke/noice.nvim",
-      -- "AckslD/swenv.nvim",
     },
     config = function()
       local lualine = require('lualine')
@@ -144,16 +143,6 @@ return {
         color = { fg = "#ff9e64" },
       }
 
-      -- python venv
-      -- ins_right {
-      --   'swenv',
-      --   icon = "venv:",
-      --   color = { fg = colors.green },
-      --   cond = function()
-      --     return vim.bo.filetype == "python"
-      --   end,
-      -- }
-
       ins_right {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
@@ -258,22 +247,6 @@ return {
         }
       }
     }
-  },
-
-  -- nicer lists for various stuff
-  {
-    "folke/trouble.nvim",
-    enabled = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      { "<leader>dd", function() require("trouble").toggle("document_diagnostics") end,  desc = "Buffer diagnostics" },
-      { "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "Workspace diagnostics" },
-    },
-    opts = {
-      position = "bottom",
-      auto_fold = { "document_diagnostics", "workspace_diagnostics", "lsp_type_definitions", "loclist" },
-      auto_preview = true,
-    },
   },
 
   -- very cool ui

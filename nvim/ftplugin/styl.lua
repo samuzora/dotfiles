@@ -1,0 +1,3 @@
+return {
+  "iloginow/vim-stylus"
+}

@@ -2,7 +2,7 @@ return {
   -- guttersigns for git
   {
     "lewis6991/gitsigns.nvim",
-    event = "UIEnter",
+    event = "VeryLazy",
     keys = {
       { "<leader>gb", function() vim.cmd("Gitsigns toggle_current_line_blame") end, desc = "Git blame" }
     },

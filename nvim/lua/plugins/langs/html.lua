@@ -7,5 +7,9 @@ return {
       "nvim-lua/plenary.nvim"
     },
     opts = {}
+  },
+  {
+    "othree/html5.vim",
+    ft = "html",
   }
 }

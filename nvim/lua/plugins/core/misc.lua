@@ -77,23 +77,17 @@ return {
   },
 
   -- neorg
-  -- {
-  --   "vhyrro/luarocks.nvim",
-  --   priority = 1000,
-  --   config = true,
-  -- },
   {
     "nvim-neorg/neorg",
-    -- dependencies = { "luarocks.nvim" },
     -- lazy = false,
-    version = "v7.0.0",
+    version = "*",
     ft = "norg",
     config = function()
       require "neorg".setup {
         load = {
-          ["core.integrations.treesitter"] = {},
+          ["core.defaults"] = {},
           ["core.concealer"] = {},
-          ["core.qol.toc"] = {},
+          ["core.integrations.treesitter"] = {},
         },
       }
     end,

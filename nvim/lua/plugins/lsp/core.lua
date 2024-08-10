@@ -20,6 +20,11 @@ local servers = {
         analysis = {
           diagnosticSeverityOverrides = {
             reportUnusedCallResult = "none",
+            reportReturnType = "none",
+            reportWildcardImportFromLibrary = "none",
+            reportUnknownParameterType = "none",
+            reportUnknownVariableType = "none",
+            reportAny = "none",
           }
         }
       },

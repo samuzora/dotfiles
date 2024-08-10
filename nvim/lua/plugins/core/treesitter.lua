@@ -1,7 +1,18 @@
+-- set some unregistered filetypes
+vim.filetype.add {
+  extension = {
+    ejs = "embedded_template",
+    squirrelly = "squirrel"
+  }
+}
+
 return {
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "nushell/tree-sitter-nu"
+    },
     event = "VeryLazy",
     build = ":TSUpdate",
     config = function()
@@ -40,9 +51,6 @@ return {
         },
       }
       require "nvim-treesitter.install".update()
-
-      vim.treesitter.language.register("html", "ejs")
-      vim.treesitter.language.register("javascript", "ejs")
     end
   },
 }
