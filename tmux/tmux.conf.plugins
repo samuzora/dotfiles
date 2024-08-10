@@ -1,0 +1,50 @@
+set -g @plugin "tmux-plugins/tpm"
+set -g @plugin "tmux-plugins/tmux-sensible"
+
+# --- catppuccin stuff ---
+set -g @plugin "catppuccin/tmux"
+set -g @catppuccin_flavour "mocha"
+
+set -g @catppuccin_status_background "default"
+set -g @catppuccin_status_left_separator " "
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_connect_separator "no"
+set -g @catppuccin_status_fill "all"
+set -g @catppuccin_status_modules_left "session directory"
+set -g @catppuccin_status_modules_right "date_time"
+
+set -g @catppuccin_status_justify "absolute-centre"
+set -g @catppuccin_window_current_fill "all"
+set -g @catppuccin_window_current_color "#{thm_cyan}"
+set -g @catppuccin_window_current_background "#{thm_bg}"
+set -g @catppuccin_window_default_fill "all"
+set -g @catppuccin_window_default_color "#{thm_black}"
+set -g @catppuccin_window_default_background "#{thm_fg}"
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator ""
+set -g @catppuccin_window_middle_separator "|"
+
+set -g @catppuccin_date_time_text "%H:%M"
+# --- end catppuccin stuff ---
+
+# vim integration
+set -g @plugin "christoomey/vim-tmux-navigator"
+
+# mouse config
+set -g @plugin "nhdaly/tmux-better-mouse-mode"
+set -g @scroll-without-changing-pane "on"
+set -g @scroll-speed-num-lines-per-scroll "2"
+
+# copying
+set -g @plugin "tmux-plugins/tmux-yank"
+
+# restore sessions after system restart
+set -g @plugin "tmux-plugins/tmux-resurrect"
+set -g @resurrect-processes "nvim gdb python3"
+
+# better popup window
+set -g @plugin "omerxx/tmux-floax"
+set -g @floax-bind "t"
+set -g @floax-text-color "white"
+set -g @floax-width "40%"
+set -g @floax-height "90%"

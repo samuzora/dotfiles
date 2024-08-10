@@ -1,0 +1,21 @@
+# true color
+set-option -sa terminal-overrides ",xterm*:Tc"
+
+# mouse
+set -g mouse on
+
+# fix for wsl utf-8 characters
+if-shell '[ -n "$WSL_DISTRO_NAME" ] && command -v powershell.exe >/dev/null 2>&1' {
+  set -g @override_copy_command \
+   'local STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value $(cat -);'
+}
+
+# window indexing
+set -g base-index 1
+set -g pane-base-index 1
+set-window-option -g pane-base-index 1
+set-option -g renumber-windows on
+set-option -g default-shell /bin/bash
+
+# status bar
+set -g status-position top
