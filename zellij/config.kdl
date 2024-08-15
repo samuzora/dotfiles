@@ -1,0 +1,184 @@
+keybinds clear-defaults=true {
+    shared_except "locked" {
+        bind "Enter" "Esc" { SwitchToMode "Locked"; }
+    }
+
+    locked {
+        bind "Ctrl s" { SwitchToMode "Normal"; }
+
+        bind "Alt h" { MoveFocus "Left"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        bind "Alt l" { MoveFocus "Right"; }
+
+        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+    }
+
+    normal {
+        bind "h" { MoveFocus "Left"; }
+        bind "j" { MoveFocus "Down"; }
+        bind "k" { MoveFocus "Up"; }
+        bind "l" { MoveFocus "Right"; }
+
+        bind "p" { SwitchToMode "Pane"; }
+        bind "t" { SwitchToMode "Tab"; }
+        bind "r" { SwitchToMode "Resize"; }
+        bind "m" { SwitchToMode "Move"; }
+        bind "s" { SwitchToMode "Scroll"; }
+        bind "/" { SwitchToMode "EnterSearch"; }
+        bind "S" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Locked"
+        }
+        bind "d" { Detach; }
+        bind "q" { Quit; }
+    }
+
+    pane {
+        bind "x" { CloseFocus; }
+        bind "f" { ToggleFocusFullscreen; }
+        bind "c" { NewPane; }
+        bind "|" { NewPane "Right"; }
+        bind "_" { NewPane "Down"; }
+        bind "z" { TogglePaneFrames; }
+        bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
+        bind "p" { TogglePaneEmbedOrFloating; }
+        bind "P" { ToggleFloatingPanes; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "Locked"; }
+
+        bind "b" { BreakPane; SwitchToMode "Locked"; }
+        bind "]" { BreakPaneRight; }
+        bind "[" { BreakPaneLeft; }
+
+        bind "t" { NextSwapLayout; }
+        bind "]" { NextSwapLayout; }
+        bind "[" { PreviousSwapLayout; }
+    }
+
+    tab {
+        bind "x" { CloseTab; }
+
+        bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+
+        bind "h" "k" { GoToPreviousTab; }
+        bind "l" "j" { GoToNextTab; }
+        bind "H" "K" { MoveTab "Left"; }
+        bind "L" "J" { MoveTab "Right"; }
+        bind "c" { NewTab; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "Locked"; }
+
+        bind "P" { ToggleFloatingPanes; }
+
+        bind "b" { BreakPane; SwitchToMode "Locked"; }
+        bind "]" { BreakPaneRight; }
+        bind "[" { BreakPaneLeft; }
+
+        bind "Tab" { ToggleTab; SwitchToMode "Locked"; }
+    }
+
+    resize {
+        bind "h" { Resize "Increase Left"; }
+        bind "j" { Resize "Increase Down"; }
+        bind "k" { Resize "Increase Up"; }
+        bind "l" { Resize "Increase Right"; }
+        bind "H" { Resize "Decrease Right"; }
+        bind "J" { Resize "Decrease Up"; }
+        bind "K" { Resize "Decrease Down"; }
+        bind "L" { Resize "Decrease Left"; }
+        bind "=" "+" { Resize "Increase"; }
+        bind "-" { Resize "Decrease"; }
+    }
+
+    move {
+        bind "Tab" { MovePane; }
+        bind "b" { MovePaneBackwards; }
+        bind "h" { MovePane "Left"; }
+        bind "j" { MovePane "Down"; }
+        bind "k" { MovePane "Up"; }
+        bind "l" { MovePane "Right"; }
+    }
+
+    scroll {
+        bind "e" { EditScrollback; SwitchToMode "Normal"; }
+
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
+
+        bind "Ctrl e" "Down" "j" { ScrollDown; }
+        bind "Ctrl y" "Up" "k" { ScrollUp; }
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "Ctrl u" { HalfPageScrollUp; }
+        bind "Ctrl f" { PageScrollDown; }
+        bind "Ctrl b" { PageScrollUp; }
+    }
+
+    search {
+        bind "Ctrl e" "Down" "j" { ScrollDown; }
+        bind "Ctrl y" "Up" "k" { ScrollUp; }
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "Ctrl u" { HalfPageScrollUp; }
+        bind "Ctrl f" { PageScrollDown; }
+        bind "Ctrl b" { PageScrollUp; }
+
+        bind "/" { SwitchToMode "EnterSearch"; }
+
+        bind "n" { Search "down"; }
+        bind "N" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+    }
+
+    entersearch {
+        bind "Esc" { SwitchToMode "Locked"; }
+        bind "Enter" { SwitchToMode "Search"; }
+    }
+
+    renametab {
+        bind "Esc" { UndoRenameTab; SwitchToMode "Locked"; }
+    }
+
+    renamepane {
+        bind "Esc" { UndoRenamePane; SwitchToMode "Locked"; }
+    }
+
+    session {}
+}
+
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
+plugins {
+    tab-bar location="zellij:tab-bar"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+}
+
+default_shell "nu"
+
+default_mode "locked"
+
+theme "catppuccin-mocha"
+auto_layout true
