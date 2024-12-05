@@ -1,11 +1,3 @@
--- set some unregistered filetypes
-vim.filetype.add {
-  extension = {
-    ejs = "embedded_template",
-    squirrelly = "squirrel"
-  }
-}
-
 return {
   -- treesitter
   {
@@ -16,6 +8,14 @@ return {
     event = "VeryLazy",
     build = ":TSUpdate",
     config = function()
+      -- set some unregistered filetypes
+      vim.filetype.add {
+        extension = {
+          ejs = "embedded_template",
+          squirrelly = "squirrel"
+        }
+      }
+
       require "nvim-treesitter.configs".setup {
         modules = {},
         ensure_installed = {},
@@ -26,6 +26,7 @@ return {
           enable = true,
           additional_vim_regex_highlighting = false,
           use_languagetree = true,
+          disable = { "kdl" },
         },
         context_commentstring = {
           languages = {
@@ -47,7 +48,11 @@ return {
         },
         indent = {
           enable = true,
-          disable = { "yaml" }
+          disable = { "yaml", "kdl" }
+        },
+        incremental_selection = {
+          enable = true,
+          disable = { "kdl" },
         },
       }
       require "nvim-treesitter.install".update()

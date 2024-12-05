@@ -1,4 +1,8 @@
 local servers = {
+  astro = {},
+  tailwindcss = {},
+  vuels = {},
+
   clangd = {
     single_file_support = true,
     cmd = {
@@ -17,6 +21,7 @@ local servers = {
     single_file_support = true,
     settings = {
       basedpyright = {
+        typeCheckingMode = "basic",
         analysis = {
           diagnosticSeverityOverrides = {
             reportUnusedCallResult = "none",
@@ -156,7 +161,7 @@ return {
         }
       },
     },
-    "hrsh7th/cmp-nvim-lsp",
+    -- "hrsh7th/cmp-nvim-lsp",
   },
 
   config = function()
@@ -169,14 +174,14 @@ return {
       -- any code to run on startup
     end
 
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-
+    -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+    --
     local default_lsp_config = {
       on_attach = on_attach,
-      capabilities = capabilities,
+      -- capabilities = capabilities,
       flags = {
-        debounce_text_changes = 200,
+        -- debounce_text_changes = 200,
         allow_incremental_sync = true,
       },
     }

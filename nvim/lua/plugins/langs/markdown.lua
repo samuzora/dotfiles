@@ -1,3 +1,4 @@
+
 return {
   "MeanderingProgrammer/markdown.nvim",
   dependencies = {

@@ -78,9 +78,11 @@ return {
       keymaps = {
         ["q"] = "actions.close",
         ["<C-h>"] = false,
+        ["<leader>cl"] = "actions.refresh",
         ["<C-l>"] = false,
         ["<M-h>"] = "actions.select_split",
         ["<M-l>"] = "actions.select_vsplit",
+        ["gs"] = false,
       },
     },
   },

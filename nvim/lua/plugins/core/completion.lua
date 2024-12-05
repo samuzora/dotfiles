@@ -19,9 +19,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      local copilot = require("copilot.suggestion")
 
-      local types = require('cmp.types')
       local compare = cmp.config.compare
 
       local has_words_before = function()
@@ -57,14 +55,15 @@ return {
 
           -- Super-tab mapping
           ["<Tab>"] = cmp.mapping(function(fallback)
+            -- local copilot = require("copilot.suggestion")
             if cmp.visible() then
               -- regular selection
               cmp.confirm({
                 behavior = cmp.ConfirmBehavior.Insert,
                 select = true
               })
-            elseif copilot.is_visible() then
-              copilot.accept()
+            -- elseif copilot.is_visible() then
+            --   copilot.accept()
             elseif luasnip.expand_or_locally_jumpable() then
               -- trigger snippet
               luasnip.expand_or_jump()
@@ -170,6 +169,27 @@ return {
     end
   },
 
+  {
+    "saghen/blink.cmp",
+    enabled = false,
+    event = "VeryLazy",
+    dependencies = "rafamadriz/friendly-snippets",
+    version = 'v0.*',
+    -- build = "cargo build --release",
+
+    opts = {
+      keymap = {
+        -- TODO when toggling is supported, change to the same keybind as show
+        hide = "<C-e>",
+        select_prev = { "<Up>", "<C-k>" },
+        select_next = { "<Down>", "<C-j>" },
+      },
+      highlight = {
+        use_nvim_cmp_as_default = true,
+      },
+    }
+  },
+
   -- snippets
   {
     "L3MON4D3/LuaSnip",
@@ -192,17 +212,17 @@ return {
       -- vim.keymap.set({ "i" }, "<C-L>", function() ls.expand() end, { silent = true })
       -- vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end, { silent = true })
 
-      vim.keymap.set({ "i", "s" }, "<C-j>", function()
-        if ls.choice_active() then
-          return ls.change_choice(1)
-        end
-      end, { noremap = true })
-
-      vim.keymap.set({ "i", "s" }, "<C-k>", function()
-        if ls.choice_active() then
-          return ls.change_choice(-1)
-        end
-      end, { noremap = true })
+      -- vim.keymap.set({ "i", "s" }, "<C-j>", function()
+      --   if ls.choice_active() then
+      --     return ls.change_choice(1)
+      --   end
+      -- end, { noremap = true })
+      --
+      -- vim.keymap.set({ "i", "s" }, "<C-k>", function()
+      --   if ls.choice_active() then
+      --     return ls.change_choice(-1)
+      --   end
+      -- end, { noremap = true })
 
       require "luasnip.loaders.from_vscode".lazy_load()
       require "luasnip.loaders.from_lua".lazy_load { paths = { "~/.config/nvim/lua/plugins/snippets" } }
@@ -211,6 +231,7 @@ return {
 
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     event = "InsertEnter",
     cmd = "Copilot",
     config = function()
@@ -247,7 +268,9 @@ return {
           auto_trigger = true,
           debounce = 20,
           keymap = {
-            accept = false,
+            -- for nvim-cmp
+            -- accept = false,
+            accept = "<C-c>",
             accept_word = false,
             accept_line = false,
             next = "<Down>",
@@ -256,17 +279,18 @@ return {
         },
       })
 
-      local cmp = require("cmp")
-      cmp.event:on("menu_opened",
-        function()
-          vim.b.copilot_suggestion_hidden = true
-        end
-      )
-      cmp.event:on("menu_closed",
-        function()
-          vim.b.copilot_suggestion_hidden = false
-        end
-      )
+      -- for nvim-cmp
+      -- local cmp = require("cmp")
+      -- cmp.event:on("menu_opened",
+      --   function()
+      --     vim.b.copilot_suggestion_hidden = true
+      --   end
+      -- )
+      -- cmp.event:on("menu_closed",
+      --   function()
+      --     vim.b.copilot_suggestion_hidden = false
+      --   end
+      -- )
     end,
   },
 }

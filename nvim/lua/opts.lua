@@ -2,7 +2,7 @@ local options = {
   -- indentation
   autoindent    = true, -- keep indent when creating newline
   smartindent   = true, -- increase indentation according to syntax
-  tabstop       = 4,    -- number of spaces per tab
+  tabstop       = 2,    -- number of spaces per tab
   shiftwidth    = 0,    -- >>/<< (0: follows tabstop)
   softtabstop   = -1,   -- "virtual" tab length (-1: follows shiftwidth)
   smarttab      = true, -- follow shiftwidth when inserting/deleting tabs
@@ -47,7 +47,10 @@ local options = {
   shell         = "/bin/bash", -- set shell to bash to allow !cmd to work
 
   list          = true, -- show invisible characters
-  listchars     = "eol:↵,trail:~,tab:>-,nbsp:␣" -- use these characters
+  listchars     = "eol:↵,trail:~,tab:>-,nbsp:␣", -- use these characters
+
+  -- for tabline
+  showtabline = 2,
 }
 for k, v in pairs(options) do vim.opt[k] = v end
 
@@ -128,8 +131,6 @@ vim.keymap.set("n", "<Leader>qf", function()
 end)
 vim.keymap.set("n", "<Leader>cd", "<cmd>lcd %:p:h<CR>", { desc = "Change directory to buffer path for current window" })
 vim.keymap.set("n", "<Leader>lz", "<cmd>Lazy<CR>", { desc = "Open Lazy window" })
-vim.keymap.set("n", "crn", vim.lsp.buf.rename, { desc = "LSP rename" })
-vim.keymap.set("n", "crr", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set("n", "<Leader>cl",
   function()
     require("notify").dismiss()
@@ -138,6 +139,19 @@ vim.keymap.set("n", "<Leader>cl",
   end,
   { desc = "Refresh screen and clear notifications" }
 )
+
+-- quick tab navigation
+-- TODO make <leader> a function/autocmd so we can jump to arbitrary tabs, not limited to 10
+vim.keymap.set("n", "<Leader>1", "1gt")
+vim.keymap.set("n", "<Leader>2", "2gt")
+vim.keymap.set("n", "<Leader>3", "3gt")
+vim.keymap.set("n", "<Leader>4", "4gt")
+vim.keymap.set("n", "<Leader>5", "5gt")
+vim.keymap.set("n", "<Leader>6", "6gt")
+vim.keymap.set("n", "<Leader>7", "7gt")
+vim.keymap.set("n", "<Leader>8", "8gt")
+vim.keymap.set("n", "<Leader>9", "9gt")
+vim.keymap.set("n", "<Leader>0", "10gt")
 
 -- temp override for nightly v0.12.0
 vim.deprecate = function() end

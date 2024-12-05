@@ -4,15 +4,15 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = { "Telescope" },
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<CR>",                               desc = "Find file" },
-      { "<leader>fg", "<cmd>Telescope live_grep<CR>",                                desc = "Find text" },
-      { "<leader>fh", "<cmd>Telescope help_tags<CR>",                                desc = "Find help" },
-      { "<leader>fd", "<cmd>Telescope diagnostics<CR>",                              desc = "Workspace diagnostics" },
-      { "<leader>fn", "<cmd>Noice telescope<CR>",                                    desc = "List notifications" },
+      { "<leader>ff", "<cmd>Telescope find_files<CR>",  desc = "Find file" },
+      { "<leader>fg", "<cmd>Telescope live_grep<CR>",   desc = "Find text" },
+      { "<leader>fh", "<cmd>Telescope help_tags<CR>",   desc = "Find help" },
+      { "<leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Workspace diagnostics" },
+      { "<leader>fn", "<cmd>Noice telescope<CR>",       desc = "List notifications" },
 
       -- telescope lsp finders
-      { "gd", function() require("telescope.builtin").lsp_definitions() end, desc = "Symbol definitions" },
-      { "gr", function() require("telescope.builtin").lsp_references() end,  desc = "Symbol references" },
+      -- { "gd", function() require("telescope.builtin").lsp_definitions() end, desc = "Symbol definitions" },
+      -- { "gx", function() require("telescope.builtin").lsp_references() end,  desc = "Symbol references" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

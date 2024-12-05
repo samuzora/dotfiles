@@ -4,12 +4,7 @@ keybinds clear-defaults=true {
     }
 
     locked {
-        bind "Ctrl s" { SwitchToMode "Normal"; }
-
-        bind "Alt h" { MoveFocus "Left"; }
-        bind "Alt j" { MoveFocus "Down"; }
-        bind "Alt k" { MoveFocus "Up"; }
-        bind "Alt l" { MoveFocus "Right"; }
+        bind "Ctrl Space" { SwitchToMode "Normal"; }
 
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt 1" { GoToTab 1; }
@@ -23,17 +18,31 @@ keybinds clear-defaults=true {
         bind "Alt 9" { GoToTab 9; }
     }
 
-    normal {
-        bind "h" { MoveFocus "Left"; }
-        bind "j" { MoveFocus "Down"; }
-        bind "k" { MoveFocus "Up"; }
-        bind "l" { MoveFocus "Right"; }
+    shared_among "locked" "normal" "pane" "resize" "move" {
+        // specially allow to move focus between panes in pane mode, resize mode and move mode 
+        bind "Alt h" {
+            MoveFocus "Left";
+        }
+        bind "Alt j" {
+            MoveFocus "Down";
+        }
+        bind "Alt k" {
+            MoveFocus "Up";
+        }
+        bind "Alt l" {
+            MoveFocus "Right";
+        }
+    }
 
+    normal {
+        bind "l" { Clear; }
+        bind "b" { TogglePaneFrames; }
         bind "p" { SwitchToMode "Pane"; }
         bind "t" { SwitchToMode "Tab"; }
         bind "r" { SwitchToMode "Resize"; }
         bind "m" { SwitchToMode "Move"; }
         bind "s" { SwitchToMode "Scroll"; }
+        bind "e" { EditScrollback; SwitchToMode "Locked"; }
         bind "/" { SwitchToMode "EnterSearch"; }
         bind "S" {
             LaunchOrFocusPlugin "session-manager" {
@@ -44,31 +53,33 @@ keybinds clear-defaults=true {
         }
         bind "d" { Detach; }
         bind "q" { Quit; }
-    }
 
-    pane {
-        bind "x" { CloseFocus; }
-        bind "f" { ToggleFocusFullscreen; }
-        bind "c" { NewPane; }
-        bind "|" { NewPane "Right"; }
-        bind "_" { NewPane "Down"; }
-        bind "z" { TogglePaneFrames; }
-        bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
-        bind "p" { TogglePaneEmbedOrFloating; }
-        bind "P" { ToggleFloatingPanes; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "Locked"; }
-
-        bind "b" { BreakPane; SwitchToMode "Locked"; }
-        bind "]" { BreakPaneRight; }
-        bind "[" { BreakPaneLeft; }
-
-        bind "t" { NextSwapLayout; }
+        bind "\\" { NextSwapLayout; }
         bind "]" { NextSwapLayout; }
         bind "[" { PreviousSwapLayout; }
     }
 
+    pane {
+        bind "c" { NewPane; SwitchToMode "Locked"; }
+        bind "l" { NewPane "Right"; SwitchToMode "Locked"; }
+        bind "j" { NewPane "Down"; SwitchToMode "Locked"; }
+        bind "x" { CloseFocus; SwitchToMode "Locked"; }
+
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
+        bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
+        bind "f" { TogglePaneEmbedOrFloating; SwitchToMode "Locked"; }
+
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "Locked"; }
+        bind "F" { ToggleFloatingPanes; SwitchToMode "Locked"; }
+
+        bind "b" { BreakPane; SwitchToMode "Locked"; }
+        bind "]" { BreakPaneRight; SwitchToMode "Locked"; }
+        bind "[" { BreakPaneLeft; SwitchToMode "Locked"; }
+    }
+
     tab {
-        bind "x" { CloseTab; }
+        bind "c" { NewTab; SwitchToMode "Locked"; }
+        bind "x" { CloseTab; SwitchToMode "Locked"; }
 
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
 
@@ -76,14 +87,6 @@ keybinds clear-defaults=true {
         bind "l" "j" { GoToNextTab; }
         bind "H" "K" { MoveTab "Left"; }
         bind "L" "J" { MoveTab "Right"; }
-        bind "c" { NewTab; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "Locked"; }
-
-        bind "P" { ToggleFloatingPanes; }
-
-        bind "b" { BreakPane; SwitchToMode "Locked"; }
-        bind "]" { BreakPaneRight; }
-        bind "[" { BreakPaneLeft; }
 
         bind "Tab" { ToggleTab; SwitchToMode "Locked"; }
     }
@@ -110,20 +113,7 @@ keybinds clear-defaults=true {
         bind "l" { MovePane "Right"; }
     }
 
-    scroll {
-        bind "e" { EditScrollback; SwitchToMode "Normal"; }
-
-        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
-
-        bind "Ctrl e" "Down" "j" { ScrollDown; }
-        bind "Ctrl y" "Up" "k" { ScrollUp; }
-        bind "Ctrl d" { HalfPageScrollDown; }
-        bind "Ctrl u" { HalfPageScrollUp; }
-        bind "Ctrl f" { PageScrollDown; }
-        bind "Ctrl b" { PageScrollUp; }
-    }
-
-    search {
+  shared_among "scroll" "search" "normal" {
         bind "Ctrl e" "Down" "j" { ScrollDown; }
         bind "Ctrl y" "Up" "k" { ScrollUp; }
         bind "Ctrl d" { HalfPageScrollDown; }
@@ -132,7 +122,14 @@ keybinds clear-defaults=true {
         bind "Ctrl b" { PageScrollUp; }
 
         bind "/" { SwitchToMode "EnterSearch"; }
+        bind "e" { EditScrollback; SwitchToMode "Locked"; }
+  }
 
+    scroll {
+        bind "G" { ScrollToBottom; }
+    }
+
+    search {
         bind "n" { Search "down"; }
         bind "N" { Search "up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
@@ -181,4 +178,4 @@ default_shell "nu"
 default_mode "locked"
 
 theme "catppuccin-mocha"
-auto_layout true
+auto_layout false

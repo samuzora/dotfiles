@@ -10,6 +10,12 @@ return {
         desc = "Hover"
       },
       {
+        "<C-s>",
+        function() require("hover").hover() end,
+        mode = { "i" },
+        desc = "Hover in insert mode"
+      },
+      {
         "gK",
         function() require("hover").hover_select() end,
         desc = "Select provider for hover"
@@ -51,6 +57,18 @@ return {
         }
       })
     end
+  },
+
+  -- cool stuff for lsp signature
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {
+      toggle_key = "<C-s>",
+    },
+    config = function(_, opts)
+      require "lsp_signature".setup(opts)
+    end,
   },
 
   -- lsp lines

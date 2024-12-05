@@ -2,6 +2,7 @@ return {
   -- move blocks of text
   {
     "echasnovski/mini.move",
+    enabled = false,
     keys = {
       { "<M-h>", mode = { "n", "v" } },
       { "<M-j>", mode = { "n", "v" } },

@@ -5,14 +5,18 @@ return {
     event = "UIEnter",
     dependencies = {
       "folke/noice.nvim",
+      "rebelot/kanagawa.nvim",
     },
     config = function()
       local lualine = require('lualine')
+      local colors = require("kanagawa.colors").setup()
+      local palette = colors.palette
+      local theme = colors.theme
 
       local colors = {}
       if (vim.o.background == 'dark') then
         colors = {
-          bg = nil,
+          bg = theme.ui.bg,
           fg = "#c0caf5",
           yellow = "#e0af68",
           cyan = "#7dcfff",
@@ -213,10 +217,11 @@ return {
   -- tabline
   {
     "nanozuki/tabby.nvim",
+    version = "v2.6.0",
     event = "UIEnter",
-    config = function()
-      vim.o.showtabline = 2
-      require('tabby.tabline').use_preset('active_wins_at_tail', {
+    opts = {
+      preset = "active_wins_at_tail",
+      option = {
         theme = {
           fill = "TabLineFill",
           head = "TabLine",
@@ -231,11 +236,11 @@ return {
         buf_name = {
           mode = "'unique'|'relative'|'tail'|'shorten'",
         },
-      })
-    end
+      }
+    },
   },
 
-  -- keymap view
+  -- keymap and spelling preview
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -381,26 +386,26 @@ return {
             col = "50%",
           }
         },
+      },
 
-        lsp = {
-          -- lsp docs
-          documentation = {
-            win_options = {
-              concealcursor = 'n',
-              conceallevel = 3,
-              winhighlight = {
-                Normal = 'PMenu',
-                FloatBorder = 'PMenu',
-              },
+      lsp = {
+        -- lsp docs
+        documentation = {
+          win_options = {
+            concealcursor = 'n',
+            conceallevel = 3,
+            winhighlight = {
+              Normal = 'PMenu',
+              FloatBorder = 'PMenu',
             },
           },
-
-          -- function signature
-          signature = {
-            enabled = true
-          }
         },
-      }
+
+        -- function signature
+        signature = {
+          enabled = false
+        }
+      },
     }
   }
 }
