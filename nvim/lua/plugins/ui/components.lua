@@ -264,7 +264,7 @@ return {
         "rcarriga/nvim-notify",
         opts = {
           stages = "fade",
-          render = "wrapped-compact",
+          render = "compact",
           max_width = "100",
         }
       },

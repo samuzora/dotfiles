@@ -3,6 +3,7 @@ keybinds clear-defaults=true {
         bind "Enter" "Esc" { SwitchToMode "Locked"; }
     }
 
+
     locked {
         bind "Ctrl Space" { SwitchToMode "Normal"; }
 
