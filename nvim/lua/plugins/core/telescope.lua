@@ -11,7 +11,7 @@ return {
       { "<leader>fn", "<cmd>Noice telescope<CR>",       desc = "List notifications" },
 
       -- telescope lsp finders
-      -- { "gd", function() require("telescope.builtin").lsp_definitions() end, desc = "Symbol definitions" },
+      { "gd", function() require("telescope.builtin").lsp_definitions() end, desc = "Symbol definitions" },
       -- { "gx", function() require("telescope.builtin").lsp_references() end,  desc = "Symbol references" },
     },
     dependencies = {

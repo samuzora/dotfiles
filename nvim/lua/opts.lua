@@ -112,28 +112,31 @@ vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", ";", ":")
-vim.keymap.set("n", "<Leader>qf", function()
-  local qf_exists = false
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      qf_exists = true
-    end
-  end
-  if qf_exists == true then
-    vim.cmd "cclose"
-    return
-  end
-  if not vim.tbl_isempty(vim.fn.getqflist()) then
-    vim.cmd "copen"
-  else
-    vim.notify("Quickfix isn't populated yet")
-  end
-end)
+-- vim.keymap.set("n", "<Leader>qf", function()
+--   local qf_exists = false
+--   for _, win in pairs(vim.fn.getwininfo()) do
+--     if win["quickfix"] == 1 then
+--       qf_exists = true
+--     end
+--   end
+--   if qf_exists == true then
+--     vim.cmd "cclose"
+--     return
+--   end
+--   if not vim.tbl_isempty(vim.fn.getqflist()) then
+--     vim.cmd "copen"
+--   else
+--     vim.notify("Quickfix isn't populated yet")
+--   end
+-- end)
 vim.keymap.set("n", "<Leader>cd", "<cmd>lcd %:p:h<CR>", { desc = "Change directory to buffer path for current window" })
 vim.keymap.set("n", "<Leader>lz", "<cmd>Lazy<CR>", { desc = "Open Lazy window" })
 vim.keymap.set("n", "<Leader>cl",
   function()
-    require("notify").dismiss()
+    require("notify").dismiss({
+      pending = true,
+      silent = true
+    })
     vim.cmd [[noh]]
     vim.cmd [[diffupdate]]
   end,

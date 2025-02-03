@@ -150,6 +150,7 @@ return {
   -- color picker
   {
     "uga-rosa/ccc.nvim",
+    enabled = false,
     ft = { "css", "scss", "html", "javascript", "typescript", "javascriptextended", "typescriptextended" },
     config = function()
       local ColorInput = require("ccc.input")
@@ -253,6 +254,27 @@ return {
       { "<leader>ct", vim.cmd.CccConvert, desc = "Convert between color types" }
     }
   },
+  {
+    "nvzone/minty",
+    dependencies = "nvzone/volt",
+    cmd = { "Shades", "Huefy" }
+  },
+
+  -- collection of small plugins
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    keys = {
+      { "<Leader>lg", function() Snacks.lazygit.open() end, desc = "Open Lazygit window" }
+    },
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      indent = { enabled = true },
+      lazygit = { enabled = true },
+    }
+  },
 
   -- ???
   {
@@ -260,5 +282,13 @@ return {
     keys = {
       { "<leader>asdf", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "???" }
     }
+  },
+
+  -- typing test for fun
+  {
+    "nvzone/typr",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = { "Typr", "TyprStats" },
   }
 }

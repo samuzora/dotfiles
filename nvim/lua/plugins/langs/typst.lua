@@ -19,7 +19,6 @@ return {
 
       -- cmd = "typst watch " .. vim.api.nvim_buf_get_name(0),
 
-
       -- typst keymap
       vim.keymap.set("n", "<leader>w",
         function()

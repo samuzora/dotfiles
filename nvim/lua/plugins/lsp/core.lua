@@ -1,7 +1,7 @@
 local servers = {
   astro = {},
   tailwindcss = {},
-  vuels = {},
+  volar = {},
 
   clangd = {
     single_file_support = true,

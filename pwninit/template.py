@@ -5,6 +5,7 @@ from pwn import *
 {bindings}
 
 context.binary = {bin_name}
+context.aslr = False # rmb to check for brute-forcable stuff!!!
 
 def exit_funcs_encrypt(val: int, key: int):
     r_bits = 0x11
