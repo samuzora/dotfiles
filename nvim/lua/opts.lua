@@ -156,5 +156,22 @@ vim.keymap.set("n", "<Leader>8", "8gt")
 vim.keymap.set("n", "<Leader>9", "9gt")
 vim.keymap.set("n", "<Leader>0", "10gt")
 
+-- type ansi escape sequences easily
+vim.keymap.set("i", "<C-a>s", "<C-q>[")
+vim.keymap.set("i", "<C-a>r", "31")
+vim.keymap.set("i", "<C-a>g", "32")
+vim.keymap.set("i", "<C-a>y", "33")
+vim.keymap.set("i", "<C-a>b", "34")
+vim.keymap.set("i", "<C-a>m", "35")
+vim.keymap.set("i", "<C-a>c", "36")
+
+vim.keymap.set("i", "<C-a>R", "0")
+vim.keymap.set("i", "<C-a>U", "4")
+vim.keymap.set("i", "<C-a>B", "1")
+vim.keymap.set("i", "<C-a>I", "3")
+
+vim.keymap.set('x', '/', '<C-\\><C-n>`</\\%V', { desc = 'Search forward within visual selection' })
+vim.keymap.set('x', '?', '<C-\\><C-n>`>?\\%V', { desc = 'Search backward within visual selection' })
+
 -- temp override for nightly v0.12.0
-vim.deprecate = function() end
+-- vim.deprecate = function() end

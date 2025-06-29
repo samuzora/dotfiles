@@ -23,7 +23,7 @@ alias wingcc = x86_64-w64-mingw32-gcc
 def pwnrpath [
     binary: path # binary to patch
     --library-dir (-d) = ./lib: directory # directory for libraries (libc.so.6 etc)
-    --linker (-l): path # path to linker binary (default: ld-linux-x86-86.so.2 in specified library-dir)
+    --linker (-l): path # path to linker binary (default: ld-linux-x86-64.so.2 in specified library-dir)
 ] {
 
     let _linker: path = if $linker != null { $linker } else { $library_dir | path join ld-linux-x86-64.so.2 }
@@ -93,6 +93,7 @@ $env.PATH = ($env.PATH | append [
     "/home/samuzora/ctf/tools/esp32_image_parser"
     "/home/samuzora/ctf/tools/vdexExtractor/bin"
     "/home/samuzora/.wokwi/bin"
+    "/home/samuzora/ctf/comp/2025-H0/greyctf/finals/google-cloud-sdk/path.bash.inc"
 ])
 
 # fnm setup
@@ -371,10 +372,10 @@ $env.config = {
             completer: null # check 'carapace_completer' above as an example
         }
     }
-    filesize: {
-        metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
-        format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
-    }
+    # filesize: {
+    #     metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
+    #     format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
+    # }
     cursor_shape: {
         emacs: line # block, underscore, line, blink_block, blink_underscore, blink_line (line is the default)
         vi_insert: block # block, underscore, line , blink_block, blink_underscore, blink_line (block is the default)

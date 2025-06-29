@@ -5,7 +5,7 @@ vim.filetype.add({
 })
 
 return {
-  "MeanderingProgrammer/markdown.nvim",
+  "MeanderingProgrammer/render-markdown.nvim",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-tree/nvim-web-devicons",
@@ -19,9 +19,11 @@ return {
     },
     code = {
       position = "left",
-      left_pad = 2,
+      left_pad = 0,
       right_pad = 2,
+      min_width = 50,
       width = "block",
+      border = "thin",
     },
     bullet = {
       icons = { "-", "-", "-", "-" }

@@ -280,7 +280,7 @@ return {
   {
     "Eandrju/cellular-automaton.nvim",
     keys = {
-      { "<leader>asdf", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "???" }
+      { "<leader>nvim", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "???" }
     }
   },
 
