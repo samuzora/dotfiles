@@ -7,8 +7,15 @@ set -g mouse on
 # fix for wsl utf-8 characters
 if-shell '[ -n "$WSL_DISTRO_NAME" ] && command -v powershell.exe >/dev/null 2>&1' {
   set -g @override_copy_command \
-   'local STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value $(cat -);'
+   'STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value $(cat -);'
 }
+
+# pane titles
+# set -g set-titles on
+# set -g set-titles-string "#W"
+# set -g automatic-rename on
+# set -g automatic-rename-format "#T"
+# setw pane-border-format "#{pane_index} #{pane_title}"
 
 # window indexing
 set -g base-index 1
@@ -18,4 +25,4 @@ set-option -g renumber-windows on
 set-option -g default-shell /bin/bash
 
 # status bar
-set -g status-position top
+set -g status-position bottom

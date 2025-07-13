@@ -1,23 +1,20 @@
 return {
   -- tmux integration
-  -- {
-  --   "christoomey/vim-tmux-navigator",
-  --   enabled = false,
-  --   cmd = {
-  --     "TmuxNavigateLeft",
-  --     "TmuxNavigateDown",
-  --     "TmuxNavigateUp",
-  --     "TmuxNavigateRight",
-  --     "TmuxNavigatePrevious",
-  --   },
-  --   keys = {
-  --     { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-  --     { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-  --     { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-  --     { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
-  --     { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-  --   },
-  -- },
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+    },
+    keys = {
+      { "<m-h>",  "<cmd>TmuxNavigateLeft<cr>" },
+      { "<m-j>",  "<cmd>TmuxNavigateDown<cr>" },
+      { "<m-k>",  "<cmd>TmuxNavigateUp<cr>" },
+      { "<m-l>",  "<cmd>TmuxNavigateRight<cr>" },
+    },
+  },
 
   -- zellij integration
   -- {

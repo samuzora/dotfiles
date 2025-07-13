@@ -2,33 +2,26 @@ set -g @plugin "tmux-plugins/tpm"
 set -g @plugin "tmux-plugins/tmux-sensible"
 
 # --- catppuccin stuff ---
-set -g @plugin "catppuccin/tmux"
-set -g @catppuccin_flavour "mocha"
+set -g @catppuccin_flavor "mocha"
 
 set -g @catppuccin_status_background "default"
-set -g @catppuccin_status_left_separator " "
-set -g @catppuccin_status_right_separator " "
-set -g @catppuccin_status_connect_separator "no"
-set -g @catppuccin_status_fill "all"
-set -g @catppuccin_status_modules_left "session directory"
-set -g @catppuccin_status_modules_right "date_time"
+set -g @catppuccin_window_status_style "basic"
+set -g @catppuccin_status_left_separator "█"
+set -g @catppuccin_status_middle_separator ""
+set -g @catppuccin_status_right_separator "█"
 
-set -g @catppuccin_status_justify "absolute-centre"
-set -g @catppuccin_window_current_fill "all"
-set -g @catppuccin_window_current_color "#{thm_cyan}"
-set -g @catppuccin_window_current_background "#{thm_bg}"
-set -g @catppuccin_window_default_fill "all"
-set -g @catppuccin_window_default_color "#{thm_black}"
-set -g @catppuccin_window_default_background "#{thm_fg}"
-set -g @catppuccin_window_left_separator ""
-set -g @catppuccin_window_right_separator ""
-set -g @catppuccin_window_middle_separator "|"
+set -g @catppuccin_window_current_text " #W"
+set -g @catppuccin_window_text " #W"
 
-set -g @catppuccin_date_time_text "%H:%M"
+set -g @catppuccin_pane_status_enabled "yes"
+set -g pane-border-status top
+set -g @catppuccin_pane_default_text "##{pane_title}"
+
+run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+
+set -g status-left ""
+set -g status-right "#{E:@catppuccin_status_session}"
 # --- end catppuccin stuff ---
-
-# vim integration
-set -g @plugin "christoomey/vim-tmux-navigator"
 
 # mouse config
 set -g @plugin "nhdaly/tmux-better-mouse-mode"
@@ -48,3 +41,17 @@ set -g @floax-bind "t"
 set -g @floax-text-color "white"
 set -g @floax-width "40%"
 set -g @floax-height "90%"
+
+# vim integration
+vim_pattern='(\S+/)?g?\.?(view|l?n?vim?x?|fzf)(diff)?(-wrapped)?'
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +${vim_pattern}$'"
+bind-key -n 'M-h' if-shell "$is_vim" { send-keys M-h } { if-shell -F '#{pane_at_left}'   {} { select-pane -L } }
+bind-key -n 'M-j' if-shell "$is_vim" { send-keys M-j } { if-shell -F '#{pane_at_bottom}' {} { select-pane -D } }
+bind-key -n 'M-k' if-shell "$is_vim" { send-keys M-k } { if-shell -F '#{pane_at_top}'    {} { select-pane -U } }
+bind-key -n 'M-l' if-shell "$is_vim" { send-keys M-l } { if-shell -F '#{pane_at_right}'  {} { select-pane -R } }
+
+bind-key -T copy-mode-vi 'M-h' if-shell -F '#{pane_at_left}'   {} { select-pane -L }
+bind-key -T copy-mode-vi 'M-j' if-shell -F '#{pane_at_bottom}' {} { select-pane -D }
+bind-key -T copy-mode-vi 'M-k' if-shell -F '#{pane_at_top}'    {} { select-pane -U }
+bind-key -T copy-mode-vi 'M-l' if-shell -F '#{pane_at_right}'  {} { select-pane -R }

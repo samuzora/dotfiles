@@ -12,13 +12,19 @@ alias pwninit = pwninit --template-path ~/.config/pwninit/template.py
 alias zipfile = /bin/zip
 alias dwl = wget --content-disposition
 alias ngrok = docker run --net=host -it -e NGROK_AUTHTOKEN=2LGGmCeGgd1RjsISAKXM47E0k9Q_6b7xjFumfE5sX6mmK72MH ngrok/ngrok:latest
+alias wingcc = x86_64-w64-mingw32-gcc
+
 alias ze = zellij
 alias zed = zellij delete-session
 alias zec = zellij delete-session
 alias zel = zellij list-sessions
 alias zes = zellij -s
 alias zea = zellij a
-alias wingcc = x86_64-w64-mingw32-gcc
+
+alias tms = tmux new -s
+alias tml = tmux ls
+alias tmk = tmux kill-session -t
+alias tma = tmux a -t
 
 def pwnrpath [
     binary: path # binary to patch

@@ -13,3 +13,5 @@
 !tmux
 !zellij
 !nushell
+!pwndbg
+!pwn.conf
