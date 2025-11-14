@@ -3,7 +3,7 @@ return {
     "ggandor/leap.nvim",
     event = "VeryLazy",
     init = function()
-      -- Hide the (real) cursor when leaping
+      -- Hide the (real) cursor when leaping...
       vim.api.nvim_create_autocmd("User", {
         pattern = "LeapEnter",
         callback = function()
@@ -12,7 +12,7 @@ return {
         end,
       })
 
-      -- and restore it afterwards.
+      -- ...and restore it afterwards.
       vim.api.nvim_create_autocmd("User", {
         pattern = "LeapLeave",
         callback = function()
@@ -23,13 +23,13 @@ return {
     end,
     config = function()
       -- mappings
-      require "leap".create_default_mappings()
+      vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)')
+      vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-backward)')
 
       -- jump to target, do something, and then jump back
       vim.keymap.set({ "n", "o" }, "gs", function()
         require("leap.remote").action()
       end)
-
 
       require "leap".setup {
         substitute_chars = { ["\r"] = "¬" },

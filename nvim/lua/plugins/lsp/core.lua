@@ -1,10 +1,16 @@
 local servers = {
   astro = {},
   tailwindcss = {},
-  volar = {},
+  vue_ls = {},
 
   clangd = {
     single_file_support = true,
+    capabilities = {
+      textDocument = {
+        definition = true,
+        implementation = true,
+      },
+    },
     cmd = {
       "clangd",
       "--offset-encoding=utf-16",
@@ -168,8 +174,6 @@ return {
     -- border
     require("lspconfig.ui.windows").default_options.border = "rounded"
 
-    local lspconfig = require("lspconfig")
-
     local function on_attach(client, bufnr)
       -- any code to run on startup
     end
@@ -188,7 +192,11 @@ return {
 
     -- setup all servers specified above
     for server, config in pairs(servers) do
-      lspconfig[server].setup(vim.tbl_deep_extend("force", default_lsp_config, config))
+      vim.lsp.config(
+        server,
+        vim.tbl_deep_extend("force", default_lsp_config, config)
+      )
+      vim.lsp.enable(server)
     end
   end,
 }

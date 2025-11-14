@@ -82,7 +82,7 @@ def "kpwn cfs" [
 $env.PATH = ($env.PATH | append [
     "/home/samuzora/ctf/tools/kernel-pwn" 
     "/home/samuzora/ctf/tools/kernel-pwn/vmlinux-to-elf"
-    "/mnt/c/Users/lucas/AppData/Roaming/IDA-8.3" 
+    "/mnt/c/Program Files/IDA Professional 9.2" 
     "/mnt/c/Users/lucas/AppData/Local/SumatraPDF" 
     "/home/samuzora/.local/share/gem/ruby/3.0.0/bin"
     "/home/samuzora/.cargo/bin"

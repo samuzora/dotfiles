@@ -1,54 +1,11 @@
 # -n: -T root
 
-# pane keybinds
-bind h split-window -hb -c "#{pane_current_path}"
-bind j split-window -v -c "#{pane_current_path}"
-bind k split-window -vb -c "#{pane_current_path}"
-bind l split-window -h -c "#{pane_current_path}"
-bind H split-window -hbf -c "#{pane_current_path}"
-bind J split-window -vf -c "#{pane_current_path}"
-bind K split-window -vbf -c "#{pane_current_path}"
-bind L split-window -hf -c "#{pane_current_path}"
+# unbinds
 unbind '"'
 unbind %
 unbind o
-
-bind -n M-H swap-pane -U
-bind -n M-L swap-pane -D
-
-bind n command-prompt -I '#{pane_title}' { select-pane -T '%%' }
-bind N command-prompt -I '#W' { rename-window -- '%%' }
-
-bind -n M-q display-panes
-
-# reload config
-bind r source-file ~/.config/tmux/tmux.conf
-
-# copy mode
-bind -T copy-mode-vi v send-keys -X begin-selection
-bind -T copy-mode-vi C-q send-keys -X rectangle-toggle
-bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-bind -T copy-mode-vi Escape send-keys -X cancel
-bind -T copy-mode-vi p run-shell -C "display '#{selection_start_y} #{selection_end_y}'"
-bind -T copy-mode-vi ] run-shell -C "send-keys -X stop-selection; send-keys -X history-bottom; capture-pane -S -#{selection_start_y} -E -#{selection_end_y} -e; send-keys -X clear-selection; send-keys -X cancel"
-
-# | base64 -w 0 | powershell.exe -c \"Set-Clipoard -Value ([Text.Encoding]::UTF8.GetString([Convert])::FromBase64String('$(cat -)')))\""
-
-bind C-l clear-history
-
-bind s choose-tree -swZ
-
-bind c new-window
-
-bind -n M-1 select-window -t 1
-bind -n M-2 select-window -t 2
-bind -n M-3 select-window -t 3
-bind -n M-4 select-window -t 4
-bind -n M-5 select-window -t 5
-bind -n M-6 select-window -t 6
-bind -n M-7 select-window -t 7
-bind -n M-8 select-window -t 8
-bind -n M-9 select-window -t 9
+unbind <
+unbind >
 unbind 0
 unbind 1
 unbind 2
@@ -60,8 +17,73 @@ unbind 7
 unbind 8
 unbind 9
 
+# split in direction
+bind h split-window -hb -c "#{pane_current_path}"
+bind j split-window -v -c "#{pane_current_path}"
+bind k split-window -vb -c "#{pane_current_path}"
+bind l split-window -h -c "#{pane_current_path}"
+
+# split in direction, taking the window's width
+bind H split-window -hbf -c "#{pane_current_path}"
+bind J split-window -vf -c "#{pane_current_path}"
+bind K split-window -vbf -c "#{pane_current_path}"
+bind L split-window -hf -c "#{pane_current_path}"
+
+# break pane to new window
+bind b break-pane -a
+
+# join/move selected (or marked, if any) pane into existing window
+bind g command-prompt -1 { join-pane -t '%1'. }
+bind G command-prompt -1 { join-pane -ht '%1'. }
+
+# dump pane output to nvim
+bind-key o run-shell "~/.config/tmux/capture-pane-nvim.sh"
+
+bind n command-prompt -I '#{pane_title}' { select-pane -T '%%' }
+bind N command-prompt -I '#W' { rename-window -- '%%' }
+
+bind -n M-q display-panes
+
+# reload config
+bind r source-file ~/.config/tmux/tmux.conf
+
+# command mode
+bind -n M-\; command-prompt
+
+# copy mode
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi C-q send-keys -X rectangle-toggle
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi Escape send-keys -X cancel
+# bind -T copy-mode-vi p run-shell -C "display '#{selection_start_y} #{selection_end_y}'"
+
+# layout editing mode
+bind + switch-client -T layout
+bind -r -T layout h run-shell -C "resize-pane -L 3"
+bind -r -T layout j run-shell -C "resize-pane -D 3"
+bind -r -T layout k run-shell -C "resize-pane -U 3"
+bind -r -T layout l run-shell -C "resize-pane -R 3"
+bind -r -T layout p swap-pane -U
+bind -r -T layout n swap-pane -D
+
+# window keybinds
+bind c new-window
+
+bind -n M-1 select-window -t 1
+bind -n M-2 select-window -t 2
+bind -n M-3 select-window -t 3
+bind -n M-4 select-window -t 4
+bind -n M-5 select-window -t 5
+bind -n M-6 select-window -t 6
+bind -n M-7 select-window -t 7
+bind -n M-8 select-window -t 8
+bind -n M-9 select-window -t 9
 bind -n M-N previous-window
 bind -n M-n next-window
+
+# other stuff
+bind C-l clear-history
+bind s choose-tree -swZ
 
 # kill without confirmation
 bind x kill-pane

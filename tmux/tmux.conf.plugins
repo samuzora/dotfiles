@@ -20,7 +20,7 @@ set -g @catppuccin_pane_default_text "##{pane_title}"
 run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
 
 set -g status-left ""
-set -g status-right "#{E:@catppuccin_status_session}"
+set -g status-right "#{E:@catppuccin_status_session}#[fg=#{@thm_crust},bg=#{@thm_red}] #{client_key_table} "
 # --- end catppuccin stuff ---
 
 # mouse config

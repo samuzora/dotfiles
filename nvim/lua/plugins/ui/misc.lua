@@ -290,5 +290,11 @@ return {
     dependencies = "nvzone/volt",
     opts = {},
     cmd = { "Typr", "TyprStats" },
+  },
+
+  -- ansi escape sequence coloring
+  {
+    "Makaze/AnsiEsc",
+    cmd = { "AnsiEsc" },
   }
 }

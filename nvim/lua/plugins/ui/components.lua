@@ -4,6 +4,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
     dependencies = {
+      "nvim-tree/nvim-web-devicons",
       "folke/noice.nvim",
       "rebelot/kanagawa.nvim",
     },

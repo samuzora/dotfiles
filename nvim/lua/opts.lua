@@ -1,53 +1,54 @@
 local options = {
   -- indentation
-  autoindent    = true, -- keep indent when creating newline
-  smartindent   = true, -- increase indentation according to syntax
-  tabstop       = 2,    -- number of spaces per tab
-  shiftwidth    = 0,    -- >>/<< (0: follows tabstop)
-  softtabstop   = -1,   -- "virtual" tab length (-1: follows shiftwidth)
-  smarttab      = true, -- follow shiftwidth when inserting/deleting tabs
-  expandtab     = true, -- turn tabs/indents into spaces
+  autoindent     = true, -- keep indent when creating newline
+  smartindent    = true, -- increase indentation according to syntax
+  tabstop        = 2,    -- number of spaces per tab
+  shiftwidth     = 0,    -- >>/<< (0: follows tabstop)
+  softtabstop    = -1,   -- "virtual" tab length (-1: follows shiftwidth)
+  smarttab       = true, -- follow shiftwidth when inserting/deleting tabs
+  expandtab      = true, -- turn tabs/indents into spaces
 
-  -- window layout management
-  splitkeep     = "screen", -- keep cursorline on the same line on screen
-  splitbelow    = true,     -- split to the bottom first
-  splitright    = true,     -- split to the right first
+  -- window layo ut management
+  splitkeep      = "screen", -- keep cursorline on the same line on screen
+  splitbelow     = true,     -- split to the bottom first
+  splitright     = true,     -- split to the right first
 
-  -- case sensitivity
-  ignorecase    = true, -- ignore case when searching
-  smartcase     = true, -- unless there's an uppercase letter
+  -- case sensit ivity
+  ignorecase     = true, -- ignore case when searching
+  smartcase      = true, -- unless there's an uppercase letter
 
-  -- soft wrapping
-  wrap          = true,             -- wrap long lines instead of overflowing
-  linebreak     = true,             -- break at 'breakat' characters
-  breakat       = " ^I!@*-+;:,./?", -- break at these characters
+  -- soft wrappi ng
+  wrap           = true,             -- wrap long lines instead of overflowing
+  linebreak      = true,             -- break at 'breakat' characters
+  breakat        = " ^I!@*-+;:,./?", -- break at these characters
 
-  -- hard wrapping
-  textwidth     = 120, -- hard wrap at 120 characters
+  -- hard wrappi ng
+  textwidth      = 120, -- hard wrap at 120 characters
 
   -- ui options
-  number        = true,  -- show line numbers
-  cursorline    = true,  -- highlight current line
-  signcolumn    = "yes", -- always show sign column
-  showmode      = false, -- don't show mode in cmdline (but cmdheight is 0 so no effect)
-  cmdheight     = 0,     -- don't show cmdline
-  conceallevel  = 2,     -- concealed text is completely hidden unless is has a custom replacement character
-  termguicolors = true,  -- true colours
-  laststatus    = 3,     -- global status line
-  pumblend      = 10,    -- popup menu transparency
+  number         = true,  -- show line numbers
+  relativenumber = true,  -- also show relative numbers
+  cursorline     = true,  -- highlight current line
+  signcolumn     = "yes", -- always show sign column
+  showmode       = false, -- don't show mode in cmdline (but cmdheight is 0 so no effect)
+  cmdheight      = 0,     -- don't show cmdline
+  conceallevel   = 2,     -- concealed text is completely hidden unless is has a custom replacement character
+  termguicolors  = true,  -- true colours
+  laststatus     = 3,     -- global status line
+  pumblend       = 10,    -- popup menu transparency
 
   -- misc
-  mouse         = "nv", -- no mouse in insert mode
-  autochdir     = false, -- don't change directory to the file's directory
-  undofile      = true, -- persistent undo history
-  backupcopy    = "yes", -- force overwrite files to trigger update events (the default is to rename the original and write a new file)
-  spell         = true, -- spell check
-  smoothscroll  = true, -- scrolling on wrapped lines is per screen line, not per text line
-  mousescroll   = "ver:1,hor:1", -- scroll 1 column/row at a time when using mouse wheel
-  shell         = "/bin/bash", -- set shell to bash to allow !cmd to work
+  mouse          = "nv", -- no mouse in insert mode
+  autochdir      = false, -- don't change directory to the file's directory
+  undofile       = true, -- persistent undo history
+  backupcopy     = "yes", -- force overwrite files to trigger update events (the default is to rename the original and write a new file)
+  spell          = true, -- spell check
+  smoothscroll   = true, -- scrolling on wrapped lines is per screen line, not per text line
+  mousescroll    = "ver:1,hor:1", -- scroll 1 column/row at a time when using mouse wheel
+  shell          = "/bin/bash", -- set shell to bash to allow !cmd to work
 
-  list          = true, -- show invisible characters
-  listchars     = "eol:↵,trail:~,tab:>-,nbsp:␣", -- use these characters
+  list           = true, -- show invisible characters
+  listchars      = "eol:↵,trail:~,tab:>-,nbsp:␣", -- use these characters
 
   -- for tabline
   showtabline = 2,
@@ -172,6 +173,8 @@ vim.keymap.set("i", "<C-a>I", "3")
 
 vim.keymap.set('x', '/', '<C-\\><C-n>`</\\%V', { desc = 'Search forward within visual selection' })
 vim.keymap.set('x', '?', '<C-\\><C-n>`>?\\%V', { desc = 'Search backward within visual selection' })
+
+vim.keymap.set("n", "grd", vim.lsp.buf.definition)
 
 -- temp override for nightly v0.12.0
 -- vim.deprecate = function() end
