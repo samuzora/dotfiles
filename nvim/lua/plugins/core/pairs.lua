@@ -3,18 +3,20 @@ return {
   {
     "kylechui/nvim-surround",
     keys = { "yp", "yP", "ypp", "yPP", "dp", "cpp", "cp", { "P", mode = "v" }, { "gP", mode = "v" } },
+    config = function()
+      vim.g.nvim_surround_no_normal_mappings = true
+
+      vim.keymap.set("n", "yp",  "<Plug>(nvim-surround-normal)")
+      vim.keymap.set("n", "ypp", "<Plug>(nvim-surround-normal-cur)")
+      vim.keymap.set("n", "yP",  "<Plug>(nvim-surround-normal-line)")
+      vim.keymap.set("n", "dp",  "<Plug>(nvim-surround-delete)")
+      vim.keymap.set("n", "cp",  "<Plug>(nvim-surround-change)")
+      vim.keymap.set("n", "cpp", "<Plug>(nvim-surround-change-line)")
+      vim.keymap.set("n", "P",   "<Plug>(nvim-surround-visual)")
+      vim.keymap.set("n", "gP",  "<Plug>(nvim-surround-visual-line)")
+
+    end,
     opts = {
-      keymaps = {
-        normal = "yp",
-        normal_cur = "ypp",
-        normal_line = "yP",
-        normal_cur_line = "yPP",
-        delete = "dp",
-        change = "cp",
-        change_line = "cpp",
-        visual = "P",
-        visual_line = "gP"
-      },
       surrounds = {
         ["$"] = {
           add = function()

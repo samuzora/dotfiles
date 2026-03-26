@@ -258,7 +258,8 @@ return {
   -- very cool ui
   {
     "folke/noice.nvim",
-    event = "UIEnter",
+    lazy = false,
+    -- event = "UIEnter",
     dependencies = {
       "MunifTanjim/nui.nvim",
       {

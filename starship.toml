@@ -1,5 +1,5 @@
 add_newline = false
-format = '''$character $directory
+format = '''$character $username$directory
 [\$](cyan) '''
 command_timeout = 5000
 

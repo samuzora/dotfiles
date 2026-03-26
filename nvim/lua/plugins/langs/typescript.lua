@@ -27,8 +27,11 @@ return {
   {
     "barrett-ruth/import-cost.nvim",
     ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-    build = 'sh install.sh yarn',
-    config = true
+    init = function()
+      vim.g.import_cost = {
+        package_manager = "npm"
+      }
+    end
   },
 
   -- tsx tags

@@ -150,8 +150,7 @@ return {
   -- color picker
   {
     "uga-rosa/ccc.nvim",
-    enabled = false,
-    ft = { "css", "scss", "html", "javascript", "typescript", "javascriptextended", "typescriptextended" },
+    ft = { "css", "scss", "html", "javascript", "typescript", "javascriptextended", "typescriptextended", "conf" },
     config = function()
       local ColorInput = require("ccc.input")
       local convert = require("ccc.utils.convert")

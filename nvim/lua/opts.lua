@@ -8,21 +8,21 @@ local options = {
   smarttab       = true, -- follow shiftwidth when inserting/deleting tabs
   expandtab      = true, -- turn tabs/indents into spaces
 
-  -- window layo ut management
+  -- window layout management
   splitkeep      = "screen", -- keep cursorline on the same line on screen
   splitbelow     = true,     -- split to the bottom first
   splitright     = true,     -- split to the right first
 
-  -- case sensit ivity
+  -- case sensitivity
   ignorecase     = true, -- ignore case when searching
   smartcase      = true, -- unless there's an uppercase letter
 
-  -- soft wrappi ng
+  -- soft wrapping
   wrap           = true,             -- wrap long lines instead of overflowing
   linebreak      = true,             -- break at 'breakat' characters
   breakat        = " ^I!@*-+;:,./?", -- break at these characters
 
-  -- hard wrappi ng
+  -- hard wrapping
   textwidth      = 120, -- hard wrap at 120 characters
 
   -- ui options
@@ -84,18 +84,18 @@ local globals = {
   loaded_netrwSettings     = 1,
   loaded_netrwFileHandlers = 1,
 
-  clipboard                = {
-    name = 'WslClipboard',
-    copy = {
-      ['+'] = 'clip.exe',
-      ['*'] = 'clip.exe',
-    },
-    paste = {
-      ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 1,
-  }
+  -- clipboard                = {
+  --   name = 'WslClipboard',
+  --   copy = {
+  --     ['+'] = 'clip.exe',
+  --     ['*'] = 'clip.exe',
+  --   },
+  --   paste = {
+  --     ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  --     ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  --   },
+  --   cache_enabled = 1,
+  -- }
 }
 for k, v in pairs(globals) do vim.g[k] = v end
 
@@ -175,6 +175,7 @@ vim.keymap.set('x', '/', '<C-\\><C-n>`</\\%V', { desc = 'Search forward within v
 vim.keymap.set('x', '?', '<C-\\><C-n>`>?\\%V', { desc = 'Search backward within visual selection' })
 
 vim.keymap.set("n", "grd", vim.lsp.buf.definition)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
 
 -- temp override for nightly v0.12.0
 -- vim.deprecate = function() end

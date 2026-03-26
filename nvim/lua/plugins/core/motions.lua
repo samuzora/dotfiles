@@ -1,6 +1,6 @@
 return {
   {
-    "ggandor/leap.nvim",
+    "https://codeberg.org/andyg/leap.nvim",
     event = "VeryLazy",
     init = function()
       -- Hide the (real) cursor when leaping...

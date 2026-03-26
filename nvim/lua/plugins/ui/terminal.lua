@@ -21,7 +21,7 @@ return {
     },
     opts = {
       size = 20,
-      shell = "nu",
+      shell = "zsh",
       shade_terminals = true,
       shading_factor = "-30",
       start_in_insert = false,

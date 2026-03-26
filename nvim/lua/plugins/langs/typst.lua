@@ -35,7 +35,7 @@ return {
 
             typst:shutdown()
 
-            typst.cmd = "typst watch " .. main_file .. " --open SumatraPDF.exe"
+            typst.cmd = "typst watch " .. main_file .. " --open zathura"
             typst:open()
           else
             typst:toggle()

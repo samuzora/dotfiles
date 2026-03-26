@@ -5,7 +5,7 @@ return {
     require('kanagawa').setup {
       compile = false,
       undercurl = true,
-      transparent = false,
+      transparent = true,
       background = {
         dark = "wave",
         light = "lotus"
