@@ -2,10 +2,11 @@ return {
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     dependencies = {
       "nushell/tree-sitter-nu"
     },
-    event = "VeryLazy",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
       -- set some unregistered filetypes
@@ -16,7 +17,7 @@ return {
         }
       }
 
-      require "nvim-treesitter.configs".setup {
+      require "nvim-treesitter".setup {
         modules = {},
         ensure_installed = {},
         ignore_install = {},
@@ -55,7 +56,7 @@ return {
           disable = { "kdl" },
         },
       }
-      require "nvim-treesitter.install".update()
+      require "nvim-treesitter".install()
     end
   },
 }
