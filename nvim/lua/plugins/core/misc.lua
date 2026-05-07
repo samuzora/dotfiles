@@ -32,7 +32,7 @@ return {
 
   -- registers
   {
-    "tversteeg/registers.nvim",
+    "https://codeberg.org/fosk/registers.nvim",
     keys = {
       { "\"",    mode = { "n", "v" } },
       { "<C-R>", mode = "i" }

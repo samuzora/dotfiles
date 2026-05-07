@@ -61,26 +61,26 @@ au('EqualWinSize', {
   },
 })
 
-au('DeferSetSpell', {
-  { 'BufReadPre', 'BufModifiedSet' },
-  {
-    desc = 'Defer setting spell options to improve startup time.',
-    callback = function(info)
-      local buf = info.buf
-      local win = vim.api.nvim_get_current_win()
-      if
-          not vim.b[buf].spell_checked
-          and not vim.b[buf].large_file
-          and not vim.wo[win].spell
-          and vim.bo[buf].bt == ''
-          and vim.bo[buf].ma
-      then
-        vim.opt_local.spell = true
-      end
-      vim.b[buf].spell_checked = true
-    end,
-  },
-})
+-- au('DeferSetSpell', {
+--   { 'BufReadPre', 'BufModifiedSet' },
+--   {
+--     desc = 'Defer setting spell options to improve startup time.',
+--     callback = function(info)
+--       local buf = info.buf
+--       local win = vim.api.nvim_get_current_win()
+--       if
+--           not vim.b[buf].spell_checked
+--           and not vim.b[buf].large_file
+--           and not vim.wo[win].spell
+--           and vim.bo[buf].bt == ''
+--           and vim.bo[buf].ma
+--       then
+--         vim.opt_local.spell = true
+--       end
+--       vim.b[buf].spell_checked = true
+--     end,
+--   },
+-- })
 
 -- adapted from https://github.com/ethanholz/nvim-lastplace/blob/main/lua/nvim-lastplace/init.lua
 local ignore_buftype = { "quickfix", "nofile", "help" }

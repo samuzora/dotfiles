@@ -23,24 +23,25 @@ local servers = {
     },
     single_file_support = true,
   },
-  basedpyright = {
-    single_file_support = true,
-    settings = {
-      basedpyright = {
-        typeCheckingMode = "basic",
-        analysis = {
-          diagnosticSeverityOverrides = {
-            reportUnusedCallResult = "none",
-            reportReturnType = "none",
-            reportWildcardImportFromLibrary = "none",
-            reportUnknownParameterType = "none",
-            reportUnknownVariableType = "none",
-            reportAny = "none",
-          }
-        }
-      },
-    }
-  },
+  ty = {},
+  -- basedpyright = {
+  --   single_file_support = true,
+  --   settings = {
+  --     basedpyright = {
+  --       typeCheckingMode = "basic",
+  --       analysis = {
+  --         diagnosticSeverityOverrides = {
+  --           reportUnusedCallResult = "none",
+  --           reportReturnType = "none",
+  --           reportWildcardImportFromLibrary = "none",
+  --           reportUnknownParameterType = "none",
+  --           reportUnknownVariableType = "none",
+  --           reportAny = "none",
+  --         }
+  --       }
+  --     },
+  --   }
+  -- },
   tinymist = {
     on_attach = function()
       -- pin current buffer to main file

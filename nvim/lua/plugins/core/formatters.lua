@@ -20,6 +20,7 @@ return {
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
         typescriptreact = { "prettier" },
+        markdown = { "prettier" },
         xml = { "xmllint" },
       },
       formatters = {
