@@ -12,8 +12,8 @@ return {
       vim.keymap.set("n", "dp",  "<Plug>(nvim-surround-delete)")
       vim.keymap.set("n", "cp",  "<Plug>(nvim-surround-change)")
       vim.keymap.set("n", "cpp", "<Plug>(nvim-surround-change-line)")
-      vim.keymap.set("n", "P",   "<Plug>(nvim-surround-visual)")
-      vim.keymap.set("n", "gP",  "<Plug>(nvim-surround-visual-line)")
+      -- vim.keymap.set("n", "P",   "<Plug>(nvim-surround-visual)")
+      -- vim.keymap.set("n", "gP",  "<Plug>(nvim-surround-visual-line)")
 
     end,
     opts = {

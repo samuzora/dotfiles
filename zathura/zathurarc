@@ -1,5 +1,5 @@
-include catppuccin-mocha
-# set selection-clipboard clipboard
+# include catppuccin-mocha
+set selection-clipboard clipboard
 # set adjust-open "best-fit"
 # set default-bg "#1a1e2a" #00
 # set default-fg "#F7F7F6" #01
