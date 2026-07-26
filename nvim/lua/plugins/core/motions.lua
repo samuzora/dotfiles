@@ -1,6 +1,7 @@
 return {
   {
     "folke/flash.nvim",
+    enabled = false,
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {},
@@ -14,7 +15,6 @@ return {
   },
   {
     "https://codeberg.org/andyg/leap.nvim",
-    enabled = false,
     event = "VeryLazy",
     init = function()
       -- Hide the (real) cursor when leaping...

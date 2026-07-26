@@ -63,13 +63,13 @@ local globals = {
   maplocalleader           = " ",
 
   -- disable built-in plugins
-  loaded_gzip              = 1,
-  loaded_zip               = 1,
-  loaded_zipPlugin         = 1,
-  loaded_tar               = 1,
-  loaded_tarPlugin         = 1,
-  loaded_vimball           = 1,
-  loaded_vimballPlugin     = 1,
+  loaded_gzip              = 0,
+  loaded_zip               = 0,
+  loaded_zipPlugin         = 0,
+  loaded_tar               = 0,
+  loaded_tarPlugin         = 0,
+  loaded_vimball           = 0,
+  loaded_vimballPlugin     = 0,
 
   loaded_getscript         = 1,
   loaded_getscriptPlugin   = 1,

@@ -117,7 +117,7 @@ output "eDP-1" {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
-    position x=1280 y=0
+    position x=0 y=0
     focus-at-startup
 }
 
@@ -384,6 +384,8 @@ blur {
 }
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "dbus-update-activation-environment" "--all"
+spawn-at-startup "~/.config/niri/fix-xdg-desktop-portal-gnome.sh"
 
 window-rule {
   open-maximized false

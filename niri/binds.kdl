@@ -59,6 +59,8 @@ binds {
     Mod+k     { focus-window-or-workspace-up; }
     Mod+l     { focus-column-right; }
 
+    Mod+s     { spawn-sh "~/.config/niri/fix-xdg-desktop-portal-gnome.sh"; }
+
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
@@ -249,4 +251,3 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
-
