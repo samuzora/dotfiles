@@ -6,18 +6,18 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "folke/noice.nvim",
-      "rebelot/kanagawa.nvim",
+      -- "rebelot/kanagawa.nvim",
     },
     config = function()
       local lualine = require('lualine')
-      local colors = require("kanagawa.colors").setup()
-      local palette = colors.palette
-      local theme = colors.theme
+      -- local colors = require("kanagawa.colors").setup()
+      -- local palette = colors.palette
+      -- local theme = colors.theme
 
       local colors = {}
       if (vim.o.background == 'dark') then
         colors = {
-          bg = theme.ui.bg,
+          -- bg = theme.ui.bg,
           fg = "#c0caf5",
           yellow = "#e0af68",
           cyan = "#7dcfff",

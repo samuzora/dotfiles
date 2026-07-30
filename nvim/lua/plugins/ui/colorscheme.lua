@@ -1,3 +1,3 @@
 return {
-  import = "plugins.ui.colorschemes.kanagawa"
+  import = "plugins.ui.colorschemes.oxocarbon"
 }

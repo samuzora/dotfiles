@@ -6,7 +6,7 @@ vim.filetype.add({
 
 return {
   "MeanderingProgrammer/render-markdown.nvim",
-  enabled = false,
+  ft = { "markdown" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-tree/nvim-web-devicons",
@@ -27,6 +27,9 @@ return {
     },
     bullet = {
       icons = { "-", "-", "-", "-" }
+    },
+    pipe_table = {
+      border_enabled = false,
     }
   },
 }
