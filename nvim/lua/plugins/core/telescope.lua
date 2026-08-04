@@ -1,7 +1,7 @@
 return {
   -- telescope
   {
-    "nvim-telescope/telescope.nvim",
+    "nvim-telescope/telescope.nvim", version = "*",
     cmd = { "Telescope" },
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<CR>",  desc = "Find file" },
@@ -21,6 +21,7 @@ return {
     config = function()
       local actions = require "telescope.actions"
       local action_state = require "telescope.actions.state"
+      local previewers = require "telescope.previewers"
 
       -- local trouble = require "trouble"
 
@@ -47,6 +48,14 @@ return {
               end,
             },
           },
+        },
+        pickers = {
+          live_grep = {
+            previewer = previewers.vimgrep.new({}),
+          },
+          help_tags = {
+            previewer = previewers.vimgrep.new({}),
+          }
         },
         extensions = {
           fzf = {

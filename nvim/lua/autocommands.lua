@@ -43,15 +43,15 @@ au('LargeFileSettings', {
   },
 })
 
-au('YankHighlight', {
-  'TextYankPost',
-  {
-    desc = 'Highlight the selection on yank.',
-    callback = function()
-      vim.highlight.on_yank({ higroup = 'Visual', timeout = 400 })
-    end,
-  },
-})
+-- au('YankHighlight', {
+--   'TextYankPost',
+--   {
+--     desc = 'Highlight the selection on yank.',
+--     callback = function()
+--       vim.highlight.on_yank({ higroup = 'Visual', timeout = 400 })
+--     end,
+--   },
+-- })
 
 au('EqualWinSize', {
   'VimResized',

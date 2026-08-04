@@ -18,12 +18,16 @@ local options = {
   smartcase      = true, -- unless there's an uppercase letter
 
   -- soft wrapping
-  wrap           = true,             -- wrap long lines instead of overflowing
+  wrap           = false,             -- wrap long lines instead of overflowing
   linebreak      = true,             -- break at 'breakat' characters
   breakat        = " ^I!@*-+;:,./?", -- break at these characters
 
   -- hard wrapping
   textwidth      = 120, -- hard wrap at 120 characters
+
+  -- horizontal scroll
+  sidescroll     = 1,
+  sidescrolloff  = 5,
 
   -- ui options
   number         = true,  -- show line numbers
@@ -109,6 +113,9 @@ if vim.g.neovide then
   vim.g.neovide_padding_left = 5
 end
 
+-- make sure filetype detection is enabled by default
+vim.cmd("filetype plugin indent on")
+
 -- keymaps
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
@@ -177,6 +184,3 @@ vim.keymap.set('x', '?', '<C-\\><C-n>`>?\\%V', { desc = 'Search backward within 
 
 vim.keymap.set("n", "grd", vim.lsp.buf.definition)
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
-
--- temp override for nightly v0.12.0
--- vim.deprecate = function() end
