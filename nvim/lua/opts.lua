@@ -120,7 +120,7 @@ vim.cmd("filetype plugin indent on")
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "U", "<C-r>")
-vim.keymap.set("n", ";", ":")
+-- vim.keymap.set("n", ";", ":")
 -- vim.keymap.set("n", "<Leader>qf", function()
 --   local qf_exists = false
 --   for _, win in pairs(vim.fn.getwininfo()) do
